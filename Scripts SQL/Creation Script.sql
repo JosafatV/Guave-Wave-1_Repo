@@ -7,11 +7,12 @@ GO
 CREATE DATABASE PosPF;
 GO
 
-USE PosPichel;
+USE PosPF;
 
 CREATE TABLE ROL (
-	IdRol INT IDENTITY(1,1),
+	IdRol TinyINT IDENTITY(1,1),
 	Nombre CHAR(15) NOT NULL,
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdRol)
 	)
@@ -22,7 +23,7 @@ CREATE TABLE EMPLEADO (
 	Cedula CHAR(10) NOT NULL,
 	Nombre CHAR (15),
 	Apellidos CHAR(30),
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdEmpleado),
 	UNIQUE (Cedula)
@@ -34,7 +35,7 @@ CREATE TABLE CLIENTE (
 	Nombre CHAR (15),
 	Apellidos CHAR(30),
 	FechaNacimiento DATE,
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdCliente),
 	UNIQUE (Cedula)
@@ -45,7 +46,7 @@ CREATE TABLE SUCURSAL (
 	Nombre CHAR (15),
 	Direccion CHAR(30),
 	Telefono INT,
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdSucursal)
 	)
@@ -53,26 +54,28 @@ CREATE TABLE SUCURSAL (
 CREATE TABLE CAJA (
 	IdCaja INT IDENTITY(1,1),
 	Dinero MONEY,
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdCaja)
 	)
 
 CREATE TABLE PRODUCTO(
 	IdProducto INT IDENTITY(1,1),
+	EAN CHAR(13) NOT NULL,
 	Nombre CHAR(15),
-	Precio MONEY,
-	StackPromedio SMALLINT,
-	StackMinimo SMALLINT,
-	Estado CHAR(1),
+	Precio MONEY NOT NULL,
+	Stock SMALLINT,
+	StockMinimo SMALLINT,
+	Estado CHAR(1) DEFAULT 'A',
 
-	PRIMARY KEY (IdProducto)
+	PRIMARY KEY (IdProducto),
+	UNIQUE (EAN)
 	)
 
 CREATE TABLE PROVEEDOR (
 	IdProveedor INT IDENTITY(1,1),
 	Nombre CHAR(15),
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdProveedor)
 )
@@ -80,14 +83,14 @@ CREATE TABLE PROVEEDOR (
 CREATE TABLE VENTA(
 	IdVenta INT IDENTITY(1,1),
 	Timestamp DATETIME,
-	Estado CHAR(1),
+	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdVenta)
 )
 
 
 CREATE TABLE EMPLEADO_POR_ROL (
-	IdRol INT,
+	IdRol tinyINT,
 	IdEmpleado INT,
 
 	PRIMARY KEY (IdRol, IdEmpleado),
@@ -101,6 +104,15 @@ CREATE TABLE EMPLEADO_POR_SUCURSAL (
 
 	PRIMARY KEY (IdSucursal, IdEmpleado),
 	FOREIGN KEY (IdEmpleado) REFERENCES EMPLEADO(IdEmpleado) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (IdSucursal) REFERENCES SUCURSAL(IdSucursal) ON DELETE CASCADE ON UPDATE CASCADE
+	)
+
+CREATE TABLE PRODUCTO_POR_SUCURSAL (
+	IdSucursal INT,
+	IdProducto INT,
+
+	PRIMARY KEY (IdSucursal, IdProducto),
+	FOREIGN KEY (IdProducto) REFERENCES PRODUCTO(IdProducto) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (IdSucursal) REFERENCES SUCURSAL(IdSucursal) ON DELETE CASCADE ON UPDATE CASCADE
 	)
 
