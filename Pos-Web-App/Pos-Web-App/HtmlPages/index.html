@@ -1,10 +1,21 @@
 ﻿<!DOCTYPE html>
-<html>
+<html data-ng-app="NigmaFacturationApp">
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <!-------------------------Framework of angularJS---------------------------------------->
+    <script src="../Scripts/Angular and Bootstrap/angular.js"></script>
+    <script src="../Scripts/Angular and Bootstrap/angular-route.js"></script>
+    <script src="../Scripts/Angular and Bootstrap/angular-resource.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <!-------------------------Init and global Scripts--------------------------------------->
+    <script src="../Scripts/Pos-Scripts/initScript.js"></script>
+    <script src="../Scripts/Pos-Scripts/resourceScript.js"></script>
+    <script src="../Scripts/Pos-Scripts/configScript.js"></script>
+    <script src="../Scripts/Pos-Scripts/Login/login.js"></script>
+
 </head>
 <body>
-    <H1>Esta es la primera prueba</H1>
+    <div data-ng-view></div>
 </body>
 </html>
