@@ -1,6 +1,6 @@
 /* Inserts a new Caja tuple */
 CREATE PROCEDURE sp_insert_Caja
-	@Dinero money, @idSucursal INT
+	@Dinero money, @IdSucursal INT
 	AS
 		DECLARE @IdCaja INT
 		INSERT INTO CAJA (Dinero) VALUES (@Dinero)
@@ -30,6 +30,16 @@ CREATE PROCEDURE sp_insert_Rol
 		INSERT INTO ROL (Nombre) VALUES (@Nombre)
 	GO
 
+/* Inserts a new Empleado and it's Rol */
+CREATE PROCEDURE sp_insert_Empleado
+	@Contraseña CHAR(15), @Cedula CHAR(19), @Nombre CHAR(15), @Apellidos CHAR(30), @IdRol tinyINT
+	AS
+		DECLARE @IdEmpleado INT
+		INSERT INTO EMPLEADO (Contraseña,Cedula,Nombre,Apellidos) VALUES (@Contraseña,@Cedula,@Nombre,@Apellidos)
+		SELECT @IdEmpleado=@@IDENTITY
+		INSERT INTO EMPLEADO_POR_ROL (IdRol, IdEmpleado) VALUES (@IdRol, @IdEmpleado)
+	GO
+
 /* Inserts a new Sucursal tuple */
 CREATE PROCEDURE sp_insert_Sucursal
 	@Nombre char(15), @Direccion char(30), @Telefono INT
@@ -49,7 +59,7 @@ CREATE PROCEDURE sp_insert_Producto
 
 /* Inserts a new Venta tuple, and its relationships */
 CREATE PROCEDURE sp_insert_Venta
-	@IdProduct int, @Quantity smallINT, @IdCaja INT, @IdCliente INT, @IdSucursal INT
+	@IdCaja INT, @IdCliente INT, @IdSucursal INT
 	AS
 		DECLARE @IdVenta INT
 
@@ -58,22 +68,26 @@ CREATE PROCEDURE sp_insert_Venta
 		
 		INSERT INTO VENTA_POR_CAJA (IdVenta, IdCaja) VALUES (@IdVenta,@IdCaja)
 		INSERT INTO VENTA_POR_CLIENTE (IdVenta, IdCliente) VALUES (@IdVenta,@IdCliente)
-		INSERT INTO PRODUCTO_POR_VENTA(IdVenta, IdPRoducto, Cantidad) VALUES (@IdVenta,@IdProduct,@Quantity)
 	GO
 
-/* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*/
+/* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*//*
 CREATE PROCEDURE sp_insert_ProductosPorVenta
-	@IdProducto INT, @IdVenta INT, @Cantidad smallINT, @IdSucursal INT
+	@IdProducto INT, @IdVenta INT, @Cantidad smallINT, @IdCaja INT
 	AS
 		INSERT INTO PRODUCTO_POR_VENTA (IdProducto,IdVenta,Cantidad) VALUES (@IdProducto,@IdVenta,@Cantidad)
+
+		/* Reduce Stock en la sucursal donde está la caja */
 		UPDATE PRODUCTO_POR_SUCURSAL SET Stock=Stock-@Cantidad WHERE IdProducto=@IdProducto
-	GO
+
+		/* Aumenta la cantidad de Dinero en la caja según el precio del producto y la cantidad */
+		UPDATE CAJA SET Dinero=Dinero+@IdProducto->Precio*Cantidad
+	GO*/
 
 /* Inserts a Producto into a Sucursal's stock and how many */
 CREATE PROCEDURE sp_Stock
-	@IdProduct INT, @Stock smallINT, @StockMinimo smallINT, @IdSucursal INT
+	@IdProducto INT, @Stock smallINT, @StockMinimo smallINT, @IdSucursal INT
 	AS
-		INSERT INTO PRODUCTO_POR_SUCURSAL (IdProducto,Stock,StockMinimo,IdSucursal) VALUES (@IdProduct,@Stock,@StockMinimo,@IdSucursal)
+		INSERT INTO PRODUCTO_POR_SUCURSAL (IdProducto,Stock,StockMinimo,IdSucursal) VALUES (@IdProducto,@Stock,@StockMinimo,@IdSucursal)
 	GO
 
 /* Updates the value of a Producto in a Sucursal after restocking */
