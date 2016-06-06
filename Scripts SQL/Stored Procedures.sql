@@ -70,18 +70,24 @@ CREATE PROCEDURE sp_insert_Venta
 		INSERT INTO VENTA_POR_CLIENTE (IdVenta, IdCliente) VALUES (@IdVenta,@IdCliente)
 	GO
 
-/* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*//*
+/* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*/
 CREATE PROCEDURE sp_insert_ProductosPorVenta
 	@IdProducto INT, @IdVenta INT, @Cantidad smallINT, @IdCaja INT
 	AS
 		INSERT INTO PRODUCTO_POR_VENTA (IdProducto,IdVenta,Cantidad) VALUES (@IdProducto,@IdVenta,@Cantidad)
 
+		DECLARE @IdSucursal INT,
+				@Precio money
+
+		SELECT @IdSucursal=Cps.IdSucursal FROM  CAJA_POR_SUCURSAL AS Cps WHERE Cps.IdCaja=@IdCaja
+		SELECT @Precio=P.Precio FROM PRODUCTO AS P WHERE P.IdProducto=@IdProducto
+
 		/* Reduce Stock en la sucursal donde está la caja */
 		UPDATE PRODUCTO_POR_SUCURSAL SET Stock=Stock-@Cantidad WHERE IdProducto=@IdProducto
 
 		/* Aumenta la cantidad de Dinero en la caja según el precio del producto y la cantidad */
-		UPDATE CAJA SET Dinero=Dinero+@IdProducto->Precio*Cantidad
-	GO*/
+		UPDATE CAJA SET Dinero=Dinero+(@Precio*@Cantidad) WHERE IdCaja=@IdCaja
+	GO
 
 /* Inserts a Producto into a Sucursal's stock and how many */
 CREATE PROCEDURE sp_Stock

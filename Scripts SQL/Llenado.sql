@@ -98,21 +98,18 @@ EXEC sp_insert_Venta @IdCaja=8, @IdCliente=1, @IdSucursal=4;
 
 
 
-/* Productos Por Venta -Debe existir la venta, y Producto en la Sucursal, activa el Trigger reduce_stock *//*
-SELECT * FROM PRODUCTO_POR_SUCURSAL
-EXEC sp_insert_ProductosPorVenta @IdProducto=1, @IdVenta=1, @Cantidad=2, @IdCaja=1, @IdSucursal=1;
-EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=1, @Cantidad=1, @IdCaja=1, @IdSucursal=1;
-EXEC sp_insert_ProductosPorVenta @IdProducto=4, @IdVenta=1, @Cantidad=2, @IdCaja=1,@IdSucursal=1;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=2, @IdVenta=2, @Cantidad=3, @IdCaja=3, @IdSucursal=2;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=6, @IdVenta=2, @Cantidad=1, @IdCaja=3, @IdSucursal=2;
-EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=3, @Cantidad=4, @IdCaja=4, @IdSucursal=2;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=6, @IdVenta=4, @Cantidad=5, @IdCaja=6, @IdSucursal=3;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=7, @IdVenta=4, @Cantidad=2, @IdCaja=6, @IdSucursal=3;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=8, @IdVenta=4, @Cantidad=2, @IdCaja=6, @IdSucursal=3;
-	EXEC sp_insert_ProductosPorVenta @IdProducto=10, @IdVenta=4, @Cantidad=3, @IdCaja=6, @IdSucursal=3;
-EXEC sp_insert_ProductosPorVenta @IdProducto=9, @IdVenta=5, @Cantidad=1, @IdCaja=8, @IdSucursal=4;
-SELECT * FROM PRODUCTO_POR_SUCURSAL*/
-
+/* Productos Por Venta -Debe existir la venta, y Producto en la Sucursal, activa el Trigger reduce_stock */
+EXEC sp_insert_ProductosPorVenta @IdProducto=1, @IdVenta=1, @Cantidad=2, @IdCaja=1;
+EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=1, @Cantidad=1, @IdCaja=1;
+EXEC sp_insert_ProductosPorVenta @IdProducto=4, @IdVenta=1, @Cantidad=2, @IdCaja=1;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=2, @IdVenta=2, @Cantidad=3, @IdCaja=3;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=6, @IdVenta=2, @Cantidad=1, @IdCaja=3;
+EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=3, @Cantidad=4, @IdCaja=4;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=6, @IdVenta=4, @Cantidad=5, @IdCaja=6;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=7, @IdVenta=4, @Cantidad=2, @IdCaja=6;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=8, @IdVenta=4, @Cantidad=2, @IdCaja=6;
+	EXEC sp_insert_ProductosPorVenta @IdProducto=10, @IdVenta=4, @Cantidad=3, @IdCaja=6;
+EXEC sp_insert_ProductosPorVenta @IdProducto=9, @IdVenta=5, @Cantidad=1, @IdCaja=8;
 
 /* Resuplir */
 /*SELECT * FROM PRODUCTO_POR_SUCURSAL AS Pps WHERE IdProducto=1 AND IdSucursal=1;*/
