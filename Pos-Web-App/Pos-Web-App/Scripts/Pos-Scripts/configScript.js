@@ -1,11 +1,51 @@
-﻿angular.module('DrPhischelApp').config(['$routeProvider', function ($routeProvider) {
+﻿angular.module('NigmaFacturationApp').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-    /*.when('/DrPhischel/Login/CrearPerfil', {
-        templateUrl: 'Login/creacionUsuario.html',
-        controller: 'creacionUsuarioController'
-    })*/
+/*-------------------------------------Cashier-------------------------------------------*/
+    .when('/NigmaFacturation/CashierView/cashDeskOpening', {
+        templateUrl: 'HtmlPages/CashierView/cashDeskOpening.html',
+        controller: 'cashDeskOpeningController'
+    })
+    .when('/NigmaFacturation/CashierView/sales', {
+        templateUrl: 'HtmlPages/Login/sales.html',
+        controller: 'salesController'
+    })
+/*-------------------------------------Admin--------------------------------------------*/
+    .when('/NigmaFacturation/AdminView/adminMenu', {
+        templateUrl: 'HtmlPages/AdminView/adminMenu.html',
+        controller: 'adminMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/branchCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/branchMenu.html',
+        controller: 'branchCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/employeesCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/employeesMenu.html',
+        controller: 'employeesCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/productsCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/productsMenu.html',
+        controller: 'productsCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/clientsCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/clientsMenu.html',
+        controller: 'clientsCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/supplierCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/supplierMenu.html',
+        controller: 'supplierCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/reports', {
+        templateUrl: 'HtmlPages/AdminView/reports.html',
+    controller: 'reportsController'
+    })
+/*-------------------------------------Login--------------------------------------------*/
+
+    .when('/NigmaFacturation/LoginView/signIn', {
+        templateUrl: 'HtmlPages/LoginView/signIn.html',
+        controller: 'signInLoginController'
+    })
     .otherwise({
-        templateUrl: 'Login/login.html',
+        templateUrl: 'HtmlPages/LoginView/login.html',
         controller: 'loginController'
     })
 }]);
