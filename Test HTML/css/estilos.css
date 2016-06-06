@@ -1,0 +1,13 @@
+.jumbotron{
+background: linear-gradient(to right, #007f7f ,white);
+  color: #000;
+  padding: 40px 0;
+}
+.jumbotron .titulo-pag{
+  font-size: 60px;
+  font-family:inherit;
+}
+.jumbotron p{
+  font-size: 20px;
+  font-family:inherit;
+}
