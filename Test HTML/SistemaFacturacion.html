@@ -1,0 +1,85 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+  <title>Nigma Facturación</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Sistema de Facturación</h1><br>
+    <h4>Mostrar Nombre del cliente</h4>
+    <h4>Mostrar cédula del cliente</h4><br><br>
+    <h3>Ingrese su producto:</h3>
+  </div>
+  <div class="container">
+    <h4>Código EAN</h4>
+    <input type="text"><br><br>
+    <h4>Cantidad</h4>
+    <input type="text"><br><br>
+  </div>
+  <div class="container">
+    <button class="btn btn-primary">Verificar Producto</button>
+    <button type="button" class="btn btn-success">
+      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>  Agregar
+    </button>
+  </div>
+  <br><br>
+  <div class="container-fluid">
+    <h3>Su pedido:</h3><br>
+  </div>
+  <!--Tabla en donde se debe mostrar lo que el cliente va a agregando-->
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover table-condensed">
+          <tr>
+              <th>Código EAN</th>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+          </tr>
+    </table>
+  </div>
+  <br>
+  <button type="button" class="btn btn-success">
+    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Guardar Compra
+  </button>
+  <button type="button" class="btn btn-danger">
+    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  Realizar Cambios
+  </button>
+
+
+  </div>
+
+
+
+
+
+
+
+
+<script src="http:code.jquery.com/jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>
