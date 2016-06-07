@@ -172,7 +172,7 @@
     <Compile Include="Controllers\EmpleadoPorSucursalController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductoPorPreveedorController.cs" />
+    <Compile Include="Controllers\ProductoPorProveedorController.cs" />
     <Compile Include="Controllers\ProductoPorSucursalController.cs" />
     <Compile Include="Controllers\ProductoPorVentaController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />

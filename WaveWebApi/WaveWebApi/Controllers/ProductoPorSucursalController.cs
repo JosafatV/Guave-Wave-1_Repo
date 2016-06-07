@@ -17,16 +17,19 @@ namespace WaveWebApi.Controllers
         private PosPFEntities db = new PosPFEntities();
 
         // GET: api/ProductoPorSucursal
-        public IQueryable<PRODUCTO_POR_SUCURSAL> GetPRODUCTO_POR_SUCURSAL()
+        [HttpGet]
+        public IQueryable<View_ProductoPorSucursal> GetPRODUCTO_POR_SUCURSAL()
         {
-            return db.PRODUCTO_POR_SUCURSAL;
+            return db.View_ProductoPorSucursal;
         }
 
         // GET: api/ProductoPorSucursal/5
-        [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
-        public IHttpActionResult GetPRODUCTO_POR_SUCURSAL(int id)
+        [HttpGet]
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
+        [ResponseType(typeof(View_ProductoPorSucursal))]
+        public IHttpActionResult GetPRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
-            PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL = db.PRODUCTO_POR_SUCURSAL.Find(id);
+            View_ProductoPorSucursal pRODUCTO_POR_SUCURSAL = db.View_ProductoPorSucursal.Find(idSucursal,idProducto);
             if (pRODUCTO_POR_SUCURSAL == null)
             {
                 return NotFound();
@@ -36,7 +39,7 @@ namespace WaveWebApi.Controllers
         }
 
         // PUT: api/ProductoPorSucursal/5
-        [ResponseType(typeof(void))]
+      /*  [ResponseType(typeof(void))]
         public IHttpActionResult PutPRODUCTO_POR_SUCURSAL(int id, PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL)
         {
             if (!ModelState.IsValid)
@@ -68,9 +71,10 @@ namespace WaveWebApi.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/ProductoPorSucursal
+        [HttpPost]
         [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
         public IHttpActionResult PostPRODUCTO_POR_SUCURSAL(PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL)
         {
@@ -87,7 +91,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PRODUCTO_POR_SUCURSALExists(pRODUCTO_POR_SUCURSAL.IdSucursal))
+                if (PRODUCTO_POR_SUCURSALExists(pRODUCTO_POR_SUCURSAL.IdSucursal, pRODUCTO_POR_SUCURSAL.IdProducto))
                 {
                     return Conflict();
                 }
@@ -97,21 +101,38 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = pRODUCTO_POR_SUCURSAL.IdSucursal }, pRODUCTO_POR_SUCURSAL);
+            return Ok(pRODUCTO_POR_SUCURSAL);
         }
 
         // DELETE: api/ProductoPorSucursal/5
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
         [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
-        public IHttpActionResult DeletePRODUCTO_POR_SUCURSAL(int id)
+        public IHttpActionResult DeletePRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
-            PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL = db.PRODUCTO_POR_SUCURSAL.Find(id);
+            PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL = db.PRODUCTO_POR_SUCURSAL.Find(idSucursal);
             if (pRODUCTO_POR_SUCURSAL == null)
             {
                 return NotFound();
             }
 
-            db.PRODUCTO_POR_SUCURSAL.Remove(pRODUCTO_POR_SUCURSAL);
-            db.SaveChanges();
+            pRODUCTO_POR_SUCURSAL.Estado = "I";
+            db.Entry(pRODUCTO_POR_SUCURSAL).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PRODUCTO_POR_SUCURSALExists(idSucursal, idProducto))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(pRODUCTO_POR_SUCURSAL);
         }
@@ -125,9 +146,9 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PRODUCTO_POR_SUCURSALExists(int id)
+        private bool PRODUCTO_POR_SUCURSALExists(int idSucursal, int idProducto)
         {
-            return db.PRODUCTO_POR_SUCURSAL.Count(e => e.IdSucursal == id) > 0;
+            return db.PRODUCTO_POR_SUCURSAL.Find(idSucursal, idProducto) != null;
         }
     }
 }

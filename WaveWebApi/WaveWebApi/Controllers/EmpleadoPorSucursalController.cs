@@ -17,16 +17,19 @@ namespace WaveWebApi.Controllers
         private PosPFEntities db = new PosPFEntities();
 
         // GET: api/EmpleadoPorSucursal
-        public IQueryable<EMPLEADO_POR_SUCURSAL> GetEMPLEADO_POR_SUCURSAL()
+        [HttpGet]
+        public IQueryable<View_EmpleadoPorSucursal> GetEMPLEADO_POR_SUCURSAL()
         {
-            return db.EMPLEADO_POR_SUCURSAL;
+            return db.View_EmpleadoPorSucursal;
         }
 
         // GET: api/EmpleadoPorSucursal/5
-        [ResponseType(typeof(EMPLEADO_POR_SUCURSAL))]
-        public IHttpActionResult GetEMPLEADO_POR_SUCURSAL(int id)
+        [HttpGet]
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idEmpleado}")]
+        [ResponseType(typeof(View_EmpleadoPorSucursal))]
+        public IHttpActionResult GetEMPLEADO_POR_SUCURSAL(int idSucursal, int idEmpleado)
         {
-            EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL = db.EMPLEADO_POR_SUCURSAL.Find(id);
+            View_EmpleadoPorSucursal eMPLEADO_POR_SUCURSAL = db.View_EmpleadoPorSucursal.Find(idSucursal,idEmpleado);
             if (eMPLEADO_POR_SUCURSAL == null)
             {
                 return NotFound();
@@ -35,42 +38,8 @@ namespace WaveWebApi.Controllers
             return Ok(eMPLEADO_POR_SUCURSAL);
         }
 
-        // PUT: api/EmpleadoPorSucursal/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutEMPLEADO_POR_SUCURSAL(int id, EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != eMPLEADO_POR_SUCURSAL.IdSucursal)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(eMPLEADO_POR_SUCURSAL).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EMPLEADO_POR_SUCURSALExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/EmpleadoPorSucursal
+        [HttpPost]
         [ResponseType(typeof(EMPLEADO_POR_SUCURSAL))]
         public IHttpActionResult PostEMPLEADO_POR_SUCURSAL(EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL)
         {
@@ -87,7 +56,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EMPLEADO_POR_SUCURSALExists(eMPLEADO_POR_SUCURSAL.IdSucursal))
+                if (EMPLEADO_POR_SUCURSALExists(eMPLEADO_POR_SUCURSAL.IdSucursal,eMPLEADO_POR_SUCURSAL.IdEmpleado))
                 {
                     return Conflict();
                 }
@@ -97,21 +66,38 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = eMPLEADO_POR_SUCURSAL.IdSucursal }, eMPLEADO_POR_SUCURSAL);
+            return Ok(eMPLEADO_POR_SUCURSAL);
         }
 
         // DELETE: api/EmpleadoPorSucursal/5
+        [HttpDelete]
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idEmpleado}")]
         [ResponseType(typeof(EMPLEADO_POR_SUCURSAL))]
-        public IHttpActionResult DeleteEMPLEADO_POR_SUCURSAL(int id)
+        public IHttpActionResult DeleteEMPLEADO_POR_SUCURSAL(int idSucursal, int idEmpleado)
         {
-            EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL = db.EMPLEADO_POR_SUCURSAL.Find(id);
+            EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL = db.EMPLEADO_POR_SUCURSAL.Find(idSucursal, idEmpleado);
             if (eMPLEADO_POR_SUCURSAL == null)
             {
                 return NotFound();
             }
+            eMPLEADO_POR_SUCURSAL.Estado = "I";
+            db.Entry(eMPLEADO_POR_SUCURSAL).State = EntityState.Modified;
 
-            db.EMPLEADO_POR_SUCURSAL.Remove(eMPLEADO_POR_SUCURSAL);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EMPLEADO_POR_SUCURSALExists(idSucursal, idEmpleado))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(eMPLEADO_POR_SUCURSAL);
         }
@@ -125,9 +111,9 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EMPLEADO_POR_SUCURSALExists(int id)
+        private bool EMPLEADO_POR_SUCURSALExists(int idSucursal, int idEmpleado)
         {
-            return db.EMPLEADO_POR_SUCURSAL.Count(e => e.IdSucursal == id) > 0;
+            return db.EMPLEADO_POR_SUCURSAL.Find(idSucursal,idEmpleado) !=null;
         }
     }
 }

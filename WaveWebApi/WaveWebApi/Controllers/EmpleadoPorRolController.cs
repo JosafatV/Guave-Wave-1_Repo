@@ -17,57 +17,25 @@ namespace WaveWebApi.Controllers
         private PosPFEntities db = new PosPFEntities();
 
         // GET: api/EmpleadoPorRol
-        public IQueryable<EMPLEADO_POR_ROL> GetEMPLEADO_POR_ROL()
+        [HttpGet]
+        public IQueryable<View_EmpleadoPorRol> GetEMPLEADO_POR_ROL()
         {
-            return db.EMPLEADO_POR_ROL;
+            return db.View_EmpleadoPorRol;
         }
 
         // GET: api/EmpleadoPorRol/5
-        [ResponseType(typeof(EMPLEADO_POR_ROL))]
-        public IHttpActionResult GetEMPLEADO_POR_ROL(byte id)
+        [HttpGet]
+        [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
+        [ResponseType(typeof(View_EmpleadoPorRol))]
+        public IHttpActionResult GetEMPLEADO_POR_ROL(byte idRol , int idEmpleado)
         {
-            EMPLEADO_POR_ROL eMPLEADO_POR_ROL = db.EMPLEADO_POR_ROL.Find(id);
+            View_EmpleadoPorRol eMPLEADO_POR_ROL = db.View_EmpleadoPorRol.Find(idRol,idEmpleado);
             if (eMPLEADO_POR_ROL == null)
             {
                 return NotFound();
             }
 
             return Ok(eMPLEADO_POR_ROL);
-        }
-
-        // PUT: api/EmpleadoPorRol/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutEMPLEADO_POR_ROL(byte id, EMPLEADO_POR_ROL eMPLEADO_POR_ROL)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != eMPLEADO_POR_ROL.IdRol)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(eMPLEADO_POR_ROL).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EMPLEADO_POR_ROLExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/EmpleadoPorRol
@@ -87,7 +55,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EMPLEADO_POR_ROLExists(eMPLEADO_POR_ROL.IdRol))
+                if (EMPLEADO_POR_ROLExists(eMPLEADO_POR_ROL.IdRol,eMPLEADO_POR_ROL.IdEmpleado))
                 {
                     return Conflict();
                 }
@@ -97,21 +65,37 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = eMPLEADO_POR_ROL.IdRol }, eMPLEADO_POR_ROL);
+            return Ok(eMPLEADO_POR_ROL);
         }
 
         // DELETE: api/EmpleadoPorRol/5
+        [HttpDelete]
+        [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
         [ResponseType(typeof(EMPLEADO_POR_ROL))]
-        public IHttpActionResult DeleteEMPLEADO_POR_ROL(byte id)
+        public IHttpActionResult DeleteEMPLEADO_POR_ROL(byte idRol, int idEmpleado)
         {
-            EMPLEADO_POR_ROL eMPLEADO_POR_ROL = db.EMPLEADO_POR_ROL.Find(id);
+            EMPLEADO_POR_ROL eMPLEADO_POR_ROL = db.EMPLEADO_POR_ROL.Find(idRol,idEmpleado);
             if (eMPLEADO_POR_ROL == null)
             {
                 return NotFound();
             }
-
-            db.EMPLEADO_POR_ROL.Remove(eMPLEADO_POR_ROL);
-            db.SaveChanges();
+            eMPLEADO_POR_ROL.Estado = "I"; //Deletion
+            db.Entry(eMPLEADO_POR_ROL).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EMPLEADO_POR_ROLExists(idRol, idEmpleado))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(eMPLEADO_POR_ROL);
         }
@@ -125,9 +109,9 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EMPLEADO_POR_ROLExists(byte id)
+        private bool EMPLEADO_POR_ROLExists(byte idRol, int idEmpleado)
         {
-            return db.EMPLEADO_POR_ROL.Count(e => e.IdRol == id) > 0;
+            return db.EMPLEADO_POR_ROL.Find(idRol ,idEmpleado) != null;
         }
     }
 }
