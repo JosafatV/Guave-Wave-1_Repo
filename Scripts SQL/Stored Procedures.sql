@@ -7,27 +7,37 @@ CREATE PROCEDURE sp_insert_Caja
 		SELECT @IdCaja = @@IDENTITY
 
 		INSERT INTO CAJA_POR_SUCURSAL (IdCaja,IdSucursal) VALUES (@IdCaja,@IdSucursal)
+		RETURN IdCaja
 	GO
 	
 /* Inserts a new Cliente tuple */
 CREATE PROCEDURE sp_insert_Cliente
 	@Cedula char(10), @Nombre char(15), @Apellidos char(30), @FechaNacimiento date
 	AS
+		DECLARE @IdCliente
 		INSERT INTO CLIENTE (Cedula,Nombre,Apellidos,FechaNacimiento) VALUES (@Cedula, @Nombre, @Apellidos, @FechaNacimiento)
+		SELECT @IdCliente = @@IDENTITY
+		RETURN @IdCliente
 	GO
 
 /* Inserts a new Proveedor tuple */
 CREATE PROCEDURE sp_insert_Proveedor
 	@Nombre char(15)
 	AS
+		DECLARE @IdProveedor tinyINT
 		INSERT INTO PROVEEDOR (Nombre) VALUES (@Nombre)
+		SELECT @IdProveedor = @@IDENTITY
+		RETURN @IdProveedor
 	GO
 
 /* Inserts a new Rol tuple */
 CREATE PROCEDURE sp_insert_Rol 
 	@Nombre char(15)
 	AS
+		DECLARE @IdRol tinyINT
 		INSERT INTO ROL (Nombre) VALUES (@Nombre)
+		SELECT @IdRol = @@IDENTITY
+		RETURN @IdRol
 	GO
 
 /* Inserts a new Empleado and it's Rol */
@@ -37,14 +47,18 @@ CREATE PROCEDURE sp_insert_Empleado
 		DECLARE @IdEmpleado INT
 		INSERT INTO EMPLEADO (Contraseña,Cedula,Nombre,Apellidos) VALUES (@Contraseña,@Cedula,@Nombre,@Apellidos)
 		SELECT @IdEmpleado=@@IDENTITY
+
 		INSERT INTO EMPLEADO_POR_ROL (IdRol, IdEmpleado) VALUES (@IdRol, @IdEmpleado)
+		RETURN @IdEmpleado
 	GO
 
 /* Inserts a new Sucursal tuple */
 CREATE PROCEDURE sp_insert_Sucursal
 	@Nombre char(15), @Direccion char(30), @Telefono INT
 	AS
+		DECLARE @IdSucursal INT
 		INSERT INTO SUCURSAL (Nombre,Direccion,Telefono) VALUES (@Nombre,@Direccion,@Telefono)
+		SELECT @IdSucursal = @@IDENTITY
 	GO
 
 /* Inserts a new Producto tuple and it's relationship with Proveedor */
@@ -55,11 +69,12 @@ CREATE PROCEDURE sp_insert_Producto
 		INSERT INTO PRODUCTO (Nombre, EAN, Precio) VALUES (@Nombre, @EAN, @Precio)
 		SELECT @IdProducto = @@IDENTITY
 		INSERT INTO PRODUCTO_POR_PROVEEDOR (IdProducto, IdProveedor) VALUES (@IdProducto,@IdProveedor)
+		RETURN @IdProducto
 	GO
 
 /* Inserts a new Venta tuple, and its relationships */
 CREATE PROCEDURE sp_insert_Venta
-	@IdCaja INT, @IdCliente INT, @IdSucursal INT
+	@IdCaja INT, @IdCliente INT
 	AS
 		DECLARE @IdVenta INT
 
@@ -68,6 +83,8 @@ CREATE PROCEDURE sp_insert_Venta
 		
 		INSERT INTO VENTA_POR_CAJA (IdVenta, IdCaja) VALUES (@IdVenta,@IdCaja)
 		INSERT INTO VENTA_POR_CLIENTE (IdVenta, IdCliente) VALUES (@IdVenta,@IdCliente)
+
+		RETURN @IdVenta
 	GO
 
 /* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*/
@@ -102,4 +119,3 @@ CREATE PROCEDURE sp_reStock
 	AS
 		UPDATE PRODUCTO_POR_SUCURSAL SET Stock=Stock+@Quantity WHERE IdProducto=@IdProduct AND IdSucursal=@IdSucursal
 	GO
-
