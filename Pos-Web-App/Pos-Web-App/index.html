@@ -3,6 +3,10 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="shortcut icon" type="image/x/icon" href="imagenes/pis.ico">
     <!-------------------------Framework of angularJS----------------------------------------->
     <script src="Scripts/Angular and Bootstrap/AngularJS/angular.js"></script>
     <script src="Scripts/Angular and Bootstrap/AngularJS/angular-route.js"></script>
@@ -11,7 +15,7 @@
     <!-------------------------Framework of Bootstrap----------------------------------------->
     <link rel="stylesheet" href="Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css" />
     <script src="Scripts/Angular and Bootstrap/Bootstrap/js/bootstrap.js"></script>
-    <script src="Scripts/Angular and Bootstrap/Bootstrap/js/bootstrap.min.js"></script>    
+    <script src="Scripts/Angular and Bootstrap/Bootstrap/js/bootstrap.min.js"></script>      
     <!-------------------------Init and config and utilities Scripts-------------------------->
     <script src="Scripts/Pos-Scripts/initScript.js"></script>
     <script src="Scripts/Pos-Scripts/resourceScript.js"></script>
@@ -22,6 +26,7 @@
     <!-------------------------Cashier Scripts------------------------------------------------>
     <script src="Scripts/Pos-Scripts/CashierView/cashDeskOpeningController.js"></script>
     <script src="Scripts/Pos-Scripts/CashierView/salesController.js"></script>
+    <script src="Scripts/Pos-Scripts/CashierView/menuCashierController.js"></script>
     <!-------------------------Admin Scripts-------------------------------------------------->
     <script src="Scripts/Pos-Scripts/AdminView/adminMenuController.js"></script>
     <script src="Scripts/Pos-Scripts/AdminView/Branch/branchCRUDMenuController.js"></script>
@@ -32,6 +37,67 @@
     <script src="Scripts/Pos-Scripts/AdminView/Suppliers/suppliersCRUDMenuController.js"></script>
 </head>
 <body>
-    <div data-ng-view></div>
+    <section class="jumbotron">
+        <div class="container-fluid">
+            <div class="col-md-offset-2">
+                <h1 class="titulo-pag">Nigma Solutions</h1>
+                <p>Facturación Global</p>
+            </div>
+        </div>
+    </section>
+    <data-ng-view></data-ng-view>
 </body>
+<!--
+<div class="col-md-2">
+    <div style="position: fixed; left:-7  ; top:-30">
+        <img src="imagenes/enep.png">
+    </div>
+</div>
+-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br> <!--NO volarse estos saltos-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <p>
+                    2016 Nigma Solutions Enterprises
+                </p>
+            </div>
+            <div class="col-xs-6">
+                <ul class="list-inline text-right">
+                    <li><a href="#">Sistemas de facturación</a></li>
+                    <li><a href="#">Acerca de nosotros</a></li>
+                    <li><a href="#">Ofertas de empleo</a></li>
+                </ul>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
 </html>

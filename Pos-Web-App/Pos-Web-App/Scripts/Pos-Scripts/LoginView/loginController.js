@@ -3,7 +3,7 @@
         alert('Estoy en el login');
 
         $scope.goCashier = function () {
-            $location.path('/NigmaFacturation/CashierView/cashDeskOpening');
+            $location.path('/NigmaFacturation/CashierView/menuCashier');
         };
         $scope.goAdminMenu = function () {
             $location.path('/NigmaFacturation/AdminView/adminMenu');

@@ -1,12 +1,20 @@
 ﻿angular.module('NigmaFacturationApp').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
 /*-------------------------------------Cashier-------------------------------------------*/
+    .when('/NigmaFacturation/CashierView/menuCashier', {
+        templateUrl: 'HtmlPages/CashierView/menuCashier.html',
+        controller: 'menuCashierController'
+    })
     .when('/NigmaFacturation/CashierView/cashDeskOpening', {
         templateUrl: 'HtmlPages/CashierView/cashDeskOpening.html',
         controller: 'cashDeskOpeningController'
     })
+    .when('/NigmaFacturation/CashierView/cashDeskClosing', {
+        templateUrl: 'HtmlPages/CashierView/cashDeskClosing.html',
+        controller: 'cashDeskClosingController'
+    })
     .when('/NigmaFacturation/CashierView/sales', {
-        templateUrl: 'HtmlPages/Login/sales.html',
+        templateUrl: 'HtmlPages/CashierView/sales.html',
         controller: 'salesController'
     })
 /*-------------------------------------Admin--------------------------------------------*/
@@ -39,7 +47,6 @@
     controller: 'reportsController'
     })
 /*-------------------------------------Login--------------------------------------------*/
-
     .when('/NigmaFacturation/LoginView/signIn', {
         templateUrl: 'HtmlPages/LoginView/signIn.html',
         controller: 'signInLoginController'
@@ -49,7 +56,6 @@
         controller: 'loginController'
     })
 }]);
-
 /*
 angular.module('DrPhischelApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
