@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3415123af16048d39414987252093870" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="PosPFModel.CAJA" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.CAJA_POR_SUCURSAL" Width="1.5" PointX="8" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.CLIENTE" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.EMPLEADO" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.EMPLEADO_POR_ROL" Width="1.5" PointX="11" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.EMPLEADO_POR_SUCURSAL" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.PRODUCTO" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.PRODUCTO_POR_PROVEEDOR" Width="2.125" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.PRODUCTO_POR_SUCURSAL" Width="1.5" PointX="8" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.PRODUCTO_POR_VENTA" Width="2.375" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.PROVEEDOR" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.ROL" Width="1.5" PointX="3.375" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.SUCURSAL" Width="1.5" PointX="5.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.VENTA" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.VENTA_POR_CAJA" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.VENTA_POR_CLIENTE" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_CajaPorSucursal" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_EmpleadoPorRol" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_EmpleadoPorSucursal" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_ProductoPorProveedor" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_ProductoPorSucursal" Width="1.5" PointX="6.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_ProductoPorVenta" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_VentaPorCaja" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosPFModel.View_VentaPorCliente" Width="1.5" PointX="10.625" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="PosPFModel.FK__CAJA_POR___IdCaj__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdCaj__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__CAJA_POR___IdSuc__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdCli__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdEmp__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdEmp__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdRol__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdSuc__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdPro__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdPro__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdPro__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdPro__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdSuc__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__PRODUCTO___IdVen__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdVen__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdVen__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PosPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAJA">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdCaja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dinero" Type="money" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CAJA_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="EMPLEADO_POR_ROL">
+          <Key>
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdRol" Type="tinyint" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="EMPLEADO_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_POR_PROVEEDOR">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Stock" Type="smallint" />
+          <Property Name="StockMinimo" Type="smallint" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_POR_VENTA">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="smallint" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Direccion" Type="char" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="VENTA_POR_CAJA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="VENTA_POR_CLIENTE">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_CajaPorSucursal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_CajaPorSucursal">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="Dinero" Type="money" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Direccion" Type="char" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="EstadoSucursal" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorRol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_EmpleadoPorRol">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="NombreRol" />
+          </Key>
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdRol" Type="tinyint" Nullable="false" />
+          <Property Name="NombreRol" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="EstadoRol" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorSucursal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_EmpleadoPorSucursal">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="NombreSucursal" Type="char" MaxLength="15" />
+          <Property Name="Direccion" Type="char" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="EstadoSucursal" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_ProductoPorProveedor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ProductoPorProveedor">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="NombreProveedor" Type="char" MaxLength="15" />
+          <Property Name="EstadoProveedor" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_ProductoPorSucursal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ProductoPorSucursal">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="Stock" Type="smallint" />
+          <Property Name="StockMinimo" Type="smallint" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="NombreSucursal" Type="char" MaxLength="15" />
+          <Property Name="Direccion" Type="char" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="EstadoSucursal" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_ProductoPorVenta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ProductoPorVenta">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="Cantidad" Type="smallint" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="NombreSucursal" Type="char" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_VentaPorCaja' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_VentaPorCaja">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="Dinero" Type="money" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="EstadoVenta" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_VentaPorCliente">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="15" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="EstadoCliente" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__CAJA_POR___IdCaj__4D94879B">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAJA_POR_SUCURSAL" Type="Self.CAJA_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="CAJA_POR_SUCURSAL">
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAJA_POR___IdSuc__4CA06362">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAJA_POR_SUCURSAL" Type="Self.CAJA_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="CAJA_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdEmp__2C3393D0">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_ROL" Type="Self.EMPLEADO_POR_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_ROL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdEmp__300424B4">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_SUCURSAL" Type="Self.EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_SUCURSAL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdRol__2B3F6F97">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_ROL" Type="Self.EMPLEADO_POR_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_ROL">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdSuc__30F848ED">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_SUCURSAL" Type="Self.EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__34C8D9D1">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_SUCURSAL" Type="Self.PRODUCTO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_SUCURSAL">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__398D8EEE">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_VENTA" Type="Self.PRODUCTO_POR_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_VENTA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__47DBAE45">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_PROVEEDOR" Type="Self.PRODUCTO_POR_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_PROVEEDOR">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__48CFD27E">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_PROVEEDOR" Type="Self.PRODUCTO_POR_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_PROVEEDOR">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdSuc__35BCFE0A">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_SUCURSAL" Type="Self.PRODUCTO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdVen__3A81B327">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_VENTA" Type="Self.PRODUCTO_POR_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdCaj__440B1D61">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CAJA" Type="Self.VENTA_POR_CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdCli__3F466844">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CLIENTE" Type="Self.VENTA_POR_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdVen__3E52440B">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CLIENTE" Type="Self.VENTA_POR_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CLIENTE">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdVen__4316F928">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CAJA" Type="Self.VENTA_POR_CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CAJA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_insert_Caja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Dinero" Type="money" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Contraseña" Type="char" Mode="In" />
+          <Parameter Name="Cedula" Type="char" Mode="In" />
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+          <Parameter Name="Apellidos" Type="char" Mode="In" />
+          <Parameter Name="IdRol" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+          <Parameter Name="EAN" Type="char" Mode="In" />
+          <Parameter Name="Precio" Type="money" Mode="In" />
+          <Parameter Name="idProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_ProductosPorVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdVenta" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="smallint" Mode="In" />
+          <Parameter Name="IdCaja" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Proveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Sucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+          <Parameter Name="Direccion" Type="char" Mode="In" />
+          <Parameter Name="Telefono" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_Venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCaja" Type="int" Mode="In" />
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_reStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProduct" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="smallint" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="Stock" Type="smallint" Mode="In" />
+          <Parameter Name="StockMinimo" Type="smallint" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PosPFModelStoreContainer">
+          <EntitySet Name="CAJA" EntityType="Self.CAJA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAJA_POR_SUCURSAL" EntityType="Self.CAJA_POR_SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO_POR_ROL" EntityType="Self.EMPLEADO_POR_ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO_POR_SUCURSAL" EntityType="Self.EMPLEADO_POR_SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_POR_PROVEEDOR" EntityType="Self.PRODUCTO_POR_PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_POR_SUCURSAL" EntityType="Self.PRODUCTO_POR_SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_POR_VENTA" EntityType="Self.PRODUCTO_POR_VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA_POR_CAJA" EntityType="Self.VENTA_POR_CAJA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA_POR_CLIENTE" EntityType="Self.VENTA_POR_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_CajaPorSucursal" EntityType="Self.View_CajaPorSucursal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_CajaPorSucursal].[IdCaja] AS [IdCaja], 
+    [View_CajaPorSucursal].[Dinero] AS [Dinero], 
+    [View_CajaPorSucursal].[Estado] AS [Estado], 
+    [View_CajaPorSucursal].[IdSucursal] AS [IdSucursal], 
+    [View_CajaPorSucursal].[Nombre] AS [Nombre], 
+    [View_CajaPorSucursal].[Direccion] AS [Direccion], 
+    [View_CajaPorSucursal].[Telefono] AS [Telefono], 
+    [View_CajaPorSucursal].[EstadoSucursal] AS [EstadoSucursal]
+    FROM [dbo].[View_CajaPorSucursal] AS [View_CajaPorSucursal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_EmpleadoPorRol" EntityType="Self.View_EmpleadoPorRol" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_EmpleadoPorRol].[IdEmpleado] AS [IdEmpleado], 
+    [View_EmpleadoPorRol].[Contraseña] AS [Contraseña], 
+    [View_EmpleadoPorRol].[Cedula] AS [Cedula], 
+    [View_EmpleadoPorRol].[Nombre] AS [Nombre], 
+    [View_EmpleadoPorRol].[Apellidos] AS [Apellidos], 
+    [View_EmpleadoPorRol].[Estado] AS [Estado], 
+    [View_EmpleadoPorRol].[IdRol] AS [IdRol], 
+    [View_EmpleadoPorRol].[NombreRol] AS [NombreRol], 
+    [View_EmpleadoPorRol].[EstadoRol] AS [EstadoRol]
+    FROM [dbo].[View_EmpleadoPorRol] AS [View_EmpleadoPorRol]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_EmpleadoPorSucursal" EntityType="Self.View_EmpleadoPorSucursal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_EmpleadoPorSucursal].[IdEmpleado] AS [IdEmpleado], 
+    [View_EmpleadoPorSucursal].[Contraseña] AS [Contraseña], 
+    [View_EmpleadoPorSucursal].[Cedula] AS [Cedula], 
+    [View_EmpleadoPorSucursal].[Nombre] AS [Nombre], 
+    [View_EmpleadoPorSucursal].[Apellidos] AS [Apellidos], 
+    [View_EmpleadoPorSucursal].[Estado] AS [Estado], 
+    [View_EmpleadoPorSucursal].[IdSucursal] AS [IdSucursal], 
+    [View_EmpleadoPorSucursal].[NombreSucursal] AS [NombreSucursal], 
+    [View_EmpleadoPorSucursal].[Direccion] AS [Direccion], 
+    [View_EmpleadoPorSucursal].[Telefono] AS [Telefono], 
+    [View_EmpleadoPorSucursal].[EstadoSucursal] AS [EstadoSucursal]
+    FROM [dbo].[View_EmpleadoPorSucursal] AS [View_EmpleadoPorSucursal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ProductoPorProveedor" EntityType="Self.View_ProductoPorProveedor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ProductoPorProveedor].[IdProducto] AS [IdProducto], 
+    [View_ProductoPorProveedor].[EAN] AS [EAN], 
+    [View_ProductoPorProveedor].[Nombre] AS [Nombre], 
+    [View_ProductoPorProveedor].[Precio] AS [Precio], 
+    [View_ProductoPorProveedor].[Estado] AS [Estado], 
+    [View_ProductoPorProveedor].[IdProveedor] AS [IdProveedor], 
+    [View_ProductoPorProveedor].[NombreProveedor] AS [NombreProveedor], 
+    [View_ProductoPorProveedor].[EstadoProveedor] AS [EstadoProveedor]
+    FROM [dbo].[View_ProductoPorProveedor] AS [View_ProductoPorProveedor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ProductoPorSucursal" EntityType="Self.View_ProductoPorSucursal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ProductoPorSucursal].[IdProducto] AS [IdProducto], 
+    [View_ProductoPorSucursal].[EAN] AS [EAN], 
+    [View_ProductoPorSucursal].[Nombre] AS [Nombre], 
+    [View_ProductoPorSucursal].[Precio] AS [Precio], 
+    [View_ProductoPorSucursal].[Estado] AS [Estado], 
+    [View_ProductoPorSucursal].[Stock] AS [Stock], 
+    [View_ProductoPorSucursal].[StockMinimo] AS [StockMinimo], 
+    [View_ProductoPorSucursal].[IdSucursal] AS [IdSucursal], 
+    [View_ProductoPorSucursal].[NombreSucursal] AS [NombreSucursal], 
+    [View_ProductoPorSucursal].[Direccion] AS [Direccion], 
+    [View_ProductoPorSucursal].[Telefono] AS [Telefono], 
+    [View_ProductoPorSucursal].[EstadoSucursal] AS [EstadoSucursal]
+    FROM [dbo].[View_ProductoPorSucursal] AS [View_ProductoPorSucursal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ProductoPorVenta" EntityType="Self.View_ProductoPorVenta" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ProductoPorVenta].[IdProducto] AS [IdProducto], 
+    [View_ProductoPorVenta].[EAN] AS [EAN], 
+    [View_ProductoPorVenta].[Nombre] AS [Nombre], 
+    [View_ProductoPorVenta].[Precio] AS [Precio], 
+    [View_ProductoPorVenta].[Cantidad] AS [Cantidad], 
+    [View_ProductoPorVenta].[Estado] AS [Estado], 
+    [View_ProductoPorVenta].[Timestamp] AS [Timestamp], 
+    [View_ProductoPorVenta].[IdVenta] AS [IdVenta], 
+    [View_ProductoPorVenta].[IdCaja] AS [IdCaja], 
+    [View_ProductoPorVenta].[IdSucursal] AS [IdSucursal], 
+    [View_ProductoPorVenta].[NombreSucursal] AS [NombreSucursal]
+    FROM [dbo].[View_ProductoPorVenta] AS [View_ProductoPorVenta]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_VentaPorCaja" EntityType="Self.View_VentaPorCaja" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_VentaPorCaja].[IdCaja] AS [IdCaja], 
+    [View_VentaPorCaja].[Dinero] AS [Dinero], 
+    [View_VentaPorCaja].[Estado] AS [Estado], 
+    [View_VentaPorCaja].[IdVenta] AS [IdVenta], 
+    [View_VentaPorCaja].[Timestamp] AS [Timestamp], 
+    [View_VentaPorCaja].[EstadoVenta] AS [EstadoVenta]
+    FROM [dbo].[View_VentaPorCaja] AS [View_VentaPorCaja]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_VentaPorCliente" EntityType="Self.View_VentaPorCliente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_VentaPorCliente].[IdVenta] AS [IdVenta], 
+    [View_VentaPorCliente].[Timestamp] AS [Timestamp], 
+    [View_VentaPorCliente].[Estado] AS [Estado], 
+    [View_VentaPorCliente].[IdCliente] AS [IdCliente], 
+    [View_VentaPorCliente].[Cedula] AS [Cedula], 
+    [View_VentaPorCliente].[Nombre] AS [Nombre], 
+    [View_VentaPorCliente].[Apellidos] AS [Apellidos], 
+    [View_VentaPorCliente].[FechaNacimiento] AS [FechaNacimiento], 
+    [View_VentaPorCliente].[EstadoCliente] AS [EstadoCliente]
+    FROM [dbo].[View_VentaPorCliente] AS [View_VentaPorCliente]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__CAJA_POR___IdCaj__4D94879B" Association="Self.FK__CAJA_POR___IdCaj__4D94879B">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="CAJA_POR_SUCURSAL" EntitySet="CAJA_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAJA_POR___IdSuc__4CA06362" Association="Self.FK__CAJA_POR___IdSuc__4CA06362">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CAJA_POR_SUCURSAL" EntitySet="CAJA_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__2C3393D0" Association="Self.FK__EMPLEADO___IdEmp__2C3393D0">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__300424B4" Association="Self.FK__EMPLEADO___IdEmp__300424B4">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdRol__2B3F6F97" Association="Self.FK__EMPLEADO___IdRol__2B3F6F97">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdSuc__30F848ED" Association="Self.FK__EMPLEADO___IdSuc__30F848ED">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__34C8D9D1" Association="Self.FK__PRODUCTO___IdPro__34C8D9D1">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_SUCURSAL" EntitySet="PRODUCTO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__398D8EEE" Association="Self.FK__PRODUCTO___IdPro__398D8EEE">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_VENTA" EntitySet="PRODUCTO_POR_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__47DBAE45" Association="Self.FK__PRODUCTO___IdPro__47DBAE45">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_PROVEEDOR" EntitySet="PRODUCTO_POR_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__48CFD27E" Association="Self.FK__PRODUCTO___IdPro__48CFD27E">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PRODUCTO_POR_PROVEEDOR" EntitySet="PRODUCTO_POR_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdSuc__35BCFE0A" Association="Self.FK__PRODUCTO___IdSuc__35BCFE0A">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="PRODUCTO_POR_SUCURSAL" EntitySet="PRODUCTO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdVen__3A81B327" Association="Self.FK__PRODUCTO___IdVen__3A81B327">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="PRODUCTO_POR_VENTA" EntitySet="PRODUCTO_POR_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdCaj__440B1D61" Association="Self.FK__VENTA_POR__IdCaj__440B1D61">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdCli__3F466844" Association="Self.FK__VENTA_POR__IdCli__3F466844">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA_POR_CLIENTE" EntitySet="VENTA_POR_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdVen__3E52440B" Association="Self.FK__VENTA_POR__IdVen__3E52440B">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENTA_POR_CLIENTE" EntitySet="VENTA_POR_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdVen__4316F928" Association="Self.FK__VENTA_POR__IdVen__4316F928">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PosPFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CAJA">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdCaja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dinero" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="CAJA_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="EMPLEADO_POR_ROL">
+          <Key>
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdRol" Type="Byte" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="EMPLEADO_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EAN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="PRODUCTO_POR_PROVEEDOR">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="PRODUCTO_POR_SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Stock" Type="Int16" />
+          <Property Name="StockMinimo" Type="Int16" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_POR_VENTA">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int16" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SUCURSAL">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="VENTA_POR_CAJA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="VENTA_POR_CLIENTE">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <EntityType Name="View_CajaPorSucursal">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="Dinero" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_EmpleadoPorRol">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="NombreRol" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdRol" Type="Byte" Nullable="false" />
+          <Property Name="NombreRol" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EstadoRol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_EmpleadoPorSucursal">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_ProductoPorProveedor">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="EAN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="EstadoProveedor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_ProductoPorSucursal">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="EAN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Stock" Type="Int16" />
+          <Property Name="StockMinimo" Type="Int16" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_ProductoPorVenta">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EAN" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="EAN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cantidad" Type="Int16" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_VentaPorCaja">
+          <Key>
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="Dinero" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="EstadoVenta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_VentaPorCliente">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="EstadoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__CAJA_POR___IdCaj__4D94879B">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAJA_POR_SUCURSAL" Type="Self.CAJA_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="CAJA_POR_SUCURSAL">
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdCaj__440B1D61">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CAJA" Type="Self.VENTA_POR_CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CAJA">
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAJA_POR___IdSuc__4CA06362">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAJA_POR_SUCURSAL" Type="Self.CAJA_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="CAJA_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdCli__3F466844">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CLIENTE" Type="Self.VENTA_POR_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdEmp__2C3393D0">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_ROL" Type="Self.EMPLEADO_POR_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_ROL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdEmp__300424B4">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_SUCURSAL" Type="Self.EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_SUCURSAL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdRol__2B3F6F97">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_ROL" Type="Self.EMPLEADO_POR_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_ROL">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdSuc__30F848ED">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EMPLEADO_POR_SUCURSAL" Type="Self.EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__34C8D9D1">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_SUCURSAL" Type="Self.PRODUCTO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_SUCURSAL">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__398D8EEE">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_VENTA" Type="Self.PRODUCTO_POR_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_VENTA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__47DBAE45">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_PROVEEDOR" Type="Self.PRODUCTO_POR_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_PROVEEDOR">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdPro__48CFD27E">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_PROVEEDOR" Type="Self.PRODUCTO_POR_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_PROVEEDOR">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdSuc__35BCFE0A">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_SUCURSAL" Type="Self.PRODUCTO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_SUCURSAL">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO___IdVen__3A81B327">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCTO_POR_VENTA" Type="Self.PRODUCTO_POR_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="PRODUCTO_POR_VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdVen__3E52440B">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CLIENTE" Type="Self.VENTA_POR_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CLIENTE">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_POR__IdVen__4316F928">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VENTA_POR_CAJA" Type="Self.VENTA_POR_CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="VENTA_POR_CAJA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PosPFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAJA" EntityType="Self.CAJA" />
+          <EntitySet Name="CAJA_POR_SUCURSAL" EntityType="Self.CAJA_POR_SUCURSAL" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="EMPLEADO_POR_ROL" EntityType="Self.EMPLEADO_POR_ROL" />
+          <EntitySet Name="EMPLEADO_POR_SUCURSAL" EntityType="Self.EMPLEADO_POR_SUCURSAL" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PRODUCTO_POR_PROVEEDOR" EntityType="Self.PRODUCTO_POR_PROVEEDOR" />
+          <EntitySet Name="PRODUCTO_POR_SUCURSAL" EntityType="Self.PRODUCTO_POR_SUCURSAL" />
+          <EntitySet Name="PRODUCTO_POR_VENTA" EntityType="Self.PRODUCTO_POR_VENTA" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <EntitySet Name="VENTA_POR_CAJA" EntityType="Self.VENTA_POR_CAJA" />
+          <EntitySet Name="VENTA_POR_CLIENTE" EntityType="Self.VENTA_POR_CLIENTE" />
+          <EntitySet Name="View_CajaPorSucursal" EntityType="Self.View_CajaPorSucursal" />
+          <EntitySet Name="View_EmpleadoPorRol" EntityType="Self.View_EmpleadoPorRol" />
+          <EntitySet Name="View_EmpleadoPorSucursal" EntityType="Self.View_EmpleadoPorSucursal" />
+          <EntitySet Name="View_ProductoPorProveedor" EntityType="Self.View_ProductoPorProveedor" />
+          <EntitySet Name="View_ProductoPorSucursal" EntityType="Self.View_ProductoPorSucursal" />
+          <EntitySet Name="View_ProductoPorVenta" EntityType="Self.View_ProductoPorVenta" />
+          <EntitySet Name="View_VentaPorCaja" EntityType="Self.View_VentaPorCaja" />
+          <EntitySet Name="View_VentaPorCliente" EntityType="Self.View_VentaPorCliente" />
+          <AssociationSet Name="FK__CAJA_POR___IdCaj__4D94879B" Association="Self.FK__CAJA_POR___IdCaj__4D94879B">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="CAJA_POR_SUCURSAL" EntitySet="CAJA_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdCaj__440B1D61" Association="Self.FK__VENTA_POR__IdCaj__440B1D61">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAJA_POR___IdSuc__4CA06362" Association="Self.FK__CAJA_POR___IdSuc__4CA06362">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CAJA_POR_SUCURSAL" EntitySet="CAJA_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdCli__3F466844" Association="Self.FK__VENTA_POR__IdCli__3F466844">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA_POR_CLIENTE" EntitySet="VENTA_POR_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__2C3393D0" Association="Self.FK__EMPLEADO___IdEmp__2C3393D0">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__300424B4" Association="Self.FK__EMPLEADO___IdEmp__300424B4">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdRol__2B3F6F97" Association="Self.FK__EMPLEADO___IdRol__2B3F6F97">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdSuc__30F848ED" Association="Self.FK__EMPLEADO___IdSuc__30F848ED">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__34C8D9D1" Association="Self.FK__PRODUCTO___IdPro__34C8D9D1">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_SUCURSAL" EntitySet="PRODUCTO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__398D8EEE" Association="Self.FK__PRODUCTO___IdPro__398D8EEE">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_VENTA" EntitySet="PRODUCTO_POR_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__47DBAE45" Association="Self.FK__PRODUCTO___IdPro__47DBAE45">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_POR_PROVEEDOR" EntitySet="PRODUCTO_POR_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdPro__48CFD27E" Association="Self.FK__PRODUCTO___IdPro__48CFD27E">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PRODUCTO_POR_PROVEEDOR" EntitySet="PRODUCTO_POR_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdSuc__35BCFE0A" Association="Self.FK__PRODUCTO___IdSuc__35BCFE0A">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="PRODUCTO_POR_SUCURSAL" EntitySet="PRODUCTO_POR_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO___IdVen__3A81B327" Association="Self.FK__PRODUCTO___IdVen__3A81B327">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="PRODUCTO_POR_VENTA" EntitySet="PRODUCTO_POR_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdVen__3E52440B" Association="Self.FK__VENTA_POR__IdVen__3E52440B">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENTA_POR_CLIENTE" EntitySet="VENTA_POR_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_POR__IdVen__4316F928" Association="Self.FK__VENTA_POR__IdVen__4316F928">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
+          </AssociationSet>
+          <FunctionImport Name="sp_insert_Caja">
+            <Parameter Name="Dinero" Mode="In" Type="Decimal" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Empleado">
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Producto">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EAN" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="idProveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_ProductosPorVenta">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdVenta" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int16" />
+            <Parameter Name="IdCaja" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Proveedor">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Rol">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Sucursal">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_Venta">
+            <Parameter Name="IdCaja" Mode="In" Type="Int32" />
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_reStock">
+            <Parameter Name="IdProduct" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Int16" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Stock">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Stock" Mode="In" Type="Int16" />
+            <Parameter Name="StockMinimo" Mode="In" Type="Int16" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PosPFModelStoreContainer" CdmEntityContainer="PosPFEntities">
+          <EntitySetMapping Name="CAJA">
+            <EntityTypeMapping TypeName="PosPFModel.CAJA">
+              <MappingFragment StoreEntitySet="CAJA">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Dinero" ColumnName="Dinero" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAJA_POR_SUCURSAL">
+            <EntityTypeMapping TypeName="PosPFModel.CAJA_POR_SUCURSAL">
+              <MappingFragment StoreEntitySet="CAJA_POR_SUCURSAL">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="PosPFModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="PosPFModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO_POR_ROL">
+            <EntityTypeMapping TypeName="PosPFModel.EMPLEADO_POR_ROL">
+              <MappingFragment StoreEntitySet="EMPLEADO_POR_ROL">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO_POR_SUCURSAL">
+            <EntityTypeMapping TypeName="PosPFModel.EMPLEADO_POR_SUCURSAL">
+              <MappingFragment StoreEntitySet="EMPLEADO_POR_SUCURSAL">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="PosPFModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_POR_PROVEEDOR">
+            <EntityTypeMapping TypeName="PosPFModel.PRODUCTO_POR_PROVEEDOR">
+              <MappingFragment StoreEntitySet="PRODUCTO_POR_PROVEEDOR">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_POR_SUCURSAL">
+            <EntityTypeMapping TypeName="PosPFModel.PRODUCTO_POR_SUCURSAL">
+              <MappingFragment StoreEntitySet="PRODUCTO_POR_SUCURSAL">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_POR_VENTA">
+            <EntityTypeMapping TypeName="PosPFModel.PRODUCTO_POR_VENTA">
+              <MappingFragment StoreEntitySet="PRODUCTO_POR_VENTA">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="PosPFModel.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="PosPFModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUCURSAL">
+            <EntityTypeMapping TypeName="PosPFModel.SUCURSAL">
+              <MappingFragment StoreEntitySet="SUCURSAL">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA">
+            <EntityTypeMapping TypeName="PosPFModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA_POR_CAJA">
+            <EntityTypeMapping TypeName="PosPFModel.VENTA_POR_CAJA">
+              <MappingFragment StoreEntitySet="VENTA_POR_CAJA">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA_POR_CLIENTE">
+            <EntityTypeMapping TypeName="PosPFModel.VENTA_POR_CLIENTE">
+              <MappingFragment StoreEntitySet="VENTA_POR_CLIENTE">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_CajaPorSucursal">
+            <EntityTypeMapping TypeName="PosPFModel.View_CajaPorSucursal">
+              <MappingFragment StoreEntitySet="View_CajaPorSucursal">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Dinero" ColumnName="Dinero" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_EmpleadoPorRol">
+            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorRol">
+              <MappingFragment StoreEntitySet="View_EmpleadoPorRol">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="EstadoRol" ColumnName="EstadoRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_EmpleadoPorSucursal">
+            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorSucursal">
+              <MappingFragment StoreEntitySet="View_EmpleadoPorSucursal">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ProductoPorProveedor">
+            <EntityTypeMapping TypeName="PosPFModel.View_ProductoPorProveedor">
+              <MappingFragment StoreEntitySet="View_ProductoPorProveedor">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="EstadoProveedor" ColumnName="EstadoProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ProductoPorSucursal">
+            <EntityTypeMapping TypeName="PosPFModel.View_ProductoPorSucursal">
+              <MappingFragment StoreEntitySet="View_ProductoPorSucursal">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ProductoPorVenta">
+            <EntityTypeMapping TypeName="PosPFModel.View_ProductoPorVenta">
+              <MappingFragment StoreEntitySet="View_ProductoPorVenta">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_VentaPorCaja">
+            <EntityTypeMapping TypeName="PosPFModel.View_VentaPorCaja">
+              <MappingFragment StoreEntitySet="View_VentaPorCaja">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Dinero" ColumnName="Dinero" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="EstadoVenta" ColumnName="EstadoVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_VentaPorCliente">
+            <EntityTypeMapping TypeName="PosPFModel.View_VentaPorCliente">
+              <MappingFragment StoreEntitySet="View_VentaPorCliente">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_Caja" FunctionName="PosPFModel.Store.sp_insert_Caja" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Empleado" FunctionName="PosPFModel.Store.sp_insert_Empleado" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Producto" FunctionName="PosPFModel.Store.sp_insert_Producto" />
+          <FunctionImportMapping FunctionImportName="sp_insert_ProductosPorVenta" FunctionName="PosPFModel.Store.sp_insert_ProductosPorVenta" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Proveedor" FunctionName="PosPFModel.Store.sp_insert_Proveedor" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Rol" FunctionName="PosPFModel.Store.sp_insert_Rol" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Sucursal" FunctionName="PosPFModel.Store.sp_insert_Sucursal" />
+          <FunctionImportMapping FunctionImportName="sp_insert_Venta" FunctionName="PosPFModel.Store.sp_insert_Venta" />
+          <FunctionImportMapping FunctionImportName="sp_reStock" FunctionName="PosPFModel.Store.sp_reStock" />
+          <FunctionImportMapping FunctionImportName="sp_Stock" FunctionName="PosPFModel.Store.sp_Stock" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
