@@ -17,16 +17,19 @@ namespace WaveWebApi.Controllers
         private PosPFEntities db = new PosPFEntities();
 
         // GET: api/CajaPorSucursal
-        public IQueryable<CAJA_POR_SUCURSAL> GetCAJA_POR_SUCURSAL()
+        [HttpGet]
+        public IQueryable<View_CajaPorSucursal> GetCAJA_POR_SUCURSAL()
         {
-            return db.CAJA_POR_SUCURSAL;
+            return db.View_CajaPorSucursal;
         }
 
         // GET: api/CajaPorSucursal/5
-        [ResponseType(typeof(CAJA_POR_SUCURSAL))]
-        public IHttpActionResult GetCAJA_POR_SUCURSAL(int id)
+        [HttpGet]
+        [ResponseType(typeof(View_CajaPorSucursal))]
+        [Route("api/CajaPorSucursal/{idCaja}/{idSucursal}")]
+        public IHttpActionResult GetCAJA_POR_SUCURSAL(int idCaja, int idSucursal)
         {
-            CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL = db.CAJA_POR_SUCURSAL.Find(id);
+            View_CajaPorSucursal cAJA_POR_SUCURSAL = db.View_CajaPorSucursal.Find(idCaja, idSucursal);
             if (cAJA_POR_SUCURSAL == null)
             {
                 return NotFound();
@@ -34,42 +37,6 @@ namespace WaveWebApi.Controllers
 
             return Ok(cAJA_POR_SUCURSAL);
         }
-
-        // PUT: api/CajaPorSucursal/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCAJA_POR_SUCURSAL(int id, CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != cAJA_POR_SUCURSAL.IdCaja)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(cAJA_POR_SUCURSAL).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CAJA_POR_SUCURSALExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/CajaPorSucursal
         [ResponseType(typeof(CAJA_POR_SUCURSAL))]
         public IHttpActionResult PostCAJA_POR_SUCURSAL(CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL)
@@ -87,7 +54,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CAJA_POR_SUCURSALExists(cAJA_POR_SUCURSAL.IdCaja))
+                if (CAJA_POR_SUCURSALExists(cAJA_POR_SUCURSAL.IdCaja, cAJA_POR_SUCURSAL.IdSucursal))
                 {
                     return Conflict();
                 }
@@ -96,22 +63,37 @@ namespace WaveWebApi.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtRoute("DefaultApi", new { id = cAJA_POR_SUCURSAL.IdCaja }, cAJA_POR_SUCURSAL);
+            //custom change
+            return Ok(cAJA_POR_SUCURSAL);
         }
 
         // DELETE: api/CajaPorSucursal/5
+        [Route("api/CajaPorSucursal/{idCaja}/{idSucursal}")]
         [ResponseType(typeof(CAJA_POR_SUCURSAL))]
-        public IHttpActionResult DeleteCAJA_POR_SUCURSAL(int id)
+        public IHttpActionResult DeleteCAJA_POR_SUCURSAL(int idCaja,int idSucursal)
         {
-            CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL = db.CAJA_POR_SUCURSAL.Find(id);
+            CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL = db.CAJA_POR_SUCURSAL.Find(idCaja,idSucursal);
             if (cAJA_POR_SUCURSAL == null)
             {
                 return NotFound();
             }
-
-            db.CAJA_POR_SUCURSAL.Remove(cAJA_POR_SUCURSAL);
-            db.SaveChanges();
+            cAJA_POR_SUCURSAL.Estado = "I" ; //sets the state inactive (DELETION)
+            db.Entry(cAJA_POR_SUCURSAL).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CAJA_POR_SUCURSALExists(idCaja,idSucursal))
+                {
+                 return NotFound();
+                }
+                else
+                {
+                throw;
+                }
+            }
 
             return Ok(cAJA_POR_SUCURSAL);
         }
@@ -125,9 +107,9 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CAJA_POR_SUCURSALExists(int id)
+        private bool CAJA_POR_SUCURSALExists(int idCaja, int idSucursal)
         {
-            return db.CAJA_POR_SUCURSAL.Count(e => e.IdCaja == id) > 0;
+            return db.CAJA_POR_SUCURSAL.Find(idCaja, idSucursal) != null;
         }
     }
 }

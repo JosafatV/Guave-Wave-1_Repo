@@ -5,6 +5,7 @@ SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.Estado, dbo.SUCURSAL.Id
 FROM            dbo.CAJA INNER JOIN
                          dbo.CAJA_POR_SUCURSAL ON dbo.CAJA.IdCaja = dbo.CAJA_POR_SUCURSAL.IdCaja INNER JOIN
                          dbo.SUCURSAL ON dbo.CAJA_POR_SUCURSAL.IdSucursal = dbo.SUCURSAL.IdSucursal
+Where dbo.CAJA_POR_SUCURSAL.Estado = 'A'
 
 GO
 
@@ -15,7 +16,7 @@ SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contraseña, dbo.EMPLEADO.Ced
 FROM            dbo.EMPLEADO INNER JOIN
                          dbo.EMPLEADO_POR_ROL ON dbo.EMPLEADO.IdEmpleado = dbo.EMPLEADO_POR_ROL.IdEmpleado INNER JOIN
                          dbo.ROL ON dbo.EMPLEADO_POR_ROL.IdRol = dbo.ROL.IdRol
-
+Where dbo.EMPLEADO_POR_ROL.Estado = 'A'
 GO
 
 CREATE VIEW [dbo].[View_EmpleadoPorSucursal]
@@ -25,7 +26,7 @@ SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contraseña, dbo.EMPLEADO.Ced
 FROM            dbo.EMPLEADO INNER JOIN
                          dbo.EMPLEADO_POR_SUCURSAL ON dbo.EMPLEADO.IdEmpleado = dbo.EMPLEADO_POR_SUCURSAL.IdEmpleado INNER JOIN
                          dbo.SUCURSAL ON dbo.EMPLEADO_POR_SUCURSAL.IdSucursal = dbo.SUCURSAL.IdSucursal
-
+Where dbo.EMPLEADO_POR_SUCURSAL.Estado = 'A'
 GO
 
 CREATE VIEW [dbo].[View_ProductoPorVenta]
@@ -39,7 +40,7 @@ FROM            dbo.VENTA INNER JOIN
                          dbo.SUCURSAL INNER JOIN
                          dbo.CAJA INNER JOIN
                          dbo.CAJA_POR_SUCURSAL ON dbo.CAJA.IdCaja = dbo.CAJA_POR_SUCURSAL.IdCaja ON dbo.SUCURSAL.IdSucursal = dbo.CAJA_POR_SUCURSAL.IdSucursal ON dbo.VENTA_POR_CAJA.IdCaja = dbo.CAJA.IdCaja
-
+Where dbo.PRODUCTO_POR_VENTA.Estado = 'A'
 GO
 
 
@@ -50,7 +51,7 @@ SELECT        dbo.PRODUCTO.*, dbo.PRODUCTO_POR_SUCURSAL.Stock, dbo.PRODUCTO_POR_
 FROM            dbo.PRODUCTO INNER JOIN
                          dbo.PRODUCTO_POR_SUCURSAL ON dbo.PRODUCTO.IdProducto = dbo.PRODUCTO_POR_SUCURSAL.IdProducto INNER JOIN
                          dbo.SUCURSAL ON dbo.PRODUCTO_POR_SUCURSAL.IdSucursal = dbo.SUCURSAL.IdSucursal
-
+Where dbo.PRODUCTO_POR_SUCURSAL.Estado = 'A'
 GO
 
 CREATE VIEW [dbo].[View_ProductoPorProveedor]
@@ -60,7 +61,7 @@ SELECT        dbo.PRODUCTO.IdProducto, dbo.PRODUCTO.EAN, dbo.PRODUCTO.Nombre, db
 FROM            dbo.PRODUCTO INNER JOIN
                          dbo.PRODUCTO_POR_PROVEEDOR ON dbo.PRODUCTO.IdProducto = dbo.PRODUCTO_POR_PROVEEDOR.IdProducto INNER JOIN
                          dbo.PROVEEDOR ON dbo.PRODUCTO_POR_PROVEEDOR.IdProveedor = dbo.PROVEEDOR.IdProveedor
-
+Where dbo.PRODUCTO_POR_PROVEEDOR.Estado = 'A'
 GO
 
 CREATE VIEW [dbo].[View_VentaPorCaja]
@@ -69,7 +70,7 @@ SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.Estado, dbo.VENTA.IdVen
 FROM            dbo.CAJA INNER JOIN
                          dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta
-
+Where dbo.VENTA_POR_CAJA.Estado = 'A'
 GO
 
 CREATE VIEW [dbo].[View_VentaPorCliente]
@@ -79,5 +80,5 @@ SELECT        dbo.VENTA.IdVenta, dbo.VENTA.Timestamp, dbo.VENTA.Estado, dbo.CLIE
 FROM            dbo.CLIENTE INNER JOIN
                          dbo.VENTA_POR_CLIENTE ON dbo.CLIENTE.IdCliente = dbo.VENTA_POR_CLIENTE.IdCliente INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CLIENTE.IdVenta = dbo.VENTA.IdVenta
-
+Where dbo.VENTA_POR_CLIENTE.Estado = 'A'
 GO
