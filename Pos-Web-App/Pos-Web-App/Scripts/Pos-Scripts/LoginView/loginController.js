@@ -1,7 +1,7 @@
 ﻿angular.module('NigmaFacturationApp').controller('loginController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
-        alert('Estoy en el login');
 
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCashier = function () {
             $location.path('/NigmaFacturation/CashierView/menuCashier');
         };
