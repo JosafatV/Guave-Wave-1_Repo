@@ -5,6 +5,10 @@
         templateUrl: 'HtmlPages/CashierView/menuCashier.html',
         controller: 'menuCashierController'
     })
+    .when('/NigmaFacturation/CashierView/createClient', {
+        templateUrl: 'HtmlPages/CashierView/createClient.html',
+        controller: 'createClientController'
+    })
     .when('/NigmaFacturation/CashierView/cashDeskOpening', {
         templateUrl: 'HtmlPages/CashierView/cashDeskOpening.html',
         controller: 'cashDeskOpeningController'
