@@ -1,6 +1,7 @@
-﻿angular.module('NigmaFacturationApp').config(['$routeProvider', function ($routeProvider) {
+﻿angular.module('NigmaBillingApp').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
 /*-------------------------------------Cashier-------------------------------------------*/
+
     .when('/NigmaFacturation/CashierView/menuCashier', {
         templateUrl: 'HtmlPages/CashierView/menuCashier.html',
         controller: 'menuCashierController'
@@ -21,7 +22,31 @@
         templateUrl: 'HtmlPages/CashierView/sales.html',
         controller: 'salesController'
     })
+/*------------------Cashier Sales--------------------*/
+
+    .when('/NigmaFacturation/CashierView/sales/billingSystem', {
+        templateUrl: 'HtmlPages/CashierView/SalesView/billingSystem.html',
+        controller: 'billingSystemController'
+    })
+    .when('/NigmaFacturation/CashierView/sales/inventory', {
+        templateUrl: 'HtmlPages/CashierView/SalesView/inventory.html',
+        controller: 'inventoryController'
+    })
+    .when('/NigmaFacturation/CashierView/sales/paymentReceipt', {
+        templateUrl: 'HtmlPages/CashierView/SalesView/paymentReceipt.html',
+        controller: 'paymentReceiptController'
+    })
+    .when('/NigmaFacturation/CashierView/sales/productsToRemove', {
+        templateUrl: 'HtmlPages/CashierView/SalesView/productsToRemove.html',
+        controller: 'productsToRemoveController'
+    })
+    .when('/NigmaFacturation/CashierView/sales/supervisorLog', {
+        templateUrl: 'HtmlPages/CashierView/SalesView/supervisorLog.html',
+        controller: 'supervisorLogController'
+    })
+
 /*-------------------------------------Admin--------------------------------------------*/
+
     .when('/NigmaFacturation/AdminView/adminMenu', {
         templateUrl: 'HtmlPages/AdminView/adminMenu.html',
         controller: 'adminMenuController'
@@ -51,6 +76,7 @@
     controller: 'reportsController'
     })
 /*-------------------------------------Login--------------------------------------------*/
+
     .when('/NigmaFacturation/LoginView/signIn', {
         templateUrl: 'HtmlPages/LoginView/signIn.html',
         controller: 'signInLoginController'

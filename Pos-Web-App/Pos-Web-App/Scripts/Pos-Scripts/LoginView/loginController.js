@@ -1,4 +1,4 @@
-﻿angular.module('NigmaFacturationApp').controller('loginController', ['$scope', '$routeParams', '$location',
+﻿angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
 
         /*--------------Functions to redirect the user as he/she do something----------------*/

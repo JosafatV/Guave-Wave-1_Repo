@@ -1,1 +1,1 @@
-angular.module('NigmaFacturationApp', ['ngRoute', 'ngResource']);
+angular.module('NigmaBillingApp', ['ngRoute', 'ngResource']);

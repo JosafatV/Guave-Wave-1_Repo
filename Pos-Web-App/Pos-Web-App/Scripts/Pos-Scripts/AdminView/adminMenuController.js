@@ -1,4 +1,4 @@
-﻿angular.module('NigmaFacturationApp').controller('adminMenuController', ['$scope', '$routeParams', '$location',
+﻿angular.module('NigmaBillingApp').controller('adminMenuController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
         alert('Estoy en el admin');
         $scope.goBranch = function () {

@@ -277,6 +277,11 @@
     <Content Include="HtmlPages\CashierView\createClient.html" />
     <Content Include="HtmlPages\CashierView\menuCashier.html" />
     <Content Include="HtmlPages\CashierView\sales.html" />
+    <Content Include="HtmlPages\CashierView\salesView\billingSystem.html" />
+    <Content Include="HtmlPages\CashierView\salesView\inventory.html" />
+    <Content Include="HtmlPages\CashierView\salesView\paymentReceipt.html" />
+    <Content Include="HtmlPages\CashierView\salesView\productsToRemove.html" />
+    <Content Include="HtmlPages\CashierView\salesView\supervisorLog.html" />
     <Content Include="HtmlPages\imagenes\caj.jpg" />
     <Content Include="HtmlPages\imagenes\emp.jpg" />
     <Content Include="HtmlPages\imagenes\enep.png" />
@@ -364,6 +369,11 @@
     <Content Include="Scripts\Pos-Scripts\CashierView\createClientController.js" />
     <Content Include="Scripts\Pos-Scripts\CashierView\menuCashierController.js" />
     <Content Include="Scripts\Pos-Scripts\CashierView\salesController.js" />
+    <Content Include="Scripts\Pos-Scripts\CashierView\SalesView\billingSystemController.js" />
+    <Content Include="Scripts\Pos-Scripts\CashierView\SalesView\inventory.js" />
+    <Content Include="Scripts\Pos-Scripts\CashierView\SalesView\paymentReceiptController.js" />
+    <Content Include="Scripts\Pos-Scripts\CashierView\SalesView\productsToRemoveController.js" />
+    <Content Include="Scripts\Pos-Scripts\CashierView\SalesView\supervisorLogController.js" />
     <Content Include="Scripts\Pos-Scripts\configScript.js" />
     <Content Include="Scripts\Pos-Scripts\initScript.js" />
     <Content Include="Scripts\Pos-Scripts\LoginView\loginController.js" />

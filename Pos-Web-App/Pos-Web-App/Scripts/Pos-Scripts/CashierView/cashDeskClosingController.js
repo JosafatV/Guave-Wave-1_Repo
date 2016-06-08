@@ -1,4 +1,4 @@
-angular.module('NigmaFacturationApp').controller('cashDeskClosingController', ['$scope', '$routeParams', '$location',
+angular.module('NigmaBillingApp').controller('cashDeskClosingController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
 
     }]);

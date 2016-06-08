@@ -1,4 +1,4 @@
-angular.module('NigmaBillingApp').controller('salesController', ['$scope', '$routeParams', '$location',
+angular.module('NigmaBillingApp').controller('paymentReceiptController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
         /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCreateClient = function () {
@@ -6,8 +6,5 @@ angular.module('NigmaBillingApp').controller('salesController', ['$scope', '$rou
         };
         $scope.goBack = function () {
             $location.path('/NigmaFacturation/CashierView/menuCashier');
-        };
-        $scope.goBillingSystem = function () {
-            $location.path('/NigmaFacturation/CashierView/sales/billingSystem');
         };
     }]);
