@@ -85,6 +85,18 @@ FROM            dbo.CLIENTE INNER JOIN
 Where dbo.VENTA_POR_CLIENTE.Estado = 'A'
 GO
 
+<<<<<<< HEAD
+CREATE VIEW [dbo].[View_VentaPorClienteYCaja]
+AS
+SELECT        dbo.CLIENTE.IdCliente, dbo.CLIENTE.Cedula, dbo.CLIENTE.Apellidos, dbo.CLIENTE.FechaNacimiento, dbo.CLIENTE.Estado AS EstadoCliente, dbo.CLIENTE.Nombre AS NombreCliente, 
+                         dbo.VENTA.Timestamp AS FechaVenta, dbo.VENTA.Estado AS EstadoVenta, dbo.VENTA.IdVenta, dbo.VENTA_POR_CAJA.IdCaja
+FROM            dbo.VENTA_POR_CAJA INNER JOIN
+                         dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta INNER JOIN
+                         dbo.VENTA_POR_CLIENTE ON dbo.VENTA.IdVenta = dbo.VENTA_POR_CLIENTE.IdVenta INNER JOIN
+                         dbo.CLIENTE ON dbo.VENTA_POR_CLIENTE.IdCliente = dbo.CLIENTE.IdCliente
+Where dbo.VENTA.Estado = 'A'
+GO
+=======
 CREATE VIEW [dbo].[View_VentasPorSucursal]
 AS
 SELECT        dbo.SUCURSAL.Nombre, dbo.VENTA_POR_CAJA.IdVenta, dbo.VENTA_POR_CAJA.Estado
@@ -93,3 +105,4 @@ FROM            dbo.CAJA_POR_SUCURSAL INNER JOIN
                          dbo.VENTA_POR_CAJA ON dbo.CAJA_POR_SUCURSAL.IdCaja = dbo.VENTA_POR_CAJA.IdCaja
 
 GO
+>>>>>>> origin/master

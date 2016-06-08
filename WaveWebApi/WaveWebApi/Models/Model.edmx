@@ -175,10 +175,7 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorRol' does not have a pri
         <EntityType Name="View_EmpleadoPorRol">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Contraseña" />
-            <PropertyRef Name="Cedula" />
             <PropertyRef Name="IdRol" />
-            <PropertyRef Name="NombreRol" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
           <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
@@ -195,8 +192,6 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorSucursal' does not have 
         <EntityType Name="View_EmpleadoPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Contraseña" />
-            <PropertyRef Name="Cedula" />
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
@@ -216,8 +211,6 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorProveedor' does not have
         <EntityType Name="View_ProductoPorProveedor">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdProveedor" />
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
@@ -234,8 +227,6 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorSucursal' does not have 
         <EntityType Name="View_ProductoPorSucursal">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
@@ -256,11 +247,7 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorVenta' does not have a p
         <EntityType Name="View_ProductoPorVenta">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdVenta" />
-            <PropertyRef Name="IdCaja" />
-            <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
           <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
@@ -294,7 +281,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <Key>
             <PropertyRef Name="IdVenta" />
             <PropertyRef Name="IdCliente" />
-            <PropertyRef Name="Cedula" />
           </Key>
           <Property Name="IdVenta" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" />
@@ -938,10 +924,7 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_EmpleadoPorRol">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Contraseña" />
-            <PropertyRef Name="Cedula" />
             <PropertyRef Name="IdRol" />
-            <PropertyRef Name="NombreRol" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
@@ -956,8 +939,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_EmpleadoPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Contraseña" />
-            <PropertyRef Name="Cedula" />
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
@@ -975,8 +956,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_ProductoPorProveedor">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdProveedor" />
           </Key>
           <Property Name="IdProducto" Type="Int32" Nullable="false" />
@@ -991,8 +970,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_ProductoPorSucursal">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdProducto" Type="Int32" Nullable="false" />
@@ -1011,11 +988,7 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_ProductoPorVenta">
           <Key>
             <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EAN" />
-            <PropertyRef Name="Precio" />
             <PropertyRef Name="IdVenta" />
-            <PropertyRef Name="IdCaja" />
-            <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdProducto" Type="Int32" Nullable="false" />
           <Property Name="EAN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
@@ -1045,7 +1018,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <Key>
             <PropertyRef Name="IdVenta" />
             <PropertyRef Name="IdCliente" />
-            <PropertyRef Name="Cedula" />
           </Key>
           <Property Name="IdVenta" Type="Int32" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />

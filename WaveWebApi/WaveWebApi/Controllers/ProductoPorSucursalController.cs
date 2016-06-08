@@ -25,7 +25,7 @@ namespace WaveWebApi.Controllers
 
         // GET: api/ProductoPorSucursal/5
         [HttpGet]
-        [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
+        [Route("api/ProductoPorSucursal/Sucursal/{idSucursal}/Producto/{idProducto}")]
         [ResponseType(typeof(View_ProductoPorSucursal))]
         public IHttpActionResult GetPRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
@@ -105,11 +105,12 @@ namespace WaveWebApi.Controllers
         }
 
         // DELETE: api/ProductoPorSucursal/5
+        [HttpDelete]
         [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
         [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
         public IHttpActionResult DeletePRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
-            PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL = db.PRODUCTO_POR_SUCURSAL.Find(idSucursal);
+            PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL = db.PRODUCTO_POR_SUCURSAL.Find(idSucursal,idProducto);
             if (pRODUCTO_POR_SUCURSAL == null)
             {
                 return NotFound();
