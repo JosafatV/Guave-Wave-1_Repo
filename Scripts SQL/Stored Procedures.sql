@@ -109,6 +109,9 @@ CREATE PROCEDURE sp_insert_ProductosPorVenta
 		UPDATE CAJA SET Dinero=Dinero+(@Precio*@Cantidad) WHERE IdCaja=@IdCaja
 	GO
 
+
+
+
 /* Inserts a Producto into a Sucursal's stock and how many */
 CREATE PROCEDURE sp_Stock
 	@IdProducto INT, @Stock smallINT, @StockMinimo smallINT, @IdSucursal INT
@@ -121,4 +124,20 @@ CREATE PROCEDURE sp_reStock
 	@IdProduct INT, @Quantity smallINT, @IdSucursal int
 	AS
 		UPDATE PRODUCTO_POR_SUCURSAL SET Stock=Stock+@Quantity WHERE IdProducto=@IdProduct AND IdSucursal=@IdSucursal
+	GO
+
+CREATE PROCEDURE sp_checkStock
+	@IdSucursal INT
+	AS
+		SELECT Pps.IdProducto, Pps.Nombre, Pps.Stock, Pps.NombreSucursal, Pps.Direccion
+		FROM View_ProductoPorSucursal AS Pps 
+		WHERE Pps.Stock<Pps.StockMinimo AND Pps.IdSucursal=@IdSucursal AND Pps.Estado='A' AND Pps.EstadoSucursal='A'
+	GO
+
+CREATE PROCEDURE sp_UpdateStockMinimo
+	@IdSucursal INT, @IdProducto INT, @newStockMinimo smallINT
+	AS
+		UPDATE PRODUCTO_POR_SUCURSAL 
+		SET StockMinimo=@newStockMinimo
+		WHERE IdSucursal=@IdSucursal AND IdProducto=@IdProducto
 	GO
