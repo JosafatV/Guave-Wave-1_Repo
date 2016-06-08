@@ -84,3 +84,12 @@ FROM            dbo.CLIENTE INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CLIENTE.IdVenta = dbo.VENTA.IdVenta
 Where dbo.VENTA_POR_CLIENTE.Estado = 'A'
 GO
+
+CREATE VIEW [dbo].[View_VentasPorSucursal]
+AS
+SELECT        dbo.SUCURSAL.Nombre, dbo.VENTA_POR_CAJA.IdVenta, dbo.VENTA_POR_CAJA.Estado
+FROM            dbo.CAJA_POR_SUCURSAL INNER JOIN
+                         dbo.SUCURSAL ON dbo.CAJA_POR_SUCURSAL.IdSucursal = dbo.SUCURSAL.IdSucursal INNER JOIN
+                         dbo.VENTA_POR_CAJA ON dbo.CAJA_POR_SUCURSAL.IdCaja = dbo.VENTA_POR_CAJA.IdCaja
+
+GO
