@@ -1,7 +1,9 @@
+USE PosPF;
+GO
 
 CREATE VIEW [dbo].[View_CajaPorSucursal]
 AS
-SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.Estado, dbo.SUCURSAL.IdSucursal, dbo.SUCURSAL.Nombre, dbo.SUCURSAL.Direccion, dbo.SUCURSAL.Telefono, dbo.SUCURSAL.Estado AS EstadoSucursal
+SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.UltimoCierre, dbo.CAJA.Estado, dbo.SUCURSAL.IdSucursal, dbo.SUCURSAL.Nombre, dbo.SUCURSAL.Direccion, dbo.SUCURSAL.Telefono, dbo.SUCURSAL.Estado AS EstadoSucursal
 FROM            dbo.CAJA INNER JOIN
                          dbo.CAJA_POR_SUCURSAL ON dbo.CAJA.IdCaja = dbo.CAJA_POR_SUCURSAL.IdCaja INNER JOIN
                          dbo.SUCURSAL ON dbo.CAJA_POR_SUCURSAL.IdSucursal = dbo.SUCURSAL.IdSucursal
@@ -66,7 +68,7 @@ GO
 
 CREATE VIEW [dbo].[View_VentaPorCaja]
 AS
-SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.Estado, dbo.VENTA.IdVenta, dbo.VENTA.Timestamp, dbo.VENTA.Estado AS EstadoVenta
+SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.UltimoCierre, dbo.CAJA.Estado, dbo.VENTA.IdVenta, dbo.VENTA.Timestamp, dbo.VENTA.Estado AS EstadoVenta
 FROM            dbo.CAJA INNER JOIN
                          dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta

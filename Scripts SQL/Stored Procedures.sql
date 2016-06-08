@@ -1,20 +1,23 @@
+USE PosPF;
+GO
+
 /* Inserts a new Caja tuple */
 CREATE PROCEDURE sp_insert_Caja
 	@Dinero money, @IdSucursal INT
 	AS
 		DECLARE @IdCaja INT
-		INSERT INTO CAJA (Dinero) VALUES (@Dinero)
+		INSERT INTO CAJA (Dinero, UltimoCierre) VALUES (@Dinero, GETDATE())
 		SELECT @IdCaja = @@IDENTITY
 
 		INSERT INTO CAJA_POR_SUCURSAL (IdCaja,IdSucursal) VALUES (@IdCaja,@IdSucursal)
-		RETURN IdCaja
+		RETURN @IdCaja
 	GO
 	
 /* Inserts a new Cliente tuple */
 CREATE PROCEDURE sp_insert_Cliente
 	@Cedula char(10), @Nombre char(15), @Apellidos char(30), @FechaNacimiento date
 	AS
-		DECLARE @IdCliente
+		DECLARE @IdCliente INT
 		INSERT INTO CLIENTE (Cedula,Nombre,Apellidos,FechaNacimiento) VALUES (@Cedula, @Nombre, @Apellidos, @FechaNacimiento)
 		SELECT @IdCliente = @@IDENTITY
 		RETURN @IdCliente
