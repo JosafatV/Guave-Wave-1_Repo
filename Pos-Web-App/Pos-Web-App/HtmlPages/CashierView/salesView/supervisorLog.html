@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -13,10 +13,13 @@
   </div>
   <div class="container">
     <h4>Cédula</h4>
-    <input type="text"><br>
+    <input type="text" data-ng-model="ced"><br>
     <h4>Contraseña</h4>
-    <input type="text"><br><br>
-    <button class="btn btn-success">Ingresar</button><br><br>
+    <input type="text" data-ng-model="passw"><br><br>
+    <button class="btn btn-success" data-ng-click="goProductsToRemove()" data-ng-disabled="!ced || !passw">Ingresar</button>
+    <button type="button" class="btn btn-danger" data-ng-click="goBack()">
+        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Volver
+    </button>
   </div>
 
 
