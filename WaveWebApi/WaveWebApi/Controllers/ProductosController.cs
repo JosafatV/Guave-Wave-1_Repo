@@ -16,13 +16,17 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Productos
+        
+        [HttpGet]
+        [Route("api/Productos")]
         public IQueryable<PRODUCTO> GetPRODUCTO()
         {
             return db.PRODUCTO;
         }
 
-        // GET: api/Productos/5
+       
+        [HttpGet]
+        [Route("api/Productos/{id}")]
         [ResponseType(typeof(PRODUCTO))]
         public IHttpActionResult GetPRODUCTO(int id)
         {
@@ -35,8 +39,9 @@ namespace WaveWebApi.Controllers
             return Ok(pRODUCTO);
         }
 
-        // PUT: api/Productos/5
-        [ResponseType(typeof(void))]
+        [HttpPut]
+        [Route("api/Productos/{id}")]
+        [ResponseType(typeof(PRODUCTO))]
         public IHttpActionResult PutPRODUCTO(int id, PRODUCTO pRODUCTO)
         {
             if (!ModelState.IsValid)
@@ -67,10 +72,12 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(pRODUCTO);
         }
 
-        // POST: api/Productos
+       
+        [HttpPost]
+        [Route("api/Productos")]
         [ResponseType(typeof(PRODUCTO))]
         public IHttpActionResult PostPRODUCTO(PRODUCTO pRODUCTO)
         {
@@ -85,7 +92,9 @@ namespace WaveWebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = pRODUCTO.IdProducto }, pRODUCTO);
         }
 
-        // DELETE: api/Productos/5
+
+        [HttpDelete]
+        [Route("api/Productos/{id}")]
         [ResponseType(typeof(PRODUCTO))]
         public IHttpActionResult DeletePRODUCTO(int id)
         {
@@ -95,8 +104,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.PRODUCTO.Remove(pRODUCTO);
-            db.SaveChanges();
+            pRODUCTO.Estado = "I";
+            db.Entry(pRODUCTO).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PRODUCTOExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(pRODUCTO);
         }
@@ -113,6 +138,14 @@ namespace WaveWebApi.Controllers
         private bool PRODUCTOExists(int id)
         {
             return db.PRODUCTO.Count(e => e.IdProducto == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Productos")]
+        [Route("api/Productos/{id}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

@@ -16,13 +16,15 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Roles
+        [HttpGet]
+        [Route("api/Roles")]
         public IQueryable<ROL> GetROL()
         {
             return db.ROL;
         }
 
-        // GET: api/Roles/5
+        [HttpGet]
+        [Route("api/Roles/{id}")]
         [ResponseType(typeof(ROL))]
         public IHttpActionResult GetROL(byte id)
         {
@@ -35,8 +37,8 @@ namespace WaveWebApi.Controllers
             return Ok(rOL);
         }
 
-        // PUT: api/Roles/5
-        [ResponseType(typeof(void))]
+        [Route("api/Roles/{id}")]
+        [ResponseType(typeof(ROL))]
         public IHttpActionResult PutROL(byte id, ROL rOL)
         {
             if (!ModelState.IsValid)
@@ -67,10 +69,11 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(rOL);
         }
 
-        // POST: api/Roles
+        [HttpPost]
+        [Route("api/Roles")]
         [ResponseType(typeof(ROL))]
         public IHttpActionResult PostROL(ROL rOL)
         {
@@ -85,7 +88,8 @@ namespace WaveWebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = rOL.IdRol }, rOL);
         }
 
-        // DELETE: api/Roles/5
+        [HttpDelete]
+        [Route("api/Roles/{id}")]
         [ResponseType(typeof(ROL))]
         public IHttpActionResult DeleteROL(byte id)
         {
@@ -95,8 +99,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.ROL.Remove(rOL);
-            db.SaveChanges();
+            rOL.Estado = "I";
+            db.Entry(rOL).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ROLExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(rOL);
         }
@@ -113,6 +133,14 @@ namespace WaveWebApi.Controllers
         private bool ROLExists(byte id)
         {
             return db.ROL.Count(e => e.IdRol == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Roles")]
+        [Route("api/Roles/{id}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

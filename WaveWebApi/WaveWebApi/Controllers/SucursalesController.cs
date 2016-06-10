@@ -16,17 +16,21 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Sucursales
+     
+        [HttpGet]
+        [Route("api/Sucursales")]
         public IQueryable<SUCURSAL> GetSUCURSAL()
         {
             return db.SUCURSAL;
         }
 
         // GET: api/Sucursales/5
+        [HttpGet]
+        [Route("api/Sucursales/{idSucursal}")]
         [ResponseType(typeof(SUCURSAL))]
-        public IHttpActionResult GetSUCURSAL(int id)
+        public IHttpActionResult GetSUCURSAL(int idSucursal)
         {
-            SUCURSAL sUCURSAL = db.SUCURSAL.Find(id);
+            SUCURSAL sUCURSAL = db.SUCURSAL.Find(idSucursal);
             if (sUCURSAL == null)
             {
                 return NotFound();
@@ -35,16 +39,17 @@ namespace WaveWebApi.Controllers
             return Ok(sUCURSAL);
         }
 
-        // PUT: api/Sucursales/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutSUCURSAL(int id, SUCURSAL sUCURSAL)
+        [HttpPut]
+        [Route("api/Sucursales/{idSucursal}")]
+        [ResponseType(typeof(SUCURSAL))]
+        public IHttpActionResult PutSUCURSAL(int idSucursal, SUCURSAL sUCURSAL)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sUCURSAL.IdSucursal)
+            if (idSucursal != sUCURSAL.IdSucursal)
             {
                 return BadRequest();
             }
@@ -57,7 +62,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SUCURSALExists(id))
+                if (!SUCURSALExists(idSucursal))
                 {
                     return NotFound();
                 }
@@ -67,10 +72,11 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(sUCURSAL);
         }
 
-        // POST: api/Sucursales
+        [HttpPost]
+        [Route("api/Sucursales")]
         [ResponseType(typeof(SUCURSAL))]
         public IHttpActionResult PostSUCURSAL(SUCURSAL sUCURSAL)
         {
@@ -82,21 +88,38 @@ namespace WaveWebApi.Controllers
             db.SUCURSAL.Add(sUCURSAL);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = sUCURSAL.IdSucursal }, sUCURSAL);
+            return Ok(sUCURSAL);
         }
 
-        // DELETE: api/Sucursales/5
+        [HttpDelete]
+        [Route("api/Sucursales/{idSucursal}")]
         [ResponseType(typeof(SUCURSAL))]
-        public IHttpActionResult DeleteSUCURSAL(int id)
+        public IHttpActionResult DeleteSUCURSAL(int idSucursal)
         {
-            SUCURSAL sUCURSAL = db.SUCURSAL.Find(id);
+            SUCURSAL sUCURSAL = db.SUCURSAL.Find(idSucursal);
             if (sUCURSAL == null)
             {
                 return NotFound();
             }
 
-            db.SUCURSAL.Remove(sUCURSAL);
-            db.SaveChanges();
+            sUCURSAL.Estado = "I"; //deletion
+            db.Entry(sUCURSAL).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SUCURSALExists(idSucursal))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(sUCURSAL);
         }
@@ -113,6 +136,14 @@ namespace WaveWebApi.Controllers
         private bool SUCURSALExists(int id)
         {
             return db.SUCURSAL.Count(e => e.IdSucursal == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Sucursales/{idSucursal}")]
+        [Route("api/Sucursales")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

@@ -23,7 +23,7 @@ namespace WaveWebApi.Controllers
             return db.View_CajaPorSucursal;
         }
 
-        // GET: api/CajaPorSucursal/5
+    
         [HttpGet]
         [ResponseType(typeof(View_CajaPorSucursal))]
         [Route("api/CajaPorSucursal/{idCaja}/{idSucursal}")]
@@ -37,7 +37,8 @@ namespace WaveWebApi.Controllers
 
             return Ok(cAJA_POR_SUCURSAL);
         }
-        // POST: api/CajaPorSucursal
+   
+        [Route("api/CajaPorSucursal")]
         [ResponseType(typeof(CAJA_POR_SUCURSAL))]
         public IHttpActionResult PostCAJA_POR_SUCURSAL(CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL)
         {
@@ -110,6 +111,14 @@ namespace WaveWebApi.Controllers
         private bool CAJA_POR_SUCURSALExists(int idCaja, int idSucursal)
         {
             return db.CAJA_POR_SUCURSAL.Find(idCaja, idSucursal) != null;
+        }
+
+        [HttpOptions]
+        [Route("api/CajaPorSucursal")]
+        [Route("api/CajaPorSucursal/{idCaja}/{idSucursal}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

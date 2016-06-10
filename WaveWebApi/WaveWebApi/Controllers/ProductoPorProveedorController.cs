@@ -39,8 +39,9 @@ namespace WaveWebApi.Controllers
         }
      
 
-        // POST: api/ProductoPorPreveedor
+       
         [HttpPost]
+        [Route("api/ProductoPorPreveedor")]
         [ResponseType(typeof(PRODUCTO_POR_PROVEEDOR))]
         public IHttpActionResult PostPRODUCTO_POR_PROVEEDOR(PRODUCTO_POR_PROVEEDOR pRODUCTO_POR_PROVEEDOR)
         {
@@ -70,7 +71,7 @@ namespace WaveWebApi.Controllers
             return Ok(pRODUCTO_POR_PROVEEDOR);
         }
 
-        // DELETE: api/ProductoPorPreveedor/5
+
         [HttpDelete]
         [Route("api/ProductoPorProveedor/{idProducto}/{idProveedor}")]
         [ResponseType(typeof(PRODUCTO_POR_PROVEEDOR))]
@@ -116,6 +117,14 @@ namespace WaveWebApi.Controllers
         private bool PRODUCTO_POR_PROVEEDORExists(int idProducto, int idProveedor)
         {
             return db.PRODUCTO_POR_PROVEEDOR.Find(idProducto, idProveedor) != null;
+        }
+
+        [HttpOptions]
+        [Route("api/ProductoPorPreveedor")]
+        [Route("api/ProductoPorProveedor/{idProducto}/{idProveedor}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

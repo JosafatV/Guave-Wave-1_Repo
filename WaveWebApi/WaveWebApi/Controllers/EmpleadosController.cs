@@ -15,49 +15,136 @@ namespace WaveWebApi.Controllers
     public class EmpleadosController : ApiController
     {
         private PosPFEntities db = new PosPFEntities();
-
-        // GET: api/Empleados
-        public IQueryable<EMPLEADO> GetEMPLEADO()
+        /// <summary>
+        /// Es para ver todos los emplados con roles que existen
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IQueryable<View_EmpleadoPorRol> GetEmpladosPorRol()
         {
-            return db.EMPLEADO;
+            return db.View_EmpleadoPorRol;
         }
-
-        // GET: api/Empleados/5
-        [ResponseType(typeof(EMPLEADO))]
-        public IHttpActionResult GetEMPLEADO(int id)
+ 
+        /// <summary>
+        /// Busca un emplado por su rol y por su idRol
+        /// </summary>
+        /// <param name="idEmpleado"></param>
+        /// <param name="idRol"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/Empleado/{idEmpleado}/{idRol}")]
+        [ResponseType(typeof(View_EmpleadoPorRol))]
+        public IHttpActionResult GetEMPLEADO_POR_ROL(int idEmpleado, int idRol)
         {
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            if (eMPLEADO == null)
+            View_EmpleadoPorRol Empleado = db.View_EmpleadoPorRol.
+                SqlQuery("Select * from View_EmpleadoPorRol where idEmpleado = '" + idEmpleado + "' and idRol = '" + idRol + "' ").ToList().First();
+            if (Empleado == null)
             {
                 return NotFound();
             }
 
-            return Ok(eMPLEADO);
+            return Ok(Empleado);
         }
 
-        // PUT: api/Empleados/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutEMPLEADO(int id, EMPLEADO eMPLEADO)
+        /// <summary>
+        /// Agrega un empleado con un rol 
+        /// </summary>
+        /// <param name="empleado"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/Empleado")]
+        [ResponseType(typeof(View_EmpleadoPorRol))]
+        public IHttpActionResult PostEMPLEADO(View_EmpleadoPorRol empleado)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != eMPLEADO.IdEmpleado)
+            string contrasenia= empleado.Contraseña;
+            string cedula= empleado.Cedula;
+            string nombre= empleado.Nombre;
+            string apellidos = empleado.Apellidos;
+            byte Rol= empleado.IdRol;
+            //calls an insert stored procedure and returns the new id
+            empleado.IdEmpleado=  db.sp_insert_Empleado(contrasenia,cedula , nombre ,apellidos , Rol); 
+            try
             {
-                return BadRequest();
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (Empleado_Por_Rol_Exists(empleado.IdEmpleado))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            db.Entry(eMPLEADO).State = EntityState.Modified;
+            return Ok(empleado);
+        }
 
+        /// <summary>
+        /// Es para agregarle más roles a un empleado
+        /// </summary>
+        /// <param name="empleadoPorRol"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/EmpleadoPorRol")]
+        [ResponseType(typeof(View_EmpleadoPorRol))]
+        public IHttpActionResult PostEmpladoPorRol(EMPLEADO_POR_ROL empleadoPorRol)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            db.EMPLEADO_POR_ROL.Add(empleadoPorRol);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if ( GetEMPLEADO_POR_ROL(empleadoPorRol.IdEmpleado, empleadoPorRol.IdRol) != NotFound())
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(empleadoPorRol);
+        }
+
+        /// <summary>
+        /// Borra la relación Emplado por rol
+        /// </summary>
+        /// <param name="idRol"></param>
+        /// <param name="idEmpleado"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
+        [ResponseType(typeof(EMPLEADO_POR_ROL))]
+        public IHttpActionResult DeleteEMPLEADO_POR_ROL(byte idRol, int idEmpleado)
+        {
+            EMPLEADO_POR_ROL eMPLEADO_POR_ROL = db.EMPLEADO_POR_ROL.Find(idRol, idEmpleado);
+            if (eMPLEADO_POR_ROL == null)
+            {
+                return NotFound();
+            }
+            eMPLEADO_POR_ROL.Estado = "I"; //Deletion
+            db.Entry(eMPLEADO_POR_ROL).State = EntityState.Modified;
             try
             {
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EMPLEADOExists(id))
+                if (!Empleado_Por_Rol_Exists( idEmpleado))
                 {
                     return NotFound();
                 }
@@ -67,38 +154,42 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(eMPLEADO_POR_ROL);
         }
-
-        // POST: api/Empleados
+        /// <summary>
+        /// Borra un Empleado
+        /// </summary>
+        /// <param name="idEmpleado"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("api/Empleado/{idEmpleado}")]
         [ResponseType(typeof(EMPLEADO))]
-        public IHttpActionResult PostEMPLEADO(EMPLEADO eMPLEADO)
+        public IHttpActionResult DeleteEmpleado( int idEmpleado)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.EMPLEADO.Add(eMPLEADO);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = eMPLEADO.IdEmpleado }, eMPLEADO);
-        }
-
-        // DELETE: api/Empleados/5
-        [ResponseType(typeof(EMPLEADO))]
-        public IHttpActionResult DeleteEMPLEADO(int id)
-        {
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            if (eMPLEADO == null)
+            EMPLEADO empleado = db.EMPLEADO.Find(idEmpleado);
+            if (empleado == null)
             {
                 return NotFound();
             }
+            empleado.Estado = "I"; //Deletion
+            db.Entry(empleado).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmpleadoExists(idEmpleado))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            db.EMPLEADO.Remove(eMPLEADO);
-            db.SaveChanges();
-
-            return Ok(eMPLEADO);
+            return Ok(empleado);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +201,24 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EMPLEADOExists(int id)
+        private bool Empleado_Por_Rol_Exists( int idEmpleado)
         {
-            return db.EMPLEADO.Count(e => e.IdEmpleado == id) > 0;
+            return db.EMPLEADO_POR_ROL.Find(idEmpleado) != null;
+        }
+        private bool EmpleadoExists(int idEmpleado)
+        {
+            return db.EMPLEADO.Find(idEmpleado) != null;
+        }
+
+
+        [HttpOptions]
+        [Route("api/Empleado")]
+        [Route("api/EmpleadoPorRol")]
+        [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
+        [Route("api/Empleado/{idEmpleado}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

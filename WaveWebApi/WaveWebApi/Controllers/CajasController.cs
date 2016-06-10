@@ -36,7 +36,7 @@ namespace WaveWebApi.Controllers
         }
 
         // PUT: api/Cajas/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(CAJA))]
         public IHttpActionResult PutCAJA(int id, CAJA cAJA)
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(cAJA);
         }
 
         // POST: api/Cajas
@@ -95,8 +95,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.CAJA.Remove(cAJA);
-            db.SaveChanges();
+            cAJA.Estado = "I";
+            db.Entry(cAJA).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CAJAExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(cAJA);
         }
@@ -113,6 +129,14 @@ namespace WaveWebApi.Controllers
         private bool CAJAExists(int id)
         {
             return db.CAJA.Count(e => e.IdCaja == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Cajas/{id}")]
+        [Route("api/Cajas")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

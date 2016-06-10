@@ -16,14 +16,14 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/ProductoPorSucursal
         [HttpGet]
+        [Route("api/ProductoPorSucursal")]
+
         public IQueryable<View_ProductoPorSucursal> GetPRODUCTO_POR_SUCURSAL()
         {
             return db.View_ProductoPorSucursal;
         }
 
-        // GET: api/ProductoPorSucursal/5
         [HttpGet]
         [Route("api/ProductoPorSucursal/Sucursal/{idSucursal}/Producto/{idProducto}")]
         [ResponseType(typeof(View_ProductoPorSucursal))]
@@ -73,8 +73,8 @@ namespace WaveWebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }*/
 
-        // POST: api/ProductoPorSucursal
         [HttpPost]
+        [Route("api/ProductoPorSucursal")]
         [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
         public IHttpActionResult PostPRODUCTO_POR_SUCURSAL(PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL)
         {
@@ -104,7 +104,6 @@ namespace WaveWebApi.Controllers
             return Ok(pRODUCTO_POR_SUCURSAL);
         }
 
-        // DELETE: api/ProductoPorSucursal/5
         [HttpDelete]
         [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
         [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
@@ -150,6 +149,14 @@ namespace WaveWebApi.Controllers
         private bool PRODUCTO_POR_SUCURSALExists(int idSucursal, int idProducto)
         {
             return db.PRODUCTO_POR_SUCURSAL.Find(idSucursal, idProducto) != null;
+        }
+
+        [HttpOptions]
+        [Route("api/ProductoPorSucursal")]
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }
