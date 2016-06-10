@@ -175,7 +175,6 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorRol' does not have a pri
         <EntityType Name="View_EmpleadoPorRol">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRol" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
           <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
@@ -924,7 +923,6 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
         <EntityType Name="View_EmpleadoPorRol">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRol" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
@@ -932,7 +930,7 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdRol" Type="Byte" Nullable="false" />
+          <Property Name="IdRol" Nullable="false" Type="Byte" />
           <Property Name="NombreRol" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EstadoRol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>

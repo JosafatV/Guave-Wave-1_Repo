@@ -82,7 +82,7 @@ namespace WaveWebApi.Controllers
             db.SUCURSAL.Add(sUCURSAL);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = sUCURSAL.IdSucursal }, sUCURSAL);
+            return Ok(sUCURSAL);
         }
 
         // DELETE: api/Sucursales/5
@@ -95,8 +95,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.SUCURSAL.Remove(sUCURSAL);
-            db.SaveChanges();
+            sUCURSAL.Estado = "I"; //deletion
+            db.Entry(sUCURSAL).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SUCURSALExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(sUCURSAL);
         }

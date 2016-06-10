@@ -168,7 +168,6 @@
     <Compile Include="Controllers\CajaPorSucursalController.cs" />
     <Compile Include="Controllers\CajasController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
-    <Compile Include="Controllers\EmpleadoPorRolController.cs" />
     <Compile Include="Controllers\EmpleadoPorSucursalController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -179,8 +178,6 @@
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
-    <Compile Include="Controllers\VentaPorCajaController.cs" />
-    <Compile Include="Controllers\VentaPorClienteController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

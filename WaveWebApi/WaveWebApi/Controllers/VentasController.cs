@@ -16,13 +16,22 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Ventas
-        public IQueryable<VENTA> GetVENTA()
+       
+        [HttpGet]
+        [Route("api/VentasPorCaja")]
+        public IQueryable<View_VentaPorCaja> GetVentaPorCaja()
         {
-            return db.VENTA;
+            return db.View_VentaPorCaja;
+        }
+      
+        [HttpGet]
+        [Route("api/VentasPorCliente")]
+        public IQueryable<View_VentaPorCliente> GetVentaPorCliente()
+        {
+            return db.View_VentaPorCliente;
         }
 
-        // GET: api/Ventas/5
+       /* // GET: api/Ventas/5
         [ResponseType(typeof(VENTA))]
         public IHttpActionResult GetVENTA(int id)
         {
@@ -69,34 +78,51 @@ namespace WaveWebApi.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        */
         // POST: api/Ventas
-        [ResponseType(typeof(VENTA))]
-        public IHttpActionResult PostVENTA(VENTA vENTA)
+        [ResponseType(typeof(void))]
+        [Route("api/Ventas")]
+        public void PostVenta(int IdCaja, int IdCliente)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+               // return BadRequest(ModelState);
             }
-
-            db.VENTA.Add(vENTA);
+            int idVenta = db.sp_insert_Venta(IdCaja, IdCliente);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = vENTA.IdVenta }, vENTA);
+            //return Ok(IdCaja);
         }
 
-        // DELETE: api/Ventas/5
+        [HttpDelete]
+        [Route("api/Ventas/{idVenta}")]
         [ResponseType(typeof(VENTA))]
-        public IHttpActionResult DeleteVENTA(int id)
+        public IHttpActionResult DeleteVENTA(int idVenta)
         {
-            VENTA vENTA = db.VENTA.Find(id);
+            VENTA vENTA = db.VENTA.Find(idVenta);
             if (vENTA == null)
             {
                 return NotFound();
             }
 
-            db.VENTA.Remove(vENTA);
-            db.SaveChanges();
+            vENTA.Estado = "I"; //Deletion
+
+            db.Entry(vENTA).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VENTAExists(idVenta))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(vENTA);
         }
