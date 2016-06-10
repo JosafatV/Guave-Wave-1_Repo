@@ -117,7 +117,7 @@ GO
 /* View for stored procedures for entity managment */
 CREATE VIEW [dbo].[View_spProductosPorVenta]
 AS
-SELECT        dbo.PRODUCTO_POR_VENTA.IdProducto, dbo.VENTA.IdVenta, dbo.PRODUCTO_POR_VENTA.Cantidad, dbo.CAJA.IdCaja AS Expr1
+SELECT        dbo.PRODUCTO_POR_VENTA.IdProducto, dbo.VENTA.IdVenta, dbo.VENTA_POR_CAJA.IdCaja, dbo.PRODUCTO_POR_VENTA.Cantidad
 FROM            dbo.CAJA INNER JOIN
                          dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta INNER JOIN
@@ -125,12 +125,13 @@ FROM            dbo.CAJA INNER JOIN
 
 GO
 
-CREATE VIEW [dbo].[View_spProductosPorVenta]
+CREATE VIEW [dbo].[View_spInsertVenta]
 AS
-SELECT        dbo.PRODUCTO_POR_VENTA.IdProducto, dbo.VENTA.IdVenta, dbo.VENTA_POR_CAJA.IdCaja, dbo.PRODUCTO_POR_VENTA.Cantidad
-FROM            dbo.CAJA INNER JOIN
-                         dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
-                         dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta INNER JOIN
-                         dbo.PRODUCTO_POR_VENTA ON dbo.VENTA.IdVenta = dbo.PRODUCTO_POR_VENTA.IdVenta
+SELECT        dbo.VENTA.IdVenta, dbo.CAJA.IdCaja, dbo.VENTA.Duracion, dbo.CLIENTE.IdCliente
+FROM            dbo.VENTA_POR_CLIENTE INNER JOIN
+                         dbo.VENTA ON dbo.VENTA_POR_CLIENTE.IdVenta = dbo.VENTA.IdVenta INNER JOIN
+                         dbo.VENTA_POR_CAJA ON dbo.VENTA.IdVenta = dbo.VENTA_POR_CAJA.IdVenta INNER JOIN
+                         dbo.CAJA ON dbo.VENTA_POR_CAJA.IdCaja = dbo.CAJA.IdCaja INNER JOIN
+                         dbo.CLIENTE ON dbo.VENTA_POR_CLIENTE.IdCliente = dbo.CLIENTE.IdCliente
 
 GO
