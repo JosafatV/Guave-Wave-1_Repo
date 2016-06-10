@@ -74,29 +74,94 @@
     })
 /*------------------Employees-------------------*/
     .when('/NigmaFacturation/AdminView/employeesCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/employeesMenu.html',
+        templateUrl: 'HtmlPages/AdminView/Employees/employeesCRUDMenu.html',
         controller: 'employeesCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/Employee/readEmployee', {
+    templateUrl: 'HtmlPages/AdminView/Employees/readEmployee.html',
+    controller: 'readEmployeeController'
+    })
+    .when('/NigmaFacturation/AdminView/Employee/createEmployee', {
+        templateUrl: 'HtmlPages/AdminView/Employees/createEmployee.html',
+        controller: 'createEmployeeController'
+    })
+    .when('/NigmaFacturation/AdminView/Employee/deleteEmployee', {
+        templateUrl: 'HtmlPages/AdminView/Employees/deleteEmployee.html',
+        controller: 'deleteEmployeeController'
+    })
+    .when('/NigmaFacturation/AdminView/Employee/updateEmployee', {
+        templateUrl: 'HtmlPages/AdminView/Employees/updateEmployee.html',
+        controller: 'updateEmployeeController'
     })
 /*------------------Products--------------------*/
     .when('/NigmaFacturation/AdminView/productsCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/productsMenu.html',
         controller: 'productsCRUDMenuController'
     })
+    .when('/NigmaFacturation/AdminView/Products/readProducts', {
+        templateUrl: 'HtmlPages/AdminView/Products/readProducts.html',
+        controller: 'readProductController'
+    })
+    .when('/NigmaFacturation/AdminView/Products/createProducts', {
+        templateUrl: 'HtmlPages/AdminView/Products/createProducts.html',
+        controller: 'createProductController'
+    })
+    .when('/NigmaFacturation/AdminView/Products/deleteProducts', {
+        templateUrl: 'HtmlPages/AdminView/Products/deleteProducts.html',
+        controller: 'deleteProductsController'
+    })
+    .when('/NigmaFacturation/AdminView/Products/updateProducts', {
+        templateUrl: 'HtmlPages/AdminView/Products/updateProducts.html',
+        controller: 'updateProductsController'
+    })
 /*------------------Clients---------------------*/
     .when('/NigmaFacturation/AdminView/clientsCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/clientsMenu.html',
         controller: 'clientsCRUDMenuController'
     })
-/*------------------Branch----------------------*/
+    .when('/NigmaFacturation/AdminView/Clients/readClients', {
+        templateUrl: 'HtmlPages/AdminView/Clients/readClients.html',
+        controller: 'readClientController'
+    })
+    .when('/NigmaFacturation/AdminView/Clients/createClients', {
+        templateUrl: 'HtmlPages/AdminView/Products/createClientAdminView.html',
+        controller: 'createClientController'
+    })
+    .when('/NigmaFacturation/AdminView/Clients/deleteClients', {
+        templateUrl: 'HtmlPages/AdminView/Clients/deleteClient.html',
+        controller: 'deleteClientController'
+    })
+    .when('/NigmaFacturation/AdminView/Clients/updateClients', {
+        templateUrl: 'HtmlPages/AdminView/Clients/updateClients.html',
+        controller: 'updateClientController'
+    })
+/*------------------Suppliers----------------------*/
     .when('/NigmaFacturation/AdminView/supplierCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/supplierMenu.html',
         controller: 'supplierCRUDMenuController'
+    })
+    .when('/NigmaFacturation/AdminView/Suppliers/readSuppliers', {
+        templateUrl: 'HtmlPages/AdminView/Products/readProducts.html',
+        controller: 'readSupplierController'
+    })
+    .when('/NigmaFacturation/AdminView/Suppliers/createSuppliers', {
+        templateUrl: 'HtmlPages/AdminView/Suppliers/createSuppliers.html',
+        controller: 'createSupplierController'
+    })
+    .when('/NigmaFacturation/AdminView/Suppliers/SuppliersProducts', {
+        templateUrl: 'HtmlPages/AdminView/Suppliers/deleteSuppliers.html',
+        controller: 'deleteSupplierController'
+    })
+    .when('/NigmaFacturation/AdminView/Products/updateSuppliers', {
+        templateUrl: 'HtmlPages/AdminView/Suppliers/updateSuppliers.html',
+        controller: 'updateSupplierController'
     })
 /*------------------Reports---------------------*/
     .when('/NigmaFacturation/AdminView/reports', {
         templateUrl: 'HtmlPages/AdminView/reports.html',
     controller: 'reportsController'
     })
+
 /*-------------------------------------Login--------------------------------------------*/
 
     .when('/NigmaFacturation/LoginView/signIn', {
@@ -109,8 +174,8 @@
         controller: 'loginController'
     })
 }]);
-
-angular.module('NigmaBillingApp').config(function ($httpProvider) {
+/*
+angular.module('DrPhischelApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -120,5 +185,5 @@ angular.module('NigmaBillingApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     /*$httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
-    $httpProvider.defaults.headers.patch = {};*/
-});
+    $httpProvider.defaults.headers.patch = {};
+});*/

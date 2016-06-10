@@ -7,7 +7,7 @@ angular.module('NigmaBillingApp').controller('branchCRUDMenuController', ['$scop
             $location.path('/NigmaFacturation/AdminView/Branch/deleteBranch');
         };
         $scope.goUpdateBranch = function () {
-            $location.path('/NigmaFacturation/AdminView/Branch/createBranch');
+            $location.path('/NigmaFacturation/AdminView/Branch/updateBranch');
         };
         $scope.goReadBranch = function () {
             $location.path('/NigmaFacturation/AdminView/Branch/readBranch');

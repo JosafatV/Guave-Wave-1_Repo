@@ -1,7 +1,7 @@
 ﻿//Var used to save the URL 
 var urlGeneric = 'http://192.168.1.4';
-//This script is the resource that is used to connect to the web Api od DrPhischel
 
+//This script is the resource that is used to connect to the web Api od DrPhischel
 angular.module('NigmaBillingApp').factory('waveWebApiResource', function ($resource) {
     return $resource(urlGeneric + ':8093/api/:type/:extension1/:extension2/:extension3/:extension4/:extension5/:extension6', {}, {
         query: {

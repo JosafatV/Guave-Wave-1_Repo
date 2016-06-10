@@ -33,8 +33,24 @@
     <h1>Sistema de Facturación</h1><br>
     <h4>Mostrar Nombre del cliente</h4>
     <h4>Mostrar cédula del cliente</h4><br><br>
-    <h3>Ingrese su producto:</h3>
   </div>
+  <header>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fp">
+            <span class="sr-only">Desplegar / Ocultar Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Ingrese sus productos:</a>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+
   <div class="container">
     <h4>Código EAN</h4>
     <input type="text" data-ng-model="codBool"><br><br>
@@ -42,15 +58,45 @@
     <input type="text" data-ng-model="quantity"><br><br>
   </div>
   <div class="container">
-    <button class="btn btn-primary">Verificar Producto</button>
     <button type="button" class="btn btn-success" data-ng-disabled="!codBool" data-ng-click="saveNewProduct(codBool,quantity)">
       <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>  Agregar
     </button>
   </div>
   <br><br>
-  <div class="container-fluid">
-    <h3>Su pedido:</h3><br>
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover table-condensed">
+          <tr>
+              <th>Código EAN</th>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+          </tr>
+          <tr data-ng-repeat="product in forSaleProductList  | filter: search">
+              <td>{{product.code}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.quantity}}</td>
+              <td>{{product.price}}</td>
+    </table>
   </div>
+</div>
+  <br><br>
+  <header>
+    <nav class="navbar navbar-inverse navbar-static-top " role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fp">
+            <span class="sr-only">Desplegar / Ocultar Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Su pedido:</a>
+        </div>
+      </div>
+    </nav>
+
+  </header>
   <!--Tabla en donde se debe mostrar lo que el cliente va a agregando-->
   <div class="container">
     <div class="table-responsive">

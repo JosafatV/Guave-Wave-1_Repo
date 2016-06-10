@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -17,20 +17,19 @@
           <form action="" class="">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input class="form-control" id="nombre" type="text" placeholder="Nombre:">
+                <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newBranch.Nombre">
             </div>
             <div class="form-group">
                 <label for="nombre">Dirección:</label>
-                <input class="form-control" id="direccion" type="text" placeholder="Dirección:">
+                <input class="form-control" id="direccion" type="text" placeholder="Dirección:" data-ng-model="newBranch.Direccion">
               </div>
               <div class="form-group">
                   <label for="cedula">Teléfono:</label>
-                  <input class="form-control" id="telefono" type="text" placeholder="Teléfono:">
+                  <input class="form-control" id="telefono" type="text" placeholder="Teléfono:" data-ng-model="newBranch.Telefono">
               </div>
 
-
               <br><br>
-              <button class="btn btn-success">Crear Sucursal</button><br><br>
+              <button class="btn btn-success" data-ng-click="sendNewBranch()">Crear Sucursal</button><br><br>
             </div>
           </form>
         </div>
