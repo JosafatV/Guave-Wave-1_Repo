@@ -44,6 +44,7 @@ CREATE PROCEDURE sp_insert_Rol
 	GO
 
 /* Inserts a new Empleado and it's Rol */
+--
 CREATE PROCEDURE sp_insert_Empleado
 	@Contraseña CHAR(15), @Cedula CHAR(19), @Nombre CHAR(15), @Apellidos CHAR(30), @IdRol tinyINT
 	AS
@@ -76,6 +77,7 @@ CREATE PROCEDURE sp_insert_Producto
 	GO
 
 /* Inserts a new Venta tuple, and its relationships */
+--
 CREATE PROCEDURE sp_insert_Venta
 	@IdCaja INT, @IdCliente INT, @Duracion smallINT
 	AS
@@ -91,6 +93,7 @@ CREATE PROCEDURE sp_insert_Venta
 	GO
 
 /* Inserts the Productos bought in a Venta and how many and updates the quantity in stock in the Sucursal*/
+--
 CREATE PROCEDURE sp_insert_ProductosPorVenta
 	@IdProducto INT, @IdVenta INT, @Cantidad smallINT, @IdCaja INT
 	AS

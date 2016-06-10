@@ -81,7 +81,7 @@ namespace WaveWebApi.Controllers
         */
        
         [ResponseType(typeof(void))]
-        [Route("api/Ventas")]
+        [Route("api/Ventas/{idCaja}/{idCliente}")]
         public void PostVenta(int IdCaja, int IdCliente)
         {
             if (!ModelState.IsValid)
@@ -142,6 +142,10 @@ namespace WaveWebApi.Controllers
         }
 
         [HttpOptions]
+        [Route("api/VentasPorCaja")]
+        [Route("api/VentasPorCliente")]
+        [Route("api/Ventas/{idCaja}/{idCliente}")]
+        [Route("api/Ventas/{idVenta}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
