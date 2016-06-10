@@ -32,9 +32,17 @@
           <DataField>Día</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Nombre">
+          <DataField>Nombre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Semana">
           <DataField>Semana</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Direccion">
+          <DataField>Direccion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Mes">
           <DataField>Mes</DataField>
@@ -948,7 +956,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>151.34166mm</Height>
+        <Height>145.25624mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -958,7 +966,7 @@
       <Width>180.71042mm</Width>
       <Page>
         <PageFooter>
-          <Height>11.43mm</Height>
+          <Height>19.63208mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -980,9 +988,71 @@
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
               <Top>5.08mm</Top>
-              <Left>101.6mm</Left>
+              <Left>116.77814mm</Left>
               <Height>6.35mm</Height>
-              <Width>50.8mm</Width>
+              <Width>44.18542mm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox2">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Nombre.Value, "Reporte_Ganancias")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>5.43mm</Top>
+              <Left>11.34533mm</Left>
+              <Height>6mm</Height>
+              <Width>49.07708mm</Width>
+              <ZIndex>1</ZIndex>
+              <ToolTip>Nombre</ToolTip>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox3">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Direccion.Value, "Reporte_Ganancias")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>5.43mm</Top>
+              <Left>64.34967mm</Left>
+              <Height>6mm</Height>
+              <Width>50.66458mm</Width>
+              <ZIndex>2</ZIndex>
+              <ToolTip>Dirección</ToolTip>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1015,10 +1085,6 @@
     <ReportParameter Name="initialDATE">
       <DataType>DateTime</DataType>
       <Prompt>initial DATE</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="finalDATE">
-      <DataType>DateTime</DataType>
-      <Prompt>final DATE</Prompt>
     </ReportParameter>
     <ReportParameter Name="IdSucursal">
       <DataType>Integer</DataType>
