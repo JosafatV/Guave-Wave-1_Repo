@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -11,33 +11,32 @@
   <div class="container-fluid">
     <h1>Sucursales Existentes:</h1><br>
   </div>
-  <div class="container">
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered table-hover table-condensed">
-          <tr>
-              <th>Nombre</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-3">
+              <input type="text" class="form-control" placeholder="Buscar Sucursales" data-ng-model="search" />
+          </div>
+      </div>
+    </div>
+   
+      <br><br>
+     
+    
+     <div class="container-fluid">
+         <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
 
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-
-          </tr>
-    </table>
+                </tr>
+                <tr data-ng-repeat="branch in listOfBranch  | filter: search">
+                <td>{{branch.Nombre}}</td>
+                <td>{{branch.Direccion}}</td>
+                <td>{{branch.Telefono}}</td>
+            </table>
+        </div>
     <br>
     <button type="button" class="btn btn-primary">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar

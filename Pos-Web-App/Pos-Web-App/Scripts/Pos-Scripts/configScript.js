@@ -109,8 +109,8 @@
         controller: 'loginController'
     })
 }]);
-/*
-angular.module('DrPhischelApp').config(function ($httpProvider) {
+
+angular.module('NigmaBillingApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -120,5 +120,5 @@ angular.module('DrPhischelApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     /*$httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
-    $httpProvider.defaults.headers.patch = {};
-});*/
+    $httpProvider.defaults.headers.patch = {};*/
+});
