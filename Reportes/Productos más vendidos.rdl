@@ -5,7 +5,7 @@
     <DataSource Name="PosPF_DB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=FROSTRITE;Initial Catalog=PosPF</ConnectString>
+        <ConnectString>Data Source=VARGAM-LAPTOP;Initial Catalog=PosPF</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
