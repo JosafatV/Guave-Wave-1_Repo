@@ -125,3 +125,15 @@ FROM            dbo.VENTA_POR_CAJA INNER JOIN
                          dbo.CLIENTE ON dbo.VENTA_POR_CLIENTE.IdCliente = dbo.CLIENTE.IdCliente
 Where dbo.VENTA.Estado = 'A'
 GO
+
+
+/* View for stored procedures for entity managment */
+CREATE VIEW [dbo].[View_spProductosPorVenta]
+AS
+SELECT        dbo.PRODUCTO_POR_VENTA.IdProducto, dbo.VENTA.IdVenta, dbo.VENTA_POR_CAJA.IdCaja, dbo.PRODUCTO_POR_VENTA.Cantidad
+FROM            dbo.CAJA INNER JOIN
+                         dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
+                         dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta INNER JOIN
+                         dbo.PRODUCTO_POR_VENTA ON dbo.VENTA.IdVenta = dbo.PRODUCTO_POR_VENTA.IdVenta
+
+GO
