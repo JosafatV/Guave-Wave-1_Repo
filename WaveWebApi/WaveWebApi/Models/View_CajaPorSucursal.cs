@@ -22,5 +22,6 @@ namespace WaveWebApi.Models
         public string Direccion { get; set; }
         public Nullable<int> Telefono { get; set; }
         public string EstadoSucursal { get; set; }
+        public Nullable<System.DateTime> UltimoCierre { get; set; }
     }
 }

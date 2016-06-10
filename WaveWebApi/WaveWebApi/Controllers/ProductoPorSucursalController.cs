@@ -29,7 +29,7 @@ namespace WaveWebApi.Controllers
         [ResponseType(typeof(View_ProductoPorSucursal))]
         public IHttpActionResult GetPRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
-            View_ProductoPorSucursal pRODUCTO_POR_SUCURSAL = db.View_ProductoPorSucursal.Find(idSucursal,idProducto);
+            View_ProductoPorSucursal pRODUCTO_POR_SUCURSAL = db.View_ProductoPorSucursal.Find(idProducto, idSucursal);
             if (pRODUCTO_POR_SUCURSAL == null)
             {
                 return NotFound();
@@ -39,39 +39,23 @@ namespace WaveWebApi.Controllers
         }
 
         // PUT: api/ProductoPorSucursal/5
-      /*  [ResponseType(typeof(void))]
-        public IHttpActionResult PutPRODUCTO_POR_SUCURSAL(int id, PRODUCTO_POR_SUCURSAL pRODUCTO_POR_SUCURSAL)
+        [HttpPut]
+        [Route("api/ProductoPorSucursal/{idProducto}/{idSucursal}/{cantidadDeMas}")]
+        [ResponseType(typeof(PRODUCTO_POR_SUCURSAL))]
+        public IHttpActionResult PutPRODUCTO_POR_SUCURSAL(int idProducto , int idSucursal ,short cantidadDeMas)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pRODUCTO_POR_SUCURSAL.IdSucursal)
-            {
-                return BadRequest();
-            }
+            
+            db.sp_reStock(idProducto, cantidadDeMas, idSucursal);
+            db.SaveChanges();
+            PRODUCTO_POR_SUCURSAL prod_x_sucursal = db.PRODUCTO_POR_SUCURSAL.Find(idProducto, idSucursal);
 
-            db.Entry(pRODUCTO_POR_SUCURSAL).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PRODUCTO_POR_SUCURSALExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+            return Ok(prod_x_sucursal);
+        }
 
         [HttpPost]
         [Route("api/ProductoPorSucursal")]
@@ -91,7 +75,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PRODUCTO_POR_SUCURSALExists(pRODUCTO_POR_SUCURSAL.IdSucursal, pRODUCTO_POR_SUCURSAL.IdProducto))
+                if (PRODUCTO_POR_SUCURSALExists(pRODUCTO_POR_SUCURSAL.IdProducto ,pRODUCTO_POR_SUCURSAL.IdSucursal ))
                 {
                     return Conflict();
                 }
@@ -124,7 +108,7 @@ namespace WaveWebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PRODUCTO_POR_SUCURSALExists(idSucursal, idProducto))
+                if (!PRODUCTO_POR_SUCURSALExists(idProducto ,idSucursal))
                 {
                     return NotFound();
                 }
@@ -146,9 +130,9 @@ namespace WaveWebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PRODUCTO_POR_SUCURSALExists(int idSucursal, int idProducto)
+        private bool PRODUCTO_POR_SUCURSALExists(int idProducto ,int  idSucursal )
         {
-            return db.PRODUCTO_POR_SUCURSAL.Find(idSucursal, idProducto) != null;
+            return db.PRODUCTO_POR_SUCURSAL.Find(idProducto , idSucursal) != null;
         }
 
         [HttpOptions]

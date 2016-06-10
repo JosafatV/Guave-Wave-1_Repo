@@ -17,5 +17,6 @@ namespace WaveWebApi.Models
         public int IdCaja { get; set; }
         public Nullable<decimal> Dinero { get; set; }
         public string Estado { get; set; }
+        public Nullable<System.DateTime> UltimoCierre { get; set; }
     }
 }

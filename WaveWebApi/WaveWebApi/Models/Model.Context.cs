@@ -40,7 +40,6 @@ namespace WaveWebApi.Models
         public virtual DbSet<PROVEEDOR> PROVEEDOR { get; set; }
         public virtual DbSet<ROL> ROL { get; set; }
         public virtual DbSet<SUCURSAL> SUCURSAL { get; set; }
-        public virtual DbSet<VENTA> VENTA { get; set; }
         public virtual DbSet<VENTA_POR_CAJA> VENTA_POR_CAJA { get; set; }
         public virtual DbSet<VENTA_POR_CLIENTE> VENTA_POR_CLIENTE { get; set; }
         public virtual DbSet<View_CajaPorSucursal> View_CajaPorSucursal { get; set; }
@@ -48,11 +47,13 @@ namespace WaveWebApi.Models
         public virtual DbSet<View_EmpleadoPorSucursal> View_EmpleadoPorSucursal { get; set; }
         public virtual DbSet<View_ProductoPorProveedor> View_ProductoPorProveedor { get; set; }
         public virtual DbSet<View_ProductoPorSucursal> View_ProductoPorSucursal { get; set; }
-        public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
         public virtual DbSet<View_VentaPorCaja> View_VentaPorCaja { get; set; }
         public virtual DbSet<View_VentaPorCliente> View_VentaPorCliente { get; set; }
+        public virtual DbSet<VENTA> VENTA { get; set; }
+        public virtual DbSet<View_Ventas> View_Ventas { get; set; }
+        public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
+        public virtual DbSet<View_spInsertVenta> View_spInsertVenta { get; set; }
         public virtual DbSet<View_spProductosPorVenta> View_spProductosPorVenta { get; set; }
-        public virtual DbSet<View_VentaPorClienteYCaja> View_VentaPorClienteYCaja { get; set; }
     
         public virtual int sp_insert_Caja(Nullable<decimal> dinero, Nullable<int> idSucursal)
         {
@@ -169,7 +170,7 @@ namespace WaveWebApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Sucursal", nombreParameter, direccionParameter, telefonoParameter);
         }
     
-        public virtual int sp_insert_Venta(Nullable<int> idCaja, Nullable<int> idCliente)
+        public virtual int sp_insert_Venta(Nullable<int> idCaja, Nullable<int> idCliente, Nullable<short> duracion)
         {
             var idCajaParameter = idCaja.HasValue ?
                 new ObjectParameter("IdCaja", idCaja) :
@@ -179,7 +180,11 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdCliente", idCliente) :
                 new ObjectParameter("IdCliente", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Venta", idCajaParameter, idClienteParameter);
+            var duracionParameter = duracion.HasValue ?
+                new ObjectParameter("Duracion", duracion) :
+                new ObjectParameter("Duracion", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Venta", idCajaParameter, idClienteParameter, duracionParameter);
         }
     
         public virtual int sp_reStock(Nullable<int> idProduct, Nullable<short> quantity, Nullable<int> idSucursal)

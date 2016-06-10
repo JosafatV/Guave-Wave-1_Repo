@@ -16,7 +16,17 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-       
+        /// <summary>
+        /// Devuelve la superVista de ventas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/Ventas")]
+        public IQueryable<View_Ventas> GetVentaSuperView()
+        {
+            return db.View_Ventas;
+        }
+
         [HttpGet]
         [Route("api/VentasPorCaja")]
         public IQueryable<View_VentaPorCaja> GetVentaPorCaja()
@@ -80,18 +90,34 @@ namespace WaveWebApi.Controllers
         }
         */
        
-        [ResponseType(typeof(void))]
-        [Route("api/Ventas/{idCaja}/{idCliente}")]
-        public void PostVenta(int IdCaja, int IdCliente)
+        [HttpPost]
+        [Route("api/Ventas")]
+        [ResponseType(typeof(View_spInsertVenta))]
+        public IHttpActionResult PostVenta(View_spInsertVenta view)
         {
             if (!ModelState.IsValid)
             {
-               // return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
-            int idVenta = db.sp_insert_Venta(IdCaja, IdCliente);
-            db.SaveChanges();
+            int idVenta = db.sp_insert_Venta(view.IdCaja, view.IdCliente, view.Duracion); //insert store procedure
+            view.IdVenta = idVenta;
+             try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (VENTAExists(idVenta))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            //return Ok(IdCaja);
+            return Ok(view);
         }
 
         [HttpDelete]
@@ -142,9 +168,7 @@ namespace WaveWebApi.Controllers
         }
 
         [HttpOptions]
-        [Route("api/VentasPorCaja")]
-        [Route("api/VentasPorCliente")]
-        [Route("api/Ventas/{idCaja}/{idCliente}")]
+        [Route("api/Ventas")]
         [Route("api/Ventas/{idVenta}")]
         public HttpResponseMessage Options()
         {

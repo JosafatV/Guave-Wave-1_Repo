@@ -16,6 +16,7 @@ namespace WaveWebApi.Models
     {
         public int IdVenta { get; set; }
         public Nullable<System.DateTime> Timestamp { get; set; }
+        public Nullable<short> Duracion { get; set; }
         public string Estado { get; set; }
     }
 }

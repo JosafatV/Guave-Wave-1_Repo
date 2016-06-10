@@ -12,15 +12,11 @@ namespace WaveWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class View_VentaPorCaja
+    public partial class View_spInsertVenta
     {
-        public int IdCaja { get; set; }
-        public Nullable<decimal> Dinero { get; set; }
-        public string Estado { get; set; }
         public int IdVenta { get; set; }
-        public Nullable<System.DateTime> Timestamp { get; set; }
-        public string EstadoVenta { get; set; }
-        public Nullable<System.DateTime> UltimoCierre { get; set; }
+        public int IdCaja { get; set; }
         public Nullable<short> Duracion { get; set; }
+        public int IdCliente { get; set; }
     }
 }

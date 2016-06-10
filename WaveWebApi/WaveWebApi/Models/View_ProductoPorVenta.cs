@@ -25,5 +25,6 @@ namespace WaveWebApi.Models
         public int IdCaja { get; set; }
         public int IdSucursal { get; set; }
         public string NombreSucursal { get; set; }
+        public string Direccion { get; set; }
     }
 }
