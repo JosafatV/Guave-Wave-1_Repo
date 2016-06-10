@@ -161,7 +161,6 @@
         templateUrl: 'HtmlPages/AdminView/reports.html',
     controller: 'reportsController'
     })
-
 /*-------------------------------------Login--------------------------------------------*/
 
     .when('/NigmaFacturation/LoginView/signIn', {
@@ -174,8 +173,8 @@
         controller: 'loginController'
     })
 }]);
-/*
-angular.module('DrPhischelApp').config(function ($httpProvider) {
+
+angular.module('NigmaBillingApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -183,7 +182,7 @@ angular.module('DrPhischelApp').config(function ($httpProvider) {
     //$httpProvider.defaults.withCredentials = true;
     //delete $httpProvider.defaults.headers.common["X-Requested-With"];
     //$httpProvider.defaults.headers.common = {};
-    /*$httpProvider.defaults.headers.post = {};
-    $httpProvider.defaults.headers.put = {};
-    $httpProvider.defaults.headers.patch = {};
-});*/
+    //$httpProvider.defaults.headers.post = {};
+    //$httpProvider.defaults.headers.put = {};
+    //$httpProvider.defaults.headers.patch = {};
+});

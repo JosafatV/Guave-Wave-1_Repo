@@ -389,6 +389,10 @@
     <Content Include="Scripts\Pos-Scripts\AdminView\Branch\CRUD\readBranchController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Branch\CRUD\updateBranchController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Clients\clientsCRUMenuController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Clients\CRUD\createClientController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Clients\CRUD\deleteClientController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Clients\CRUD\readClientController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Clients\CRUD\updateClientController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Employees\employeesCRUDMenuController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Products\productsCRUDMenuController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Reports\reportsMenuController.js" />
