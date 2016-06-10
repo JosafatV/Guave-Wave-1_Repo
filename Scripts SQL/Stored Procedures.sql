@@ -110,8 +110,6 @@ CREATE PROCEDURE sp_insert_ProductosPorVenta
 	GO
 
 
-
-
 /* Inserts a Producto into a Sucursal's stock and how many */
 CREATE PROCEDURE sp_Stock
 	@IdProducto INT, @Stock smallINT, @StockMinimo smallINT, @IdSucursal INT
@@ -141,3 +139,33 @@ CREATE PROCEDURE sp_UpdateStockMinimo
 		SET StockMinimo=@newStockMinimo
 		WHERE IdSucursal=@IdSucursal AND IdProducto=@IdProducto
 	GO
+
+CREATE PROCEDURE sp_CierreDeCaja
+	@IdCaja INT, @DineroCierre money
+	AS
+		SELECT Cps.IdCaja, Cps.Dinero-@DineroCierre
+		FROM View_CajaPorSucursal AS Cps
+		WHERE Cps.IdCaja=@IdCaja
+
+		UPDATE CAJA
+		SET Dinero=@DineroCierre, UltimoCierre=GETDATE()
+		WHERE IdCaja=@IdCaja
+	GO
+		
+CREATE PROCEDURE sp_AperturaDeCaja
+	@IdCaja INT, @DineroApertura INT
+	AS
+		UPDATE CAJA
+		SET Dinero=50000
+		WHERE @IdCaja=IdCaja
+	GO
+
+/*
+/* EJEMPLO DE VENTA */
+	/* Inserta la venta */
+EXEC sp_insert_Venta @IdCaja=1, @IdCliente=1;
+SELECT * FROM VENTA /* Obtener el IdVenta */
+	/* Inserta los productos vendidos */
+EXEC sp_insert_ProductosPorVenta @IdProducto=2, @IdVenta=7, @Cantidad=2, @IdCaja=1;
+EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=7, @Cantidad=4, @IdCaja=1;
+*/
