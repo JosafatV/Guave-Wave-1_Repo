@@ -209,5 +209,16 @@ namespace WaveWebApi.Controllers
         {
             return db.EMPLEADO.Find(idEmpleado) != null;
         }
+
+
+        [HttpOptions]
+        [Route("api/Empleado")]
+        [Route("api/EmpleadoPorRol")]
+        [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
+        [Route("api/Empleado/{idEmpleado}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
+        }
     }
 }

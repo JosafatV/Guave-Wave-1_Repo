@@ -36,7 +36,7 @@ namespace WaveWebApi.Controllers
         }
 
         // PUT: api/Clientes/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(CLIENTE))]
         public IHttpActionResult PutCLIENTE(int id, CLIENTE cLIENTE)
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(cLIENTE);
         }
 
         // POST: api/Clientes
@@ -95,8 +95,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.CLIENTE.Remove(cLIENTE);
-            db.SaveChanges();
+            cLIENTE.Estado = "I";
+            db.Entry(cLIENTE).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CLIENTEExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(cLIENTE);
         }
@@ -113,6 +129,14 @@ namespace WaveWebApi.Controllers
         private bool CLIENTEExists(int id)
         {
             return db.CLIENTE.Count(e => e.IdCliente == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Clientes")]
+        [Route("api/Clientes/{id}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

@@ -79,7 +79,7 @@ namespace WaveWebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
         */
-        // POST: api/Ventas
+       
         [ResponseType(typeof(void))]
         [Route("api/Ventas")]
         public void PostVenta(int IdCaja, int IdCliente)
@@ -139,6 +139,12 @@ namespace WaveWebApi.Controllers
         private bool VENTAExists(int id)
         {
             return db.VENTA.Count(e => e.IdVenta == id) > 0;
+        }
+
+        [HttpOptions]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

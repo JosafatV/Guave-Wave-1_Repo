@@ -16,14 +16,14 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/EmpleadoPorSucursal
+
         [HttpGet]
         public IQueryable<View_EmpleadoPorSucursal> GetEMPLEADO_POR_SUCURSAL()
         {
             return db.View_EmpleadoPorSucursal;
         }
 
-        // GET: api/EmpleadoPorSucursal/5
+     
         [HttpGet]
         [Route("api/ProductoPorSucursal/{idSucursal}/{idEmpleado}")]
         [ResponseType(typeof(View_EmpleadoPorSucursal))]
@@ -40,6 +40,7 @@ namespace WaveWebApi.Controllers
 
         // POST: api/EmpleadoPorSucursal
         [HttpPost]
+        [Route("api/EmpleadoPorSucursal")]
         [ResponseType(typeof(EMPLEADO_POR_SUCURSAL))]
         public IHttpActionResult PostEMPLEADO_POR_SUCURSAL(EMPLEADO_POR_SUCURSAL eMPLEADO_POR_SUCURSAL)
         {
@@ -114,6 +115,15 @@ namespace WaveWebApi.Controllers
         private bool EMPLEADO_POR_SUCURSALExists(int idSucursal, int idEmpleado)
         {
             return db.EMPLEADO_POR_SUCURSAL.Find(idSucursal,idEmpleado) !=null;
+        }
+
+
+        [HttpOptions]
+        [Route("api/EmpleadoPorSucursal")]
+        [Route("api/ProductoPorSucursal/{idSucursal}/{idEmpleado}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

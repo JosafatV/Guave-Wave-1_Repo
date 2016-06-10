@@ -16,13 +16,13 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/ProductoPorVenta
+        [HttpGet]
+        [Route("api/ProductoPorVenta")]
         public IQueryable<View_ProductoPorVenta> GetPRODUCTO_POR_VENTA()
         {
             return db.View_ProductoPorVenta;
         }
 
-        // GET: api/ProductoPorVenta/5
         [HttpGet]
         [Route("api/ProductoPorVenta/{idProducto}/{idVenta}")]
         [ResponseType(typeof(View_ProductoPorVenta))]
@@ -72,7 +72,9 @@ namespace WaveWebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 */
-        // POST: api/ProductoPorVenta
+    
+        [HttpPost]
+        [Route("api/ProductoPorVenta")]
         [ResponseType(typeof(PRODUCTO_POR_VENTA))]
         public IHttpActionResult PostPRODUCTO_POR_VENTA(PRODUCTO_POR_VENTA pRODUCTO_POR_VENTA)
         {
@@ -102,7 +104,7 @@ namespace WaveWebApi.Controllers
             return Ok(pRODUCTO_POR_VENTA);
         }
 
-        // DELETE: api/ProductoPorVenta/5
+        
         [HttpDelete]
         [Route("api/ProductoPorVenta/{idProducto}/{idVenta}")]
         [ResponseType(typeof(PRODUCTO_POR_VENTA))]
@@ -148,6 +150,14 @@ namespace WaveWebApi.Controllers
         private bool PRODUCTO_POR_VENTAExists(int idProducto, int idVenta)
         {
             return db.PRODUCTO_POR_VENTA.Find(idProducto, idVenta) != null;
+        }
+
+        [HttpOptions]
+        [Route("api/ProductoPorVenta")]
+        [Route("api/ProductoPorVenta/{idProducto}/{idVenta}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }

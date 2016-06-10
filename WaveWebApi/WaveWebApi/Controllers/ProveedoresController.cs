@@ -16,13 +16,17 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Proveedores
+
+        [HttpGet]
+        [Route("api/Proveedores")]
         public IQueryable<PROVEEDOR> GetPROVEEDOR()
         {
             return db.PROVEEDOR;
         }
 
-        // GET: api/Proveedores/5
+    
+        [HttpGet]
+        [Route("api/Proveedores/{id}")]
         [ResponseType(typeof(PROVEEDOR))]
         public IHttpActionResult GetPROVEEDOR(int id)
         {
@@ -35,8 +39,10 @@ namespace WaveWebApi.Controllers
             return Ok(pROVEEDOR);
         }
 
-        // PUT: api/Proveedores/5
-        [ResponseType(typeof(void))]
+       
+        [HttpPut]
+        [Route("api/Proveedores/{id}")]
+        [ResponseType(typeof(PROVEEDOR))]
         public IHttpActionResult PutPROVEEDOR(int id, PROVEEDOR pROVEEDOR)
         {
             if (!ModelState.IsValid)
@@ -67,10 +73,11 @@ namespace WaveWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(pROVEEDOR);
         }
 
-        // POST: api/Proveedores
+        [HttpPost]
+        [Route("api/Proveedores")]
         [ResponseType(typeof(PROVEEDOR))]
         public IHttpActionResult PostPROVEEDOR(PROVEEDOR pROVEEDOR)
         {
@@ -85,7 +92,8 @@ namespace WaveWebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = pROVEEDOR.IdProveedor }, pROVEEDOR);
         }
 
-        // DELETE: api/Proveedores/5
+        [HttpDelete]
+        [Route("api/Proveedores/{id}")]
         [ResponseType(typeof(PROVEEDOR))]
         public IHttpActionResult DeletePROVEEDOR(int id)
         {
@@ -95,8 +103,24 @@ namespace WaveWebApi.Controllers
                 return NotFound();
             }
 
-            db.PROVEEDOR.Remove(pROVEEDOR);
-            db.SaveChanges();
+            pROVEEDOR.Estado = "I";
+            db.Entry(pROVEEDOR).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PROVEEDORExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(pROVEEDOR);
         }
@@ -113,6 +137,14 @@ namespace WaveWebApi.Controllers
         private bool PROVEEDORExists(int id)
         {
             return db.PROVEEDOR.Count(e => e.IdProveedor == id) > 0;
+        }
+
+        [HttpOptions]
+        [Route("api/Proveedores")]
+        [Route("api/Proveedores/{id}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }
