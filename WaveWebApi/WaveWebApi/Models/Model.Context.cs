@@ -51,6 +51,8 @@ namespace WaveWebApi.Models
         public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
         public virtual DbSet<View_VentaPorCaja> View_VentaPorCaja { get; set; }
         public virtual DbSet<View_VentaPorCliente> View_VentaPorCliente { get; set; }
+        public virtual DbSet<View_spProductosPorVenta> View_spProductosPorVenta { get; set; }
+        public virtual DbSet<View_VentaPorClienteYCaja> View_VentaPorClienteYCaja { get; set; }
     
         public virtual int sp_insert_Caja(Nullable<decimal> dinero, Nullable<int> idSucursal)
         {

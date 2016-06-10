@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PosPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PosPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CAJA">
           <Key>
             <PropertyRef Name="IdCaja" />
@@ -175,6 +175,10 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorRol' does not have a pri
         <EntityType Name="View_EmpleadoPorRol">
           <Key>
             <PropertyRef Name="IdEmpleado" />
+            
+            
+            
+            
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
           <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
@@ -191,6 +195,8 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorSucursal' does not have 
         <EntityType Name="View_EmpleadoPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpleado" />
+            
+            
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
@@ -210,6 +216,8 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorProveedor' does not have
         <EntityType Name="View_ProductoPorProveedor">
           <Key>
             <PropertyRef Name="IdProducto" />
+            
+            
             <PropertyRef Name="IdProveedor" />
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
@@ -226,6 +234,8 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorSucursal' does not have 
         <EntityType Name="View_ProductoPorSucursal">
           <Key>
             <PropertyRef Name="IdProducto" />
+            
+            
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
@@ -246,7 +256,11 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorVenta' does not have a p
         <EntityType Name="View_ProductoPorVenta">
           <Key>
             <PropertyRef Name="IdProducto" />
+            
+            
             <PropertyRef Name="IdVenta" />
+            
+            
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
           <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
@@ -259,6 +273,19 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorVenta' does not have a p
           <Property Name="IdCaja" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="NombreSucursal" Type="char" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_spProductosPorVenta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_spProductosPorVenta">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="smallint" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PosPF.dbo.View_VentaPorCaja' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -280,6 +307,7 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <Key>
             <PropertyRef Name="IdVenta" />
             <PropertyRef Name="IdCliente" />
+            
           </Key>
           <Property Name="IdVenta" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" />
@@ -290,6 +318,26 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <Property Name="Apellidos" Type="char" MaxLength="30" />
           <Property Name="FechaNacimiento" Type="date" />
           <Property Name="EstadoCliente" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PosPF.dbo.View_VentaPorClienteYCaja' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_VentaPorClienteYCaja">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Apellidos" Type="char" MaxLength="30" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="EstadoCliente" Type="char" MaxLength="1" />
+          <Property Name="NombreCliente" Type="char" MaxLength="15" />
+          <Property Name="FechaVenta" Type="datetime" />
+          <Property Name="EstadoVenta" Type="char" MaxLength="1" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__CAJA_POR___IdCaj__4D94879B">
           <End Role="CAJA" Type="Self.CAJA" Multiplicity="1">
@@ -664,6 +712,14 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
     [View_ProductoPorVenta].[NombreSucursal] AS [NombreSucursal]
     FROM [dbo].[View_ProductoPorVenta] AS [View_ProductoPorVenta]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="View_spProductosPorVenta" EntityType="Self.View_spProductosPorVenta" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_spProductosPorVenta].[IdProducto] AS [IdProducto], 
+    [View_spProductosPorVenta].[IdVenta] AS [IdVenta], 
+    [View_spProductosPorVenta].[IdCaja] AS [IdCaja], 
+    [View_spProductosPorVenta].[Cantidad] AS [Cantidad]
+    FROM [dbo].[View_spProductosPorVenta] AS [View_spProductosPorVenta]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_VentaPorCaja" EntityType="Self.View_VentaPorCaja" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_VentaPorCaja].[IdCaja] AS [IdCaja], 
@@ -686,6 +742,20 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
     [View_VentaPorCliente].[FechaNacimiento] AS [FechaNacimiento], 
     [View_VentaPorCliente].[EstadoCliente] AS [EstadoCliente]
     FROM [dbo].[View_VentaPorCliente] AS [View_VentaPorCliente]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_VentaPorClienteYCaja" EntityType="Self.View_VentaPorClienteYCaja" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_VentaPorClienteYCaja].[IdCliente] AS [IdCliente], 
+    [View_VentaPorClienteYCaja].[Cedula] AS [Cedula], 
+    [View_VentaPorClienteYCaja].[Apellidos] AS [Apellidos], 
+    [View_VentaPorClienteYCaja].[FechaNacimiento] AS [FechaNacimiento], 
+    [View_VentaPorClienteYCaja].[EstadoCliente] AS [EstadoCliente], 
+    [View_VentaPorClienteYCaja].[NombreCliente] AS [NombreCliente], 
+    [View_VentaPorClienteYCaja].[FechaVenta] AS [FechaVenta], 
+    [View_VentaPorClienteYCaja].[EstadoVenta] AS [EstadoVenta], 
+    [View_VentaPorClienteYCaja].[IdVenta] AS [IdVenta], 
+    [View_VentaPorClienteYCaja].[IdCaja] AS [IdCaja]
+    FROM [dbo].[View_VentaPorClienteYCaja] AS [View_VentaPorClienteYCaja]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__CAJA_POR___IdCaj__4D94879B" Association="Self.FK__CAJA_POR___IdCaj__4D94879B">
             <End Role="CAJA" EntitySet="CAJA" />
@@ -752,8 +822,7 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
             <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PosPFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1364,10 +1433,10 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
             <Parameter Name="IdCaja" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_Proveedor">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_Rol">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_Sucursal">
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -1389,7 +1458,38 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
             <Parameter Name="StockMinimo" Mode="In" Type="Int16" />
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="View_spProductosPorVenta" EntityType="PosPFModel.View_spProductosPorVenta" />
+          <EntitySet Name="View_VentaPorClienteYCaja" EntityType="PosPFModel.View_VentaPorClienteYCaja" />
         </EntityContainer>
+        <EntityType Name="View_spProductosPorVenta">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int16" />
+        </EntityType>
+        <EntityType Name="View_VentaPorClienteYCaja">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="IdVenta" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="EstadoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="FechaVenta" Type="DateTime" Precision="3" />
+          <Property Name="EstadoVenta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1685,6 +1785,32 @@ warning 6002: The table/view 'PosPF.dbo.View_VentaPorCliente' does not have a pr
           <FunctionImportMapping FunctionImportName="sp_insert_Venta" FunctionName="PosPFModel.Store.sp_insert_Venta" />
           <FunctionImportMapping FunctionImportName="sp_reStock" FunctionName="PosPFModel.Store.sp_reStock" />
           <FunctionImportMapping FunctionImportName="sp_Stock" FunctionName="PosPFModel.Store.sp_Stock" />
+          <EntitySetMapping Name="View_spProductosPorVenta">
+            <EntityTypeMapping TypeName="PosPFModel.View_spProductosPorVenta">
+              <MappingFragment StoreEntitySet="View_spProductosPorVenta">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_VentaPorClienteYCaja">
+            <EntityTypeMapping TypeName="PosPFModel.View_VentaPorClienteYCaja">
+              <MappingFragment StoreEntitySet="View_VentaPorClienteYCaja">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="EstadoVenta" ColumnName="EstadoVenta" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

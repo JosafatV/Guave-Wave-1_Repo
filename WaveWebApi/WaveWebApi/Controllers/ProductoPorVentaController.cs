@@ -75,33 +75,16 @@ namespace WaveWebApi.Controllers
     
         [HttpPost]
         [Route("api/ProductoPorVenta")]
-        [ResponseType(typeof(PRODUCTO_POR_VENTA))]
-        public IHttpActionResult PostPRODUCTO_POR_VENTA(PRODUCTO_POR_VENTA pRODUCTO_POR_VENTA)
+        [ResponseType(typeof(View_spProductosPorVenta))]
+        public IHttpActionResult PostPRODUCTO_POR_VENTA(View_spProductosPorVenta prod_x_venta)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.PRODUCTO_POR_VENTA.Add(pRODUCTO_POR_VENTA);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PRODUCTO_POR_VENTAExists(pRODUCTO_POR_VENTA.IdProducto, pRODUCTO_POR_VENTA.IdVenta))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Ok(pRODUCTO_POR_VENTA);
+            db.sp_insert_ProductosPorVenta(prod_x_venta.IdProducto, prod_x_venta.IdVenta, prod_x_venta.Cantidad, prod_x_venta.IdCaja);
+            db.SaveChanges();
+            return Ok(prod_x_venta);
         }
 
         
