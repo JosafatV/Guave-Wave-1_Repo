@@ -68,11 +68,11 @@ GO
 
 CREATE VIEW [dbo].[View_VentaPorCaja]
 AS
-SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.UltimoCierre, dbo.CAJA.Estado, dbo.VENTA.IdVenta, dbo.VENTA.Timestamp, dbo.VENTA.Estado AS EstadoVenta
+SELECT        dbo.CAJA.IdCaja, dbo.CAJA.Dinero, dbo.CAJA.UltimoCierre, dbo.CAJA.Estado, dbo.VENTA.IdVenta, dbo.VENTA.Timestamp, dbo.VENTA.Estado AS EstadoVenta, dbo.VENTA.Duracion
 FROM            dbo.CAJA INNER JOIN
                          dbo.VENTA_POR_CAJA ON dbo.CAJA.IdCaja = dbo.VENTA_POR_CAJA.IdCaja INNER JOIN
                          dbo.VENTA ON dbo.VENTA_POR_CAJA.IdVenta = dbo.VENTA.IdVenta
-Where dbo.VENTA_POR_CAJA.Estado = 'A'
+WHERE        (dbo.VENTA_POR_CAJA.Estado = 'A')
 GO
 
 CREATE VIEW [dbo].[View_VentaPorCliente]

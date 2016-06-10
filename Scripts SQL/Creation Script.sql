@@ -76,6 +76,7 @@ CREATE TABLE PROVEEDOR (
 CREATE TABLE VENTA(
 	IdVenta INT IDENTITY(1,1),
 	Timestamp DATETIME,
+	Duracion smallINT,
 	Estado CHAR(1) DEFAULT 'A',
 
 	PRIMARY KEY (IdVenta)

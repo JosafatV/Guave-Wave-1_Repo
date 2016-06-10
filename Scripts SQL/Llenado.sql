@@ -91,11 +91,11 @@ EXEC sp_Stock @IdProducto=10, @Stock=50, @StockMinimo=10, @idSucursal=3;
 
 
 /* Ventas -Deben eistir productos, sucursales, clientes, cajas, pps */
-EXEC sp_insert_Venta @IdCaja=1, @IdCliente=1;
-EXEC sp_insert_Venta @IdCaja=3, @IdCliente=1;
-EXEC sp_insert_Venta @IdCaja=4, @IdCliente=2;
-EXEC sp_insert_Venta @IdCaja=6, @IdCliente=3;
-EXEC sp_insert_Venta @IdCaja=8, @IdCliente=1;
+EXEC sp_insert_Venta @IdCaja=1, @IdCliente=1, @Duracion=232;
+EXEC sp_insert_Venta @IdCaja=3, @IdCliente=1, @Duracion=173;
+EXEC sp_insert_Venta @IdCaja=4, @IdCliente=2, @Duracion=216;
+EXEC sp_insert_Venta @IdCaja=6, @IdCliente=3, @Duracion=124;
+EXEC sp_insert_Venta @IdCaja=8, @IdCliente=1, @Duracion=261;
 
 
 

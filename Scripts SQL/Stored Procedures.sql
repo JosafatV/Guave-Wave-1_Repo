@@ -77,11 +77,11 @@ CREATE PROCEDURE sp_insert_Producto
 
 /* Inserts a new Venta tuple, and its relationships */
 CREATE PROCEDURE sp_insert_Venta
-	@IdCaja INT, @IdCliente INT
+	@IdCaja INT, @IdCliente INT, @Duracion smallINT
 	AS
 		DECLARE @IdVenta INT
 
-		INSERT INTO VENTA (Timestamp) VALUES (GETDATE())
+		INSERT INTO VENTA (Timestamp, Duracion) VALUES (GETDATE(), @Duracion)
 		SELECT @IdVenta = @@IDENTITY
 		
 		INSERT INTO VENTA_POR_CAJA (IdVenta, IdCaja) VALUES (@IdVenta,@IdCaja)
@@ -159,13 +159,3 @@ CREATE PROCEDURE sp_AperturaDeCaja
 		SET Dinero=50000
 		WHERE @IdCaja=IdCaja
 	GO
-
-/*
-/* EJEMPLO DE VENTA */
-	/* Inserta la venta */
-EXEC sp_insert_Venta @IdCaja=1, @IdCliente=1;
-SELECT * FROM VENTA /* Obtener el IdVenta */
-	/* Inserta los productos vendidos */
-EXEC sp_insert_ProductosPorVenta @IdProducto=2, @IdVenta=7, @Cantidad=2, @IdCaja=1;
-EXEC sp_insert_ProductosPorVenta @IdProducto=3, @IdVenta=7, @Cantidad=4, @IdCaja=1;
-*/

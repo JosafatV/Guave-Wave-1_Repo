@@ -89,7 +89,14 @@ AS
 	WHERE S.IdSucursal=@IdSucursal
 GO
 
-
+CREATE PROCEDURE report_TiempoEnCaja
+	@IdCaja INT
+	AS
+		SELECT Vpc.IdCaja, AVG(Vpc.Duracion) AS DuraciónPromedio
+		FROM View_VentaPorCaja AS Vpc
+		WHERE @IdCaja=Vpc.IdCaja
+		GROUP BY Vpc.IdCaja
+	GO
 
 /* test query for ms checking 
 EXEC report_VentasPorSucursal @initialDATE = '20160601'
