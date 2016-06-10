@@ -1,109 +1,53 @@
 ﻿<html>
 <head>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
-  <title>Nigma Facturación</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/estilos.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+    <title>Nigma Facturación</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fp">
-            <span class="sr-only">Desplegar / Ocultar Menu</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">Nigma Solutions/Administradores</a>
+    <header>
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fp">
+                        <span class="sr-only">Desplegar / Ocultar Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">Nigma Solutions/Administradores</a>
+                </div>
+                <!--Inicia Menu-->
+                <div class="collapse navbar-collapse" id="navegacion-fp">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a>Inicio</a></li>
+                        <li><a data-ng-click="goBranch()">Sucursales</a></li>
+                        <li><a >Empleados</a></li>
+                        <li><a >Productos</a></li>
+                        <li><a >Proveedores</a></li>
+                        <li><a >Clientes</a></li>
+                        <li><a >Cerrar sesion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br><br><br><br><br><br>
+    <div class="container-fluid">
+        <div class="col-md-offset-4">
+            <img src="imagenes/adm.jpg" />
+
         </div>
-        <!--Inicia Menu-->
-        <div class="collapse navbar-collapse" id="navegacion-fp">
-          <ul class="nav navbar-nav">
-            <li class="active"><a>Inicio</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                Sucursales <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Crear sucursales</a></li>
-                <li><a href="#">Ver sucursales existentes</a></li>
-                <li><a href="#">Actualizar sucursales</a></li>
-                <li><a href="#">Borrar sucursales</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                Empleados <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Crear empleados</a></li>
-                <li><a href="#">Ver empleados existentes</a></li>
-                <li><a href="#">Actualizar empleados</a></li>
-                <li><a href="#">Borrar empleados</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                Productos <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Crear productos</a></li>
-                <li><a href="#">Ver productos existentes</a></li>
-                <li><a href="#">Actualizar productos</a></li>
-                <li><a href="#">Borrar productos</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                Proveedores <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Crear proveedores</a></li>
-                <li><a href="#">Ver proveedores existentes</a></li>
-                <li><a href="#">Actualizar proveedores</a></li>
-                <li><a href="#">Borrar proveedores</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                Clientes <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Crear clientes</a></li>
-                <li><a href="#">Ver clientes existentes</a></li>
-                <li><a href="#">Actualizar clientes</a></li>
-                <li><a href="#">Borrar clientes</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Reportes</a></li>
-            <li><a href="#">Cerrar sesion</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-<br><br><br><br><br><br>
-  <div class="container-fluid">
-    <div class="col-md-offset-4">
-      <img src="imagenes/adm.jpg"/>
 
     </div>
 
-  </div>
 
 
-
-
-
-
-
-
-<script src="http:code.jquery.com/jquery-latest.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http:code.jquery.com/jquery-latest.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </body>
 </html>

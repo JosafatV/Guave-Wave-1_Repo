@@ -51,26 +51,48 @@
         templateUrl: 'HtmlPages/AdminView/adminMenu.html',
         controller: 'adminMenuController'
     })
-    .when('/NigmaFacturation/AdminView/branchCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/branchMenu.html',
+/*------------------Branch----------------------*/
+    .when('/NigmaFacturation/AdminView/Branch/branchCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/Branch/branchCRUDMenu.html',
         controller: 'branchCRUDMenuController'
     })
+    .when('/NigmaFacturation/AdminView/Branch/readBranch', {
+        templateUrl: 'HtmlPages/AdminView/Branch/readBranch.html',
+        controller: 'readBranchController'
+    })
+    .when('/NigmaFacturation/AdminView/Branch/createBranch', {
+        templateUrl: 'HtmlPages/AdminView/Branch/createBranch.html',
+        controller: 'createBranchController'
+    })
+    .when('/NigmaFacturation/AdminView/Branch/deleteBranch', {
+        templateUrl: 'HtmlPages/AdminView/Branch/deleteBranch.html',
+        controller: 'deleteBranchController'
+    })
+    .when('/NigmaFacturation/AdminView/Branch/updateBranch', {
+        templateUrl: 'HtmlPages/AdminView/Branch/updateBranch.html',
+        controller: 'updateBranchController'
+    })
+/*------------------Employees-------------------*/
     .when('/NigmaFacturation/AdminView/employeesCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/employeesMenu.html',
         controller: 'employeesCRUDMenuController'
     })
+/*------------------Products--------------------*/
     .when('/NigmaFacturation/AdminView/productsCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/productsMenu.html',
         controller: 'productsCRUDMenuController'
     })
+/*------------------Clients---------------------*/
     .when('/NigmaFacturation/AdminView/clientsCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/clientsMenu.html',
         controller: 'clientsCRUDMenuController'
     })
+/*------------------Branch----------------------*/
     .when('/NigmaFacturation/AdminView/supplierCRUDMenu', {
         templateUrl: 'HtmlPages/AdminView/supplierMenu.html',
         controller: 'supplierCRUDMenuController'
     })
+/*------------------Reports---------------------*/
     .when('/NigmaFacturation/AdminView/reports', {
         templateUrl: 'HtmlPages/AdminView/reports.html',
     controller: 'reportsController'
@@ -81,6 +103,7 @@
         templateUrl: 'HtmlPages/LoginView/signIn.html',
         controller: 'signInLoginController'
     })
+/*-------------------------------------Default--------------------------------------------*/
     .otherwise({
         templateUrl: 'HtmlPages/LoginView/login.html',
         controller: 'loginController'
