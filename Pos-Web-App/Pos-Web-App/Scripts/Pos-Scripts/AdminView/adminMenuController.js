@@ -1,7 +1,7 @@
 ﻿angular.module('NigmaBillingApp').controller('adminMenuController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
         $scope.goBranch = function () {
-            $location.path('/NigmaFacturation/AdminView/branchCRUDMenu');
+            $location.path('/NigmaFacturation/AdminView/Branch/branchCRUDMenu');
         };
         $scope.goEmployees = function () {
             $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu');
