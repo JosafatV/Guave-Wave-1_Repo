@@ -13,9 +13,12 @@
             $location.path('/NigmaFacturation/AdminView/clientsCRUDMenu');
         };
         $scope.goProducts = function () {
-            $location.path('/NigmaFacturation/AdminView/productsCRUDMenu');
+            $location.path('/NigmaFacturation/AdminView/Products/productsCRUDMenu');
         };
         $scope.goReports = function () {
             $location.path('/NigmaFacturation/AdminView/reports');
+        };
+        $scope.goReports = function () {
+            $location.path('/NigmaFacturation/AdminView/Products/productsCRUDMenu');
         };
     }]);

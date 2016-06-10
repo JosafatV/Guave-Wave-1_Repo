@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -24,19 +24,19 @@
         <div class="collapse navbar-collapse" id="navegacion-fp">
           <ul class="nav navbar-nav">
             <li class="active"><a>Inicio</a></li>
-            <li><a href="#">Crear Producto</a></li>
-            <li><a href="#">Ver productos existentes</a></li>
-            <li><a href="#">Modificar producto existente</a></li>
-            <li><a href="#">Borrar Producto</a></li>
-            <li><a href="#">Regresar</a></li>
+            <li><a data-ng-click="goCreateProducts()">Crear Producto</a></li>
+            <li><a data-ng-click="goReadProducts()">Ver productos existentes</a></li>
+            <li><a data-ng-click="goUpdateProducts()">Modificar producto existente</a></li>
+            <li><a data-ng-click="goDeleteProducts()">Borrar Producto</a></li>
+            <li><a data-ng-click="goReturn()">Regresar</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  <br><br><br>
+  <br><br>
   <div class="container-fluid">
-      <div class="col-md-offset-3">
+      <div class="col-md-offset-2">
         <img src="imagenes/pro.jpg"/>
 
       </div>

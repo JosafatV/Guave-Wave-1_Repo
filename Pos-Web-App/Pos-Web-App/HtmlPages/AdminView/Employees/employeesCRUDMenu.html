@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -24,19 +24,19 @@
         <div class="collapse navbar-collapse" id="navegacion-fp">
           <ul class="nav navbar-nav">
             <li class="active"><a>Inicio</a></li>
-            <li><a href="#">Crear Empleado</a></li>
-            <li><a href="#">Ver empleados existentes</a></li>
-            <li><a href="#">Modificar empleado existente</a></li>
-            <li><a href="#">Borrar Empleado</a></li>
-            <li><a href="#">Regresar</a></li>
+            <li><a data-ng-click="goCreateEmployee()">Crear Empleado</a></li>
+            <li><a data-ng-click="goSeeEmployee()">Ver empleados existentes</a></li>
+            <li><a data-ng-click="goUpdateEmployee()">Modificar empleado existente</a></li>
+            <li><a data-ng-click="goDeleteEmployee()">Borrar Empleado</a></li>
+            <li><a data-ng-click="goReturn()">Regresar</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  <br><br><br><br><br><br>
+  <br><br><br>
   <div class="container-fluid">
-      <div class="col-md-offset-4">
+      <div class="col-md-offset-3">
         <img src="imagenes/plus.jpg"/>
 
       </div>

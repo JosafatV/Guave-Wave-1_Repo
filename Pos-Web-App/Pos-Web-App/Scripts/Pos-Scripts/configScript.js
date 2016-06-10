@@ -78,7 +78,7 @@
         controller: 'employeesCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Employee/readEmployee', {
-    templateUrl: 'HtmlPages/AdminView/Employees/readEmployee.html',
+    templateUrl: 'HtmlPages/AdminView/Employees/readEmployees.html',
     controller: 'readEmployeeController'
     })
     .when('/NigmaFacturation/AdminView/Employee/createEmployee', {
@@ -90,12 +90,12 @@
         controller: 'deleteEmployeeController'
     })
     .when('/NigmaFacturation/AdminView/Employee/updateEmployee', {
-        templateUrl: 'HtmlPages/AdminView/Employees/updateEmployee.html',
+        templateUrl: 'HtmlPages/AdminView/Employees/updateEmployees.html',
         controller: 'updateEmployeeController'
     })
 /*------------------Products--------------------*/
-    .when('/NigmaFacturation/AdminView/productsCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/productsMenu.html',
+    .when('/NigmaFacturation/AdminView/Products/productsCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/Products/productsCRUDMenu.html',
         controller: 'productsCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Products/readProducts', {
@@ -161,6 +161,7 @@
         templateUrl: 'HtmlPages/AdminView/reports.html',
     controller: 'reportsController'
     })
+
 /*-------------------------------------Login--------------------------------------------*/
 
     .when('/NigmaFacturation/LoginView/signIn', {
@@ -173,8 +174,8 @@
         controller: 'loginController'
     })
 }]);
-
-angular.module('NigmaBillingApp').config(function ($httpProvider) {
+/*
+angular.module('DrPhischelApp').config(function ($httpProvider) {
     //$httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -182,7 +183,7 @@ angular.module('NigmaBillingApp').config(function ($httpProvider) {
     //$httpProvider.defaults.withCredentials = true;
     //delete $httpProvider.defaults.headers.common["X-Requested-With"];
     //$httpProvider.defaults.headers.common = {};
-    //$httpProvider.defaults.headers.post = {};
-    //$httpProvider.defaults.headers.put = {};
-    //$httpProvider.defaults.headers.patch = {};
-});
+    /*$httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
+});*/
