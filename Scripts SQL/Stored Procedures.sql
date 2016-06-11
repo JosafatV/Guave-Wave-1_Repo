@@ -127,6 +127,7 @@ CREATE PROCEDURE sp_reStock
 		UPDATE PRODUCTO_POR_SUCURSAL SET Stock=Stock+@Quantity WHERE IdProducto=@IdProduct AND IdSucursal=@IdSucursal
 	GO
 
+	/* Checks for products who's stock is below it's specified limit */
 CREATE PROCEDURE sp_checkStock
 	@IdSucursal INT
 	AS
@@ -135,6 +136,7 @@ CREATE PROCEDURE sp_checkStock
 		WHERE Pps.Stock<Pps.StockMinimo AND Pps.IdSucursal=@IdSucursal AND Pps.Estado='A' AND Pps.EstadoSucursal='A'
 	GO
 
+	/* Updates stockMinimo */
 CREATE PROCEDURE sp_UpdateStockMinimo
 	@IdSucursal INT, @IdProducto INT, @newStockMinimo smallINT
 	AS
@@ -143,6 +145,7 @@ CREATE PROCEDURE sp_UpdateStockMinimo
 		WHERE IdSucursal=@IdSucursal AND IdProducto=@IdProducto
 	GO
 
+	/* Compares the amount of money in the Caja against what the user reported, resets the timer, and sets the caja as closed */
 CREATE PROCEDURE sp_CierreDeCaja
 	@IdCaja INT, @DineroCierre money
 	AS
@@ -151,14 +154,15 @@ CREATE PROCEDURE sp_CierreDeCaja
 		WHERE Cps.IdCaja=@IdCaja
 
 		UPDATE CAJA
-		SET Dinero=@DineroCierre, UltimoCierre=GETDATE()
+		SET Dinero=@DineroCierre, UltimoCierre=GETDATE(), Estado='C'
 		WHERE IdCaja=@IdCaja
 	GO
 		
+	/* Resets the amount of money in the Caja and sets the caja as active*/
 CREATE PROCEDURE sp_AperturaDeCaja
 	@IdCaja INT, @DineroApertura INT
 	AS
 		UPDATE CAJA
-		SET Dinero=50000
+		SET Dinero=50000, Estado='A'
 		WHERE @IdCaja=IdCaja
 	GO
