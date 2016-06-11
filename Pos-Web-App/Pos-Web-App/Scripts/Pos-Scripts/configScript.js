@@ -78,7 +78,7 @@
         controller: 'employeesCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Employee/readEmployee', {
-    templateUrl: 'HtmlPages/AdminView/Employees/readEmployee.html',
+    templateUrl: 'HtmlPages/AdminView/Employees/readEmployees.html',
     controller: 'readEmployeeController'
     })
     .when('/NigmaFacturation/AdminView/Employee/createEmployee', {
@@ -90,12 +90,12 @@
         controller: 'deleteEmployeeController'
     })
     .when('/NigmaFacturation/AdminView/Employee/updateEmployee', {
-        templateUrl: 'HtmlPages/AdminView/Employees/updateEmployee.html',
+        templateUrl: 'HtmlPages/AdminView/Employees/updateEmployees.html',
         controller: 'updateEmployeeController'
     })
 /*------------------Products--------------------*/
-    .when('/NigmaFacturation/AdminView/productsCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/productsMenu.html',
+    .when('/NigmaFacturation/AdminView/Products/productsCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/Products/productsCRUDMenu.html',
         controller: 'productsCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Products/readProducts', {
@@ -115,8 +115,8 @@
         controller: 'updateProductsController'
     })
 /*------------------Clients---------------------*/
-    .when('/NigmaFacturation/AdminView/clientsCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/clientsMenu.html',
+    .when('/NigmaFacturation/AdminView/Clients/clientsCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/Clients/clientsCRUDMenu.html',
         controller: 'clientsCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Clients/readClients', {
@@ -124,7 +124,7 @@
         controller: 'readClientController'
     })
     .when('/NigmaFacturation/AdminView/Clients/createClients', {
-        templateUrl: 'HtmlPages/AdminView/Products/createClientAdminView.html',
+        templateUrl: 'HtmlPages/AdminView/Clients/createClientAdminView.html',
         controller: 'createClientController'
     })
     .when('/NigmaFacturation/AdminView/Clients/deleteClients', {
@@ -136,9 +136,9 @@
         controller: 'updateClientController'
     })
 /*------------------Suppliers----------------------*/
-    .when('/NigmaFacturation/AdminView/supplierCRUDMenu', {
-        templateUrl: 'HtmlPages/AdminView/supplierMenu.html',
-        controller: 'supplierCRUDMenuController'
+    .when('/NigmaFacturation/AdminView/Suppliers/supplierCRUDMenu', {
+        templateUrl: 'HtmlPages/AdminView/Suppliers/supplierCRUDMenu.html',
+        controller: 'suppliersCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Suppliers/readSuppliers', {
         templateUrl: 'HtmlPages/AdminView/Products/readProducts.html',
@@ -148,7 +148,7 @@
         templateUrl: 'HtmlPages/AdminView/Suppliers/createSuppliers.html',
         controller: 'createSupplierController'
     })
-    .when('/NigmaFacturation/AdminView/Suppliers/SuppliersProducts', {
+    .when('/NigmaFacturation/AdminView/Suppliers/deleteSuppliers', {
         templateUrl: 'HtmlPages/AdminView/Suppliers/deleteSuppliers.html',
         controller: 'deleteSupplierController'
     })

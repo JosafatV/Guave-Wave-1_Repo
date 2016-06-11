@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -24,19 +24,19 @@
         <div class="collapse navbar-collapse" id="navegacion-fp">
           <ul class="nav navbar-nav">
             <li class="active"><a>Inicio</a></li>
-            <li><a href="#">Crear Proveedor</a></li>
-            <li><a href="#">Ver proveedores existentes</a></li>
-            <li><a href="#">Modificar proveedor existente</a></li>
-            <li><a href="#">Borrar Proveedor</a></li>
-            <li><a href="#">Regresar</a></li>
+            <li><a data-ng-click="goCreateSupplier()">Crear Proveedor</a></li>
+            <li><a data-ng-click="goReadSupplier()">Ver proveedores existentes</a></li>
+            <li><a data-ng-click="goUpdateSupplier()">Modificar proveedor existente</a></li>
+            <li><a data-ng-click="goDeleteSupplier()">Borrar Proveedor</a></li>
+            <li><a data-ng-click="goReturn()">Regresar</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  <br><br><br><br><br>
+  <br><br><br>
   <div class="container-fluid">
-      <div class="col-md-offset-3">
+      <div class="col-md-offset-1">
         <img src="imagenes/provee.jpg"/>
 
       </div>

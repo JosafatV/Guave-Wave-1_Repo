@@ -1,6 +1,6 @@
-﻿<html>
+<html>
 <head>
-  <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">-->
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <meta charset="utf-8">
@@ -17,32 +17,28 @@
           <form action="" class="">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newEmployee.Nombre">
+                <input class="form-control" id="nombre" type="text" placeholder="Nombre:">
             </div>
             <div class="form-group">
                 <label for="nombre">Apellidos:</label>
-                <input class="form-control" id="apellidos" type="text" placeholder="Apellidos:" data-ng-model="newEmployee.Apellidos">
+                <input class="form-control" id="apellidos" type="text" placeholder="Apellidos:">
               </div>
               <div class="form-group">
                   <label for="cedula">Cédula:</label>
-                  <input class="form-control" id="cedula" type="text" placeholder="Cédula:" data-ng-model="newEmployee.Cedula">
+                  <input class="form-control" id="cedula" type="text" placeholder="Cédula:">
               </div>
               <div class="form-group">
                   <label for="cedula">Contraseña:</label>
-                  <input class="form-control" id="contraseña" type="text" placeholder="Contraseña:" data-ng-model="newEmployee.Contraseña">
+                  <input class="form-control" id="contraseña" type="text" placeholder="Contraseña:">
               </div>
 
-              <div class="form-group">
-                  <label for="option">Puesto:</label>
-                  <select ng-disabled="checked" ng-options="rol.Nombre for rol in rolList" data-ng-model="rolSelected" class="form-control"  data-ng-change="changeRol()"></select>
-              </div>
 
               <br><br>
+              <button class="btn btn-success">Crear Empleado</button><br><br>
             </div>
           </form>
         </div>
       </div>
-    <button class="btn btn-success" data-ng-click="sendNewEmployee()">Crear Empleado</button><br><br>
 
 
 

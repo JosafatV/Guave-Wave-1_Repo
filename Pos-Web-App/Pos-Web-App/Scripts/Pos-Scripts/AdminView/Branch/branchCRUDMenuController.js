@@ -12,4 +12,7 @@ angular.module('NigmaBillingApp').controller('branchCRUDMenuController', ['$scop
         $scope.goReadBranch = function () {
             $location.path('/NigmaFacturation/AdminView/Branch/readBranch');
         };
+        $scope.goReturn = function () {
+            $location.path('/NigmaFacturation/AdminView/adminMenu');
+        };
     }]);
