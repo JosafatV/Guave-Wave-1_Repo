@@ -138,6 +138,7 @@ namespace WaveWebApi.Controllers
         [HttpOptions]
         [Route("api/ProductoPorSucursal")]
         [Route("api/ProductoPorSucursal/{idSucursal}/{idProducto}")]
+        [Route("api/ProductoPorSucursal/{idProducto}/{idSucursal}/{cantidadDeMas}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

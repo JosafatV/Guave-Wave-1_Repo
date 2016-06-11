@@ -46,6 +46,21 @@ namespace WaveWebApi.Controllers
             return Ok(Empleado);
         }
 
+        [HttpGet]
+        [Route("api/Empleado/{idEmpleado}/{password}")]
+        [ResponseType(typeof(List<View_EmpleadoPorRol>))]
+        public IHttpActionResult GetEmpleadoLogin(int idEmpleado, int password)
+        {
+            List<View_EmpleadoPorRol> List_Empleado = db.View_EmpleadoPorRol.
+                SqlQuery("Select * from View_EmpleadoPorRol where idEmpleado = '" + idEmpleado + "' and contrasena = '" + password + "' ").ToList();
+            if (List_Empleado == null || List_Empleado.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(List_Empleado);
+        }
+
         /// <summary>
         /// Agrega un empleado con un rol 
         /// </summary>
