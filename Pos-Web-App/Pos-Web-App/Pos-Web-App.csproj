@@ -398,8 +398,16 @@
     <Content Include="Scripts\Pos-Scripts\AdminView\Employees\CRUD\readEmployeeController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Employees\CRUD\updateEmployeeController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Employees\employeesCRUDMenuController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Products\CRUD\createProductController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Products\CRUD\deleteProductController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Products\CRUD\readProductController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Products\CRUD\updateProductController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Products\productsCRUDMenuController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Reports\reportsMenuController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Suppliers\CRUD\createSupplierController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Suppliers\CRUD\deleteSupplierController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Suppliers\CRUD\readSupplierController.js" />
+    <Content Include="Scripts\Pos-Scripts\AdminView\Suppliers\CRUD\updateSupplierController.js" />
     <Content Include="Scripts\Pos-Scripts\AdminView\Suppliers\suppliersCRUDMenuController.js" />
     <Content Include="Scripts\Pos-Scripts\CashierView\cashDeskClosingController.js" />
     <Content Include="Scripts\Pos-Scripts\CashierView\cashDeskOpeningController.js" />

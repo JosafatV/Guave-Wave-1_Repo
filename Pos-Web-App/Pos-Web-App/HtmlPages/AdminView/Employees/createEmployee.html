@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -17,27 +17,32 @@
           <form action="" class="">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input class="form-control" id="nombre" type="text" placeholder="Nombre:">
+                <input class="form-control" id="nombre" type="text" placeholder="Nombre:"  data-ng-model="newEmployee.Nombre">
             </div>
             <div class="form-group">
                 <label for="nombre">Apellidos:</label>
-                <input class="form-control" id="apellidos" type="text" placeholder="Apellidos:">
+                <input class="form-control" id="apellidos" type="text" placeholder="Apellidos:"  data-ng-model="newEmployee.Apellidos">
               </div>
               <div class="form-group">
                   <label for="cedula">Cédula:</label>
-                  <input class="form-control" id="cedula" type="text" placeholder="Cédula:">
+                  <input class="form-control" id="cedula" type="text" placeholder="Cédula:"  data-ng-model="newEmployee.Cedula">
               </div>
               <div class="form-group">
                   <label for="cedula">Contraseña:</label>
-                  <input class="form-control" id="contraseña" type="text" placeholder="Contraseña:">
+                  <input class="form-control" id="contraseña" type="text" placeholder="Contraseña:"  data-ng-model="newEmployee.Contrasena">
               </div>
 
+              <div class="form-group">
+                  <label for="option">Puesto: </label>
+                  <select ng-disabled="checked" ng-options="rol.Nombre for rol in rolList" class="form-control" data-ng-model="rolSelected" data-ng-change="changeRol()"></select>
+
+              </div>
 
               <br><br>
-              <button class="btn btn-success">Crear Empleado</button><br><br>
             </div>
           </form>
         </div>
+    <button class="btn btn-success">Crear Empleado</button><br><br>
       </div>
 
 
