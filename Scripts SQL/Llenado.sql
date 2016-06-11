@@ -40,10 +40,10 @@ INSERT INTO CLIENTE (Cedula,Nombre,Apellidos,FechaNacimiento) VALUES ('323453834
 
 
 /* Empleados - Deben existir los roles */
-EXEC sp_insert_Empleado @Contraseña='admin', @Cedula=402260398, @Nombre='Josafat', @Apellidos='Vargas Gamboa', @IdRol=1;
-EXEC sp_insert_Empleado @Contraseña='123456', @Cedula=402270398, @Nombre='Sebastian', @Apellidos='Gonzalez', @IdRol=2;
-EXEC sp_insert_Empleado @Contraseña='123456', @Cedula=402280398, @Nombre='Giovanni', @Apellidos='Villalobos', @IdRol=3;
-EXEC sp_insert_Empleado @Contraseña='123456', @Cedula=402290398, @Nombre='Joseph', @Apellidos='Campos Porras', @IdRol=4;
+EXEC sp_insert_Empleado @Contrasena='admin', @Cedula=402260398, @Nombre='Josafat', @Apellidos='Vargas Gamboa', @IdRol=1;
+EXEC sp_insert_Empleado @Contrasena='123456', @Cedula=402270398, @Nombre='Sebastian', @Apellidos='Gonzalez', @IdRol=2;
+EXEC sp_insert_Empleado @Contrasena='123456', @Cedula=402280398, @Nombre='Giovanni', @Apellidos='Villalobos', @IdRol=3;
+EXEC sp_insert_Empleado @Contrasena='123456', @Cedula=402290398, @Nombre='Joseph', @Apellidos='Campos Porras', @IdRol=4;
 
 /*Cajas - Deben existir sucursales */
 EXEC sp_insert_Caja @Dinero=50000.00, @idSucursal=1;
