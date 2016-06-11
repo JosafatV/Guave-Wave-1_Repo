@@ -1,9 +1,7 @@
 angular.module('NigmaBillingApp').controller('updateBranchController', ['$scope', '$routeParams', '$location','waveWebApiResource',
     function ($scope, $routeParams, $location, waveWebApiResource) {
-        //Id de la Branch
-        $scope.idActual = '';
         //Branch to modify 
-        $scope.updatedBranch = { Nombre: '', Direccion: '', Estado: 'A', Telefono: '' };
+        $scope.updatedBranch = { IdSucursal:'' ,Nombre: '', Direccion: '', Estado: 'A', Telefono: '' };
         $scope.boolHideModify = true;
         //List of the Branch
         $scope.listOfBranch = [];
@@ -17,11 +15,10 @@ angular.module('NigmaBillingApp').controller('updateBranchController', ['$scope'
             $scope.updatedBranch.Nombre = branch.Nombre;
             $scope.updatedBranch.Direccion = branch.Direccion;
             $scope.updatedBranch.Telefono = branch.Telefono;
-            $scope.idActual = branch.IdSucursal;
+            $scope.updatedBranch.IdSucursal = branch.IdSucursal;
         };
         //Function that sends te PUT
         $scope.sendUpdate = function () {
-            //alert(angular.toJson($scope.updatedBranch));
-            waveWebApiResource.update({ Type: 'Sucursales', extension1: $scope.idActual }, $scope.updatedBranch);
+            waveWebApiResource.update({ type: 'Sucursales', extension1: $scope.updatedBranch.IdSucursal }, $scope.updatedBranch);
         };
     }]);

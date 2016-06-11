@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
@@ -18,22 +18,15 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Cédula</th>
+              <th>Puesto</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
+          <tr data-ng-repeat="employee in listOfEmployees  | filter: search">
+              <td>{{employee.Nombre}}</td>
+              <td>{{employee.Apellidos}}</td>
+              <td>{{employee.Cedula}}</td>
+              <td>{{employee.NombreRol}}</td>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
+
     </table>
     <br>
     <button type="button" class="btn btn-primary">
