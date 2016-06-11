@@ -13,7 +13,7 @@ CREATE TABLE ROL (
 
 CREATE TABLE EMPLEADO (
 	IdEmpleado INT IDENTITY(1,1),
-	Contraseña CHAR(15) NOT NULL,
+	Contrasena CHAR(15) NOT NULL,
 	Cedula CHAR(10) NOT NULL,
 	Nombre CHAR (15),
 	Apellidos CHAR(30),

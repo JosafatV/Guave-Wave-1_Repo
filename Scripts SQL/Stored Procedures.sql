@@ -46,10 +46,10 @@ CREATE PROCEDURE sp_insert_Rol
 /* Inserts a new Empleado and it's Rol */
 --
 CREATE PROCEDURE sp_insert_Empleado
-	@Contraseña CHAR(15), @Cedula CHAR(19), @Nombre CHAR(15), @Apellidos CHAR(30), @IdRol tinyINT
+	@Contrasena CHAR(15), @Cedula CHAR(19), @Nombre CHAR(15), @Apellidos CHAR(30), @IdRol tinyINT
 	AS
 		DECLARE @IdEmpleado INT
-		INSERT INTO EMPLEADO (Contraseña,Cedula,Nombre,Apellidos) VALUES (@Contraseña,@Cedula,@Nombre,@Apellidos)
+		INSERT INTO EMPLEADO (Contrasena,Cedula,Nombre,Apellidos) VALUES (@Contrasena,@Cedula,@Nombre,@Apellidos)
 		SELECT @IdEmpleado=@@IDENTITY
 
 		INSERT INTO EMPLEADO_POR_ROL (IdRol, IdEmpleado) VALUES (@IdRol, @IdEmpleado)

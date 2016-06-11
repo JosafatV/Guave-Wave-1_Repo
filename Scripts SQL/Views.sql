@@ -13,7 +13,7 @@ GO
 
 CREATE VIEW [dbo].[View_EmpleadoPorRol]
 AS
-SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contraseña, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.EMPLEADO.Estado, dbo.ROL.IdRol, dbo.ROL.Nombre AS NombreRol, 
+SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contrasena, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.EMPLEADO.Estado, dbo.ROL.IdRol, dbo.ROL.Nombre AS NombreRol, 
                          dbo.ROL.Estado AS EstadoRol
 FROM            dbo.EMPLEADO INNER JOIN
                          dbo.EMPLEADO_POR_ROL ON dbo.EMPLEADO.IdEmpleado = dbo.EMPLEADO_POR_ROL.IdEmpleado INNER JOIN
@@ -23,7 +23,7 @@ GO
 
 CREATE VIEW [dbo].[View_EmpleadoPorSucursal]
 AS
-SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contraseña, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.EMPLEADO.Estado, dbo.SUCURSAL.IdSucursal, 
+SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contrasena, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.EMPLEADO.Estado, dbo.SUCURSAL.IdSucursal, 
                          dbo.SUCURSAL.Nombre AS NombreSucursal, dbo.SUCURSAL.Direccion, dbo.SUCURSAL.Telefono, dbo.SUCURSAL.Estado AS EstadoSucursal
 FROM            dbo.EMPLEADO INNER JOIN
                          dbo.EMPLEADO_POR_SUCURSAL ON dbo.EMPLEADO.IdEmpleado = dbo.EMPLEADO_POR_SUCURSAL.IdEmpleado INNER JOIN
@@ -90,7 +90,7 @@ GO
 
 CREATE VIEW [dbo].[View_Empleados]
 AS
-SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contraseña, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.SUCURSAL.IdSucursal, dbo.SUCURSAL.Nombre AS Sucursal, 
+SELECT        dbo.EMPLEADO.IdEmpleado, dbo.EMPLEADO.Contrasena, dbo.EMPLEADO.Cedula, dbo.EMPLEADO.Nombre, dbo.EMPLEADO.Apellidos, dbo.SUCURSAL.IdSucursal, dbo.SUCURSAL.Nombre AS Sucursal, 
                          dbo.SUCURSAL.Direccion, dbo.SUCURSAL.Telefono, dbo.ROL.IdRol, dbo.ROL.Nombre AS Rol, dbo.EMPLEADO.Estado, dbo.SUCURSAL.Estado AS EstadoSucursal, dbo.ROL.Estado AS EstadoRol
 FROM            dbo.EMPLEADO INNER JOIN
                          dbo.EMPLEADO_POR_ROL ON dbo.EMPLEADO.IdEmpleado = dbo.EMPLEADO_POR_ROL.IdEmpleado INNER JOIN
