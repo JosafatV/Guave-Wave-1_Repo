@@ -905,7 +905,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
@@ -1033,7 +1033,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
-          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
@@ -1048,7 +1048,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
-          <Property Name="Contraseña" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
@@ -1604,7 +1604,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <EntityTypeMapping TypeName="PosPFModel.EMPLEADO">
               <MappingFragment StoreEntitySet="EMPLEADO">
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
@@ -1737,7 +1737,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorRol">
               <MappingFragment StoreEntitySet="View_EmpleadoPorRol">
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
@@ -1752,7 +1752,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorSucursal">
               <MappingFragment StoreEntitySet="View_EmpleadoPorSucursal">
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />

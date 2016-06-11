@@ -75,7 +75,7 @@ namespace WaveWebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            string contrasenia= empleado.Contraseña;
+            string contrasenia= empleado.Contrasena;
             string cedula= empleado.Cedula;
             string nombre= empleado.Nombre;
             string apellidos = empleado.Apellidos;
