@@ -21,10 +21,10 @@
               <th>Rol</th>
           </tr>
           <tr data-ng-repeat="emp in listOfEmployee  | filter: search">
-              <td>{{cli.Nombre}}</td>
-              <td>{{cli.Apellidos}}</td>
-              <td>{{cli.Cedula}}</td>
-              <td>{{cli.NombreRol}}</td>
+              <td>{{emp.Nombre}}</td>
+              <td>{{emp.Apellidos}}</td>
+              <td>{{emp.Cedula}}</td>
+              <td>{{emp.NombreRol}}</td>
 </table>
     <br>
     <button type="button" class="btn btn-primary">

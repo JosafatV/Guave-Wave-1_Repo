@@ -5,7 +5,7 @@ angular.module('NigmaBillingApp').controller('createEmployeeController', ['$scop
            $scope.rolList = data;
         });
         $scope.rolSelected = '';
-        $scope.newEmployee = { Nombre: '', Apellidos: '', Cedula: '', Contrasena: '', IdRol:'',Estado:'A' };
+        $scope.newEmployee = { Contrasena: '', Cedula: '', Nombre: '', Apellidos: '', Estado: 'A', IdRol: '', };
         $scope.sendNewEmployee = function () {
             alert(angular.toJson($scope.newEmployee));
             //waveWebApiResource.save({ type: 'Empleados' }, $scope.newEmployee);
@@ -13,5 +13,9 @@ angular.module('NigmaBillingApp').controller('createEmployeeController', ['$scop
         $scope.changeRol = function () {
             $scope.newEmployee.IdRol = $scope.rolSelected.IdRol;
             alert(angular.toJson($scope.newEmployee));
+        };
+        $scope.sendNewEmployee = function () {
+            alert(angular.toJson($scope.newEmployee));
+            waveWebApiResource.save({ type: 'Empleado' }, $scope.newEmployee);
         };
     }]);

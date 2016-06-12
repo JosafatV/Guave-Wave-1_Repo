@@ -17,29 +17,49 @@
   <br>
   <div class="container">
     <div class="table-responsive">
-      <table class="table table-striped table-bordered table-hover table-condensed">
-          <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Cédula</th>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-    </table>
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cédula</th>
+                <th>Rol</th>
+            </tr>
+            <tr data-ng-repeat="emp in listOfEmployee  | filter: search" data-ng-click="unHideMod(emp)">
+                <td>{{emp.Nombre}}</td>
+                <td>{{emp.Apellidos}}</td>
+                <td>{{emp.Cedula}}</td>                
+                <td>{{emp.NombreRol}}</td>
+        </table>
     <br>
+        <div class="container">
+            <div class="col-md-6" data-ng-hide="boolHideModify">
+                <br />
+                <form action="" class="">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedEmployee.Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Apellidos:</label>
+                        <input class="form-control" id="Apellidos" type="text" placeholder="Apellidos:" data-ng-model="updatedEmployee.Apellidos">
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Cedula:</label>
+                        <input class="form-control" id="Cedula" type="text" placeholder="Cedula:" data-ng-model="updatedEmployee.Cedula">
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Contraseña:</label>
+                        <input class="form-control" id="Contraseña" type="password" placeholder="Contraseña:" data-ng-model="updatedEmployee.Contrasena">
+                    </div>
+                    <div class="form-group">
+                        <label for="option">Puesto: </label>
+                        <select ng-disabled="checked" ng-options="rol.Nombre for rol in rolList" class="form-control" data-ng-model="rolSelected" data-ng-change="changeRol(rol)"></select>
+
+                    </div>
+                    <br><br>
+                </form>
+            </div>
+        </div>
     <button type="button" class="btn btn-primary">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
     </button>
