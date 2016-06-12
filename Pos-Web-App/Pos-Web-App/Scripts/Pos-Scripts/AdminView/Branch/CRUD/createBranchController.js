@@ -4,5 +4,8 @@ angular.module('NigmaBillingApp').controller('createBranchController', ['$scope'
         $scope.sendNewBranch = function () {
             waveWebApiResource.save({ type: 'Sucursales' }, $scope.newBranch);
         };
+        $scope.goSucursalCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/Branch/branchCRUDMenu');
+        };
 
     }]);

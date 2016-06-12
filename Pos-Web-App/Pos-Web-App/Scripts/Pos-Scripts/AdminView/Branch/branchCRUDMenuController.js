@@ -15,4 +15,5 @@ angular.module('NigmaBillingApp').controller('branchCRUDMenuController', ['$scop
         $scope.goReturn = function () {
             $location.path('/NigmaFacturation/AdminView/adminMenu');
         };
+        
     }]);

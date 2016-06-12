@@ -6,6 +6,9 @@ angular.module('NigmaBillingApp').controller('createProductController', ['$scope
             $scope.sendNewProduct = function () {
                 alert(angular.toJson($scope.newProduct))
             //waveWebApiResource.save({ type: 'Productos' }, $scope.newProduct);
-        };
+            };
+            $scope.goProductosCRUD = function () {
+                $location.path('/NigmaFacturation/AdminView/Products/productsCRUDMenu');
+            };
 
     }]);

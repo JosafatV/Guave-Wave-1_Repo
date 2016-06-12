@@ -5,4 +5,7 @@ angular.module('NigmaBillingApp').controller('createClientController', ['$scope'
             alert(angular.toJson($scope.newClient));
             //waveWebApiResource.save({ type: 'Clientes' }, $scope.newClient);
         };
+        $scope.goClientsCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/Clients/clientsCRUDMenu');
+        };
     }]);

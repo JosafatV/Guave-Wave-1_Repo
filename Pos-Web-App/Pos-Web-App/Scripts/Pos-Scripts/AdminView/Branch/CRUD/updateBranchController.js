@@ -21,4 +21,7 @@ angular.module('NigmaBillingApp').controller('updateBranchController', ['$scope'
         $scope.sendUpdate = function () {
             waveWebApiResource.update({ type: 'Sucursales', extension1: $scope.updatedBranch.IdSucursal }, $scope.updatedBranch);
         };
+        $scope.goSucursalCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/Branch/branchCRUDMenu');
+        };
     }]);

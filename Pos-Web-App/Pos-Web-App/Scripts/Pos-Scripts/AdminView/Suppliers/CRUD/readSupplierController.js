@@ -6,4 +6,7 @@ angular.module('NigmaBillingApp').controller('readSupplierController', ['$scope'
         waveWebApiResource.query({ type: 'Proveedores' }).$promise.then(function (data) {
             $scope.listOfSuppliers = data;
         });
+        $scope.goSuppliersCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/Suppliers/supplierCRUDMenu');
+        };
     }]);

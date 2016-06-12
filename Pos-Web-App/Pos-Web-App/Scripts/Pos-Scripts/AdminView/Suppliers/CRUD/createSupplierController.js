@@ -5,4 +5,7 @@ angular.module('NigmaBillingApp').controller('createSupplierController', ['$scop
             alert(angular.toJson($scope.newSupplierC));
             //waveWebApiResource.save({ type: 'Sucursales' }, $scope.newSupplier);
         };
+        $scope.goSuppliersCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/Suppliers/supplierCRUDMenu');
+        };
     }]);
