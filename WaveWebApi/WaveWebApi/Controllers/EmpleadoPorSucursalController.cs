@@ -20,7 +20,7 @@ namespace WaveWebApi.Controllers
         [HttpGet]
         public IQueryable<View_EmpleadoPorSucursal> GetEMPLEADO_POR_SUCURSAL()
         {
-            return db.View_EmpleadoPorSucursal;
+            return db.View_EmpleadoPorSucursal.Where(T => T.Estado == "A");
         }
 
      
@@ -30,7 +30,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetEMPLEADO_POR_SUCURSAL(int idSucursal, int idEmpleado)
         {
             View_EmpleadoPorSucursal eMPLEADO_POR_SUCURSAL = db.View_EmpleadoPorSucursal.Find(idSucursal,idEmpleado);
-            if (eMPLEADO_POR_SUCURSAL == null)
+            if (eMPLEADO_POR_SUCURSAL == null || eMPLEADO_POR_SUCURSAL.Estado != "A")
             {
                 return NotFound();
             }

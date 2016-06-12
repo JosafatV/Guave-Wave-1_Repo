@@ -21,7 +21,7 @@ namespace WaveWebApi.Controllers
         [Route("api/Productos")]
         public IQueryable<PRODUCTO> GetPRODUCTO()
         {
-            return db.PRODUCTO;
+            return db.PRODUCTO.Where(T => T.Estado == "A"); 
         }
 
        
@@ -31,7 +31,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetPRODUCTO(int id)
         {
             PRODUCTO pRODUCTO = db.PRODUCTO.Find(id);
-            if (pRODUCTO == null)
+            if (pRODUCTO == null || pRODUCTO. Estado != "A")
             {
                 return NotFound();
             }
@@ -89,7 +89,7 @@ namespace WaveWebApi.Controllers
             db.PRODUCTO.Add(pRODUCTO);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = pRODUCTO.IdProducto }, pRODUCTO);
+            return Ok(pRODUCTO);
         }
 
 

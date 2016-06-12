@@ -16,18 +16,20 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Cajas
+        [HttpGet]
+        [Route("api/Cajas")]
         public IQueryable<CAJA> GetCAJA()
         {
-            return db.CAJA;
+            return db.CAJA.Where(T => T.Estado == "A");
         }
 
-        // GET: api/Cajas/5
+        [HttpGet]
+        [Route("api/Cajas/{id}")]
         [ResponseType(typeof(CAJA))]
         public IHttpActionResult GetCAJA(int id)
         {
             CAJA cAJA = db.CAJA.Find(id);
-            if (cAJA == null)
+            if (cAJA == null || cAJA.Estado != "A")
             {
                 return NotFound();
             }
@@ -35,7 +37,8 @@ namespace WaveWebApi.Controllers
             return Ok(cAJA);
         }
 
-        // PUT: api/Cajas/5
+        [HttpPut]
+        [Route("api/Cajas/{id}")]
         [ResponseType(typeof(CAJA))]
         public IHttpActionResult PutCAJA(int id, CAJA cAJA)
         {
@@ -70,7 +73,8 @@ namespace WaveWebApi.Controllers
             return Ok(cAJA);
         }
 
-        // POST: api/Cajas
+        [HttpPost]
+        [Route("api/Cajas")]
         [ResponseType(typeof(CAJA))]
         public IHttpActionResult PostCAJA(CAJA cAJA)
         {
@@ -82,10 +86,11 @@ namespace WaveWebApi.Controllers
             db.CAJA.Add(cAJA);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cAJA.IdCaja }, cAJA);
+            return Ok(cAJA);
         }
 
-        // DELETE: api/Cajas/5
+        [HttpDelete]
+        [Route("api/Cajas/{id}")]
         [ResponseType(typeof(CAJA))]
         public IHttpActionResult DeleteCAJA(int id)
         {

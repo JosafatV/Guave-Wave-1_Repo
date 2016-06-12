@@ -20,7 +20,7 @@ namespace WaveWebApi.Controllers
         [Route("api/Roles")]
         public IQueryable<ROL> GetROL()
         {
-            return db.ROL;
+            return db.ROL.Where(T => T.Estado == "A");
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetROL(byte id)
         {
             ROL rOL = db.ROL.Find(id);
-            if (rOL == null)
+            if (rOL == null || rOL.Estado != "A")
             {
                 return NotFound();
             }
@@ -85,7 +85,7 @@ namespace WaveWebApi.Controllers
             db.ROL.Add(rOL);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = rOL.IdRol }, rOL);
+            return Ok(rOL);
         }
 
         [HttpDelete]

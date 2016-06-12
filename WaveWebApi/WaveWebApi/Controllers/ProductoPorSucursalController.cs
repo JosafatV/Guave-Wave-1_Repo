@@ -21,7 +21,7 @@ namespace WaveWebApi.Controllers
 
         public IQueryable<View_ProductoPorSucursal> GetPRODUCTO_POR_SUCURSAL()
         {
-            return db.View_ProductoPorSucursal;
+            return db.View_ProductoPorSucursal.Where(T => T.EstadoSucursal == "A");
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetPRODUCTO_POR_SUCURSAL(int idSucursal, int idProducto)
         {
             View_ProductoPorSucursal pRODUCTO_POR_SUCURSAL = db.View_ProductoPorSucursal.Find(idProducto, idSucursal);
-            if (pRODUCTO_POR_SUCURSAL == null)
+            if (pRODUCTO_POR_SUCURSAL == null || pRODUCTO_POR_SUCURSAL.Estado != "A")
             {
                 return NotFound();
             }

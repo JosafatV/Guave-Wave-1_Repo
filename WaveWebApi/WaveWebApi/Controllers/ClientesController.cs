@@ -16,20 +16,21 @@ namespace WaveWebApi.Controllers
     {
         private PosPFEntities db = new PosPFEntities();
 
-        // GET: api/Clientes
+        [Route("api/Clientes")]
         [HttpGet]
         public IQueryable<CLIENTE> GetCLIENTE()
         {
-            return db.CLIENTE;
+            return db.CLIENTE.Where(T => T.Estado == "A");
         }
 
         // GET: api/Clientes/5
         [HttpGet]
+        [Route("api/Clientes/{id}")]
         [ResponseType(typeof(CLIENTE))]
         public IHttpActionResult GetClienteById(int id)
         {
             CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            if (cLIENTE == null || cLIENTE.Estado != "A" )
             {
                 return NotFound();
             }
@@ -37,7 +38,8 @@ namespace WaveWebApi.Controllers
             return Ok(cLIENTE);
         }
 
-        // PUT: api/Clientes/5
+        [HttpPut]
+        [Route("api/Clientes/{id}")]
         [ResponseType(typeof(CLIENTE))]
         public IHttpActionResult PutCLIENTE(int id, CLIENTE cLIENTE)
         {
@@ -72,7 +74,7 @@ namespace WaveWebApi.Controllers
             return Ok(cLIENTE);
         }
 
-        // POST: api/Clientes
+        [Route("api/Clientes")]
         [ResponseType(typeof(CLIENTE))]
         public IHttpActionResult PostCLIENTE(CLIENTE cLIENTE)
         {
@@ -84,10 +86,10 @@ namespace WaveWebApi.Controllers
             db.CLIENTE.Add(cLIENTE);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cLIENTE.IdCliente }, cLIENTE);
+            return Ok(cLIENTE);
         }
 
-        // DELETE: api/Clientes/5
+        [Route("api/Clientes/{id}")]
         [ResponseType(typeof(CLIENTE))]
         public IHttpActionResult DeleteCLIENTE(int id)
         {

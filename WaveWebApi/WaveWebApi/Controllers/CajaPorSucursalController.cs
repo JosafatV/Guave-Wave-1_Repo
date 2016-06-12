@@ -20,7 +20,7 @@ namespace WaveWebApi.Controllers
         [HttpGet]
         public IQueryable<View_CajaPorSucursal> GetCAJA_POR_SUCURSAL()
         {
-            return db.View_CajaPorSucursal;
+            return db.View_CajaPorSucursal.Where(T => T.Estado == "A");
         }
 
     
@@ -30,14 +30,15 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetCAJA_POR_SUCURSAL(int idCaja, int idSucursal)
         {
             View_CajaPorSucursal cAJA_POR_SUCURSAL = db.View_CajaPorSucursal.Find(idCaja, idSucursal);
-            if (cAJA_POR_SUCURSAL == null)
+            if (cAJA_POR_SUCURSAL == null || cAJA_POR_SUCURSAL.Estado != "A")
             {
                 return NotFound();
             }
 
             return Ok(cAJA_POR_SUCURSAL);
         }
-   
+
+        [HttpPost]
         [Route("api/CajaPorSucursal")]
         [ResponseType(typeof(CAJA_POR_SUCURSAL))]
         public IHttpActionResult PostCAJA_POR_SUCURSAL(CAJA_POR_SUCURSAL cAJA_POR_SUCURSAL)

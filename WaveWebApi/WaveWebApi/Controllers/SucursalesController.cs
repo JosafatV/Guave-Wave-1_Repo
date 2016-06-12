@@ -21,7 +21,7 @@ namespace WaveWebApi.Controllers
         [Route("api/Sucursales")]
         public IQueryable<SUCURSAL> GetSUCURSAL()
         {
-            return db.SUCURSAL;
+            return db.SUCURSAL.Where(T => T.Estado == "A");
         }
 
         // GET: api/Sucursales/5
@@ -31,7 +31,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetSUCURSAL(int idSucursal)
         {
             SUCURSAL sUCURSAL = db.SUCURSAL.Find(idSucursal);
-            if (sUCURSAL == null)
+            if (sUCURSAL == null || sUCURSAL.Estado != "A")
             {
                 return NotFound();
             }

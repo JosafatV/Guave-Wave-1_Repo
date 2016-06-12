@@ -20,7 +20,7 @@ namespace WaveWebApi.Controllers
         [HttpGet]
         public IQueryable<View_ProductoPorProveedor> GetPRODUCTO_POR_PROVEEDOR()
         {
-            return db.View_ProductoPorProveedor;
+            return db.View_ProductoPorProveedor.Where(T => T.Estado == "A");
         }
 
         // GET: api/ProductoPorPreveedor/5
@@ -30,7 +30,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetPRODUCTO_POR_PROVEEDOR(int idProducto, int idProveedor)
         {
             View_ProductoPorProveedor pRODUCTO_POR_PROVEEDOR = db.View_ProductoPorProveedor.Find(idProducto,idProveedor);
-            if (pRODUCTO_POR_PROVEEDOR == null)
+            if (pRODUCTO_POR_PROVEEDOR == null || pRODUCTO_POR_PROVEEDOR.Estado != "A" )
             {
                 return NotFound();
             }

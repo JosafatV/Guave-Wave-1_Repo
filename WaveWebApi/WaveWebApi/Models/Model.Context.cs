@@ -30,7 +30,6 @@ namespace WaveWebApi.Models
         public virtual DbSet<CAJA> CAJA { get; set; }
         public virtual DbSet<CAJA_POR_SUCURSAL> CAJA_POR_SUCURSAL { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
-        public virtual DbSet<EMPLEADO> EMPLEADO { get; set; }
         public virtual DbSet<EMPLEADO_POR_ROL> EMPLEADO_POR_ROL { get; set; }
         public virtual DbSet<EMPLEADO_POR_SUCURSAL> EMPLEADO_POR_SUCURSAL { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
@@ -43,8 +42,6 @@ namespace WaveWebApi.Models
         public virtual DbSet<VENTA_POR_CAJA> VENTA_POR_CAJA { get; set; }
         public virtual DbSet<VENTA_POR_CLIENTE> VENTA_POR_CLIENTE { get; set; }
         public virtual DbSet<View_CajaPorSucursal> View_CajaPorSucursal { get; set; }
-        public virtual DbSet<View_EmpleadoPorRol> View_EmpleadoPorRol { get; set; }
-        public virtual DbSet<View_EmpleadoPorSucursal> View_EmpleadoPorSucursal { get; set; }
         public virtual DbSet<View_ProductoPorProveedor> View_ProductoPorProveedor { get; set; }
         public virtual DbSet<View_ProductoPorSucursal> View_ProductoPorSucursal { get; set; }
         public virtual DbSet<View_VentaPorCaja> View_VentaPorCaja { get; set; }
@@ -54,6 +51,9 @@ namespace WaveWebApi.Models
         public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
         public virtual DbSet<View_spInsertVenta> View_spInsertVenta { get; set; }
         public virtual DbSet<View_spProductosPorVenta> View_spProductosPorVenta { get; set; }
+        public virtual DbSet<View_EmpleadoPorRol> View_EmpleadoPorRol { get; set; }
+        public virtual DbSet<EMPLEADO> EMPLEADO { get; set; }
+        public virtual DbSet<View_EmpleadoPorSucursal> View_EmpleadoPorSucursal { get; set; }
     
         public virtual int sp_insert_Caja(Nullable<decimal> dinero, Nullable<int> idSucursal)
         {
@@ -68,11 +68,11 @@ namespace WaveWebApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Caja", dineroParameter, idSucursalParameter);
         }
     
-        public virtual int sp_insert_Empleado(string contraseña, string cedula, string nombre, string apellidos, Nullable<byte> idRol)
+        public virtual int sp_insert_Empleado(string contrasena, string cedula, string nombre, string apellidos, Nullable<byte> idRol)
         {
-            var contraseñaParameter = contraseña != null ?
-                new ObjectParameter("Contraseña", contraseña) :
-                new ObjectParameter("Contraseña", typeof(string));
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
     
             var cedulaParameter = cedula != null ?
                 new ObjectParameter("Cedula", cedula) :
@@ -90,7 +90,7 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdRol", idRol) :
                 new ObjectParameter("IdRol", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Empleado", contraseñaParameter, cedulaParameter, nombreParameter, apellidosParameter, idRolParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Empleado", contrasenaParameter, cedulaParameter, nombreParameter, apellidosParameter, idRolParameter);
         }
     
         public virtual int sp_insert_Producto(string nombre, string eAN, Nullable<decimal> precio, Nullable<int> idProveedor)

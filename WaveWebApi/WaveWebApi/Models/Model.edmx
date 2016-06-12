@@ -39,7 +39,7 @@
             <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Contrasena" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="Nombre" Type="char" MaxLength="15" />
           <Property Name="Apellidos" Type="char" MaxLength="30" />
@@ -184,7 +184,7 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorRol' does not have a pri
             
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
-          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Contrasena" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="Nombre" Type="char" MaxLength="15" />
           <Property Name="Apellidos" Type="char" MaxLength="30" />
@@ -198,12 +198,10 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorSucursal' does not have 
         <EntityType Name="View_EmpleadoPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpleado" />
-            
-            
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
-          <Property Name="Contraseña" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="Contrasena" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="Cedula" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="Nombre" Type="char" MaxLength="15" />
           <Property Name="Apellidos" Type="char" MaxLength="30" />
@@ -259,7 +257,11 @@ warning 6002: The table/view 'PosPF.dbo.View_ProductoPorVenta' does not have a p
         <EntityType Name="View_ProductoPorVenta">
           <Key>
             <PropertyRef Name="IdProducto" />
+            
+            
             <PropertyRef Name="IdVenta" />
+            
+            
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
           <Property Name="EAN" Type="char" MaxLength="13" Nullable="false" />
@@ -592,7 +594,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Parameter Name="IdSucursal" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_insert_Empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Contraseña" Type="char" Mode="In" />
+          <Parameter Name="Contrasena" Type="char" Mode="In" />
           <Parameter Name="Cedula" Type="char" Mode="In" />
           <Parameter Name="Nombre" Type="char" Mode="In" />
           <Parameter Name="Apellidos" Type="char" Mode="In" />
@@ -670,7 +672,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <EntitySet Name="View_EmpleadoPorRol" EntityType="Self.View_EmpleadoPorRol" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_EmpleadoPorRol].[IdEmpleado] AS [IdEmpleado], 
-    [View_EmpleadoPorRol].[Contraseña] AS [Contraseña], 
+    [View_EmpleadoPorRol].[Contrasena] AS [Contrasena], 
     [View_EmpleadoPorRol].[Cedula] AS [Cedula], 
     [View_EmpleadoPorRol].[Nombre] AS [Nombre], 
     [View_EmpleadoPorRol].[Apellidos] AS [Apellidos], 
@@ -683,7 +685,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <EntitySet Name="View_EmpleadoPorSucursal" EntityType="Self.View_EmpleadoPorSucursal" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_EmpleadoPorSucursal].[IdEmpleado] AS [IdEmpleado], 
-    [View_EmpleadoPorSucursal].[Contraseña] AS [Contraseña], 
+    [View_EmpleadoPorSucursal].[Contrasena] AS [Contrasena], 
     [View_EmpleadoPorSucursal].[Cedula] AS [Cedula], 
     [View_EmpleadoPorSucursal].[Nombre] AS [Nombre], 
     [View_EmpleadoPorSucursal].[Apellidos] AS [Apellidos], 
@@ -900,17 +902,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="EMPLEADO">
-          <Key>
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          </EntityType>
         <EntityType Name="EMPLEADO_POR_ROL">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -1027,37 +1018,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Property Name="Telefono" Type="Int32" />
           <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="UltimoCierre" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="View_EmpleadoPorRol">
-          <Key>
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdRol" Nullable="false" Type="Byte" />
-          <Property Name="NombreRol" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EstadoRol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="View_EmpleadoPorSucursal">
-          <Key>
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdSucursal" />
-          </Key>
-          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="Telefono" Type="Int32" />
-          <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="View_ProductoPorProveedor">
           <Key>
@@ -1176,34 +1136,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMPLEADO___IdEmp__2C3393D0">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="EMPLEADO_POR_ROL" Type="Self.EMPLEADO_POR_ROL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLEADO">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="EMPLEADO_POR_ROL">
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EMPLEADO___IdEmp__300424B4">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="EMPLEADO_POR_SUCURSAL" Type="Self.EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLEADO">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="EMPLEADO_POR_SUCURSAL">
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__EMPLEADO___IdRol__2B3F6F97">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1306,7 +1238,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <EntitySet Name="CAJA" EntityType="Self.CAJA" />
           <EntitySet Name="CAJA_POR_SUCURSAL" EntityType="Self.CAJA_POR_SUCURSAL" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
-          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
           <EntitySet Name="EMPLEADO_POR_ROL" EntityType="Self.EMPLEADO_POR_ROL" />
           <EntitySet Name="EMPLEADO_POR_SUCURSAL" EntityType="Self.EMPLEADO_POR_SUCURSAL" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
@@ -1319,8 +1250,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <EntitySet Name="VENTA_POR_CAJA" EntityType="Self.VENTA_POR_CAJA" />
           <EntitySet Name="VENTA_POR_CLIENTE" EntityType="Self.VENTA_POR_CLIENTE" />
           <EntitySet Name="View_CajaPorSucursal" EntityType="Self.View_CajaPorSucursal" />
-          <EntitySet Name="View_EmpleadoPorRol" EntityType="Self.View_EmpleadoPorRol" />
-          <EntitySet Name="View_EmpleadoPorSucursal" EntityType="Self.View_EmpleadoPorSucursal" />
           <EntitySet Name="View_ProductoPorProveedor" EntityType="Self.View_ProductoPorProveedor" />
           <EntitySet Name="View_ProductoPorSucursal" EntityType="Self.View_ProductoPorSucursal" />
           <EntitySet Name="View_VentaPorCaja" EntityType="Self.View_VentaPorCaja" />
@@ -1340,14 +1269,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <AssociationSet Name="FK__VENTA_POR__IdCli__3F466844" Association="Self.FK__VENTA_POR__IdCli__3F466844">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="VENTA_POR_CLIENTE" EntitySet="VENTA_POR_CLIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EMPLEADO___IdEmp__2C3393D0" Association="Self.FK__EMPLEADO___IdEmp__2C3393D0">
-            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
-            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EMPLEADO___IdEmp__300424B4" Association="Self.FK__EMPLEADO___IdEmp__300424B4">
-            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
-            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
           </AssociationSet>
           <AssociationSet Name="FK__EMPLEADO___IdRol__2B3F6F97" Association="Self.FK__EMPLEADO___IdRol__2B3F6F97">
             <End Role="ROL" EntitySet="ROL" />
@@ -1382,7 +1303,7 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_Empleado">
-            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
             <Parameter Name="Cedula" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Apellidos" Mode="In" Type="String" />
@@ -1444,6 +1365,17 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <EntitySet Name="View_ProductoPorVenta" EntityType="PosPFModel.View_ProductoPorVenta" />
           <EntitySet Name="View_spInsertVenta" EntityType="PosPFModel.View_spInsertVenta" />
           <EntitySet Name="View_spProductosPorVenta" EntityType="PosPFModel.View_spProductosPorVenta" />
+          <EntitySet Name="View_EmpleadoPorRol" EntityType="PosPFModel.View_EmpleadoPorRol" />
+          <EntitySet Name="EMPLEADO" EntityType="PosPFModel.EMPLEADO" />
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__2C3393D0" Association="PosPFModel.FK__EMPLEADO___IdEmp__2C3393D0">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_ROL" EntitySet="EMPLEADO_POR_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADO___IdEmp__300424B4" Association="PosPFModel.FK__EMPLEADO___IdEmp__300424B4">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
+          </AssociationSet>
+          <EntitySet Name="View_EmpleadoPorSucursal" EntityType="PosPFModel.View_EmpleadoPorSucursal" />
         </EntityContainer>
         <EntityType Name="VENTA">
           <Key>
@@ -1563,6 +1495,76 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Property Name="IdCaja" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int16" />
         </EntityType>
+        <EntityType Name="View_EmpleadoPorRol">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdRol" Type="Byte" Nullable="false" />
+          <Property Name="NombreRol" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="EstadoRol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__EMPLEADO___IdEmp__2C3393D0">
+          <End Type="PosPFModel.EMPLEADO" Role="EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PosPFModel.EMPLEADO_POR_ROL" Role="EMPLEADO_POR_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_ROL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADO___IdEmp__300424B4">
+          <End Type="PosPFModel.EMPLEADO" Role="EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PosPFModel.EMPLEADO_POR_SUCURSAL" Role="EMPLEADO_POR_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO_POR_SUCURSAL">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_EmpleadoPorSucursal">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1596,18 +1598,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EMPLEADO">
-            <EntityTypeMapping TypeName="PosPFModel.EMPLEADO">
-              <MappingFragment StoreEntitySet="EMPLEADO">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1727,38 +1717,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_EmpleadoPorRol">
-            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorRol">
-              <MappingFragment StoreEntitySet="View_EmpleadoPorRol">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
-                <ScalarProperty Name="EstadoRol" ColumnName="EstadoRol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_EmpleadoPorSucursal">
-            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorSucursal">
-              <MappingFragment StoreEntitySet="View_EmpleadoPorSucursal">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contraseña" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
@@ -1905,6 +1863,50 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
                 <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
                 <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_EmpleadoPorRol">
+            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorRol">
+              <MappingFragment StoreEntitySet="View_EmpleadoPorRol">
+                <ScalarProperty Name="EstadoRol" ColumnName="EstadoRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="PosPFModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_EmpleadoPorSucursal">
+            <EntityTypeMapping TypeName="PosPFModel.View_EmpleadoPorSucursal">
+              <MappingFragment StoreEntitySet="View_EmpleadoPorSucursal">
+                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

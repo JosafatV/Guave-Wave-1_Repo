@@ -24,21 +24,21 @@ namespace WaveWebApi.Controllers
         [Route("api/Ventas")]
         public IQueryable<View_Ventas> GetVentaSuperView()
         {
-            return db.View_Ventas;
+            return db.View_Ventas.Where(T => T.EstadoVenta == "A");
         }
 
         [HttpGet]
         [Route("api/VentasPorCaja")]
         public IQueryable<View_VentaPorCaja> GetVentaPorCaja()
         {
-            return db.View_VentaPorCaja;
+            return db.View_VentaPorCaja.Where(T => T.Estado == "A");
         }
       
         [HttpGet]
         [Route("api/VentasPorCliente")]
         public IQueryable<View_VentaPorCliente> GetVentaPorCliente()
         {
-            return db.View_VentaPorCliente;
+            return db.View_VentaPorCliente.Where(T => T.Estado == "A");
         }
 
        /* // GET: api/Ventas/5

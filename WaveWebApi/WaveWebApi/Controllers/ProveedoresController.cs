@@ -21,7 +21,7 @@ namespace WaveWebApi.Controllers
         [Route("api/Proveedores")]
         public IQueryable<PROVEEDOR> GetPROVEEDOR()
         {
-            return db.PROVEEDOR;
+            return db.PROVEEDOR.Where(T => T.Estado == "A");
         }
 
     
@@ -31,7 +31,7 @@ namespace WaveWebApi.Controllers
         public IHttpActionResult GetPROVEEDOR(int id)
         {
             PROVEEDOR pROVEEDOR = db.PROVEEDOR.Find(id);
-            if (pROVEEDOR == null)
+            if (pROVEEDOR == null || pROVEEDOR.Estado != "A")
             {
                 return NotFound();
             }
@@ -89,7 +89,7 @@ namespace WaveWebApi.Controllers
             db.PROVEEDOR.Add(pROVEEDOR);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = pROVEEDOR.IdProveedor }, pROVEEDOR);
+            return Ok(pROVEEDOR);
         }
 
         [HttpDelete]

@@ -23,7 +23,7 @@ namespace WaveWebApi.Controllers
         [Route("api/Empleados")]
         public IQueryable<View_EmpleadoPorRol> GetEmpladosPorRol()
         {
-            return db.View_EmpleadoPorRol;
+            return db.View_EmpleadoPorRol.Where(T => T.Estado == "A");
         }
  
         /// <summary>
@@ -39,7 +39,7 @@ namespace WaveWebApi.Controllers
         {
             View_EmpleadoPorRol Empleado = db.View_EmpleadoPorRol.
                 SqlQuery("Select * from View_EmpleadoPorRol where idEmpleado = '" + idEmpleado + "' and idRol = '" + idRol + "' ").ToList().First();
-            if (Empleado == null)
+            if (Empleado == null || Empleado.Estado != "A")
             {
                 return NotFound();
             }
@@ -60,6 +60,42 @@ namespace WaveWebApi.Controllers
             }
 
             return Ok(List_Empleado);
+        }
+
+        [HttpPut]
+        [Route("api/Empleado/{idEmpleado}")]
+        [ResponseType(typeof(EMPLEADO))]
+        public IHttpActionResult PutCLIENTE(int idEmpleado, EMPLEADO empleado)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (idEmpleado != empleado.IdEmpleado)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(empleado).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmpleadoExists(idEmpleado))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(empleado);
         }
 
         /// <summary>
@@ -230,6 +266,7 @@ namespace WaveWebApi.Controllers
         [HttpOptions]
         [Route("api/Empleado")]
         [Route("api/EmpleadoPorRol")]
+   
         [Route("api/EmpleadoPorRol/{idRol}/{idEmpleado}")]
         [Route("api/Empleado/{idEmpleado}")]
         public HttpResponseMessage Options()
