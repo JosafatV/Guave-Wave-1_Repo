@@ -1,6 +1,6 @@
-<html>
+﻿<html>
 <head>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+
   <title>Nigma Facturación</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <meta charset="utf-8">
@@ -18,23 +18,14 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Cédula</th>
+              <th>Rol</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-    </table>
+          <tr data-ng-repeat="emp in listOfEmployee  | filter: search">
+              <td>{{cli.Nombre}}</td>
+              <td>{{cli.Apellidos}}</td>
+              <td>{{cli.Cedula}}</td>
+              <td>{{cli.NombreRol}}</td>
+</table>
     <br>
     <button type="button" class="btn btn-primary">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar

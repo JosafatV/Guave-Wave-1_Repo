@@ -1,6 +1,5 @@
 angular.module('NigmaBillingApp').controller('suppliersCRUDMenuController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
-        alert('Estoy en el suppliersCRUDMenuController');
         $scope.goCreateSupplier = function () {
             $location.path('/NigmaFacturation/AdminView/Suppliers/createSuppliers');
         };

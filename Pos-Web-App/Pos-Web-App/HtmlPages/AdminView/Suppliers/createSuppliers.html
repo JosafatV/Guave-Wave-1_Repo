@@ -1,6 +1,5 @@
-<html>
+﻿<html>
 <head>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
   <title>Nigma Facturación</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <meta charset="utf-8">
@@ -11,27 +10,28 @@
   <div class="container-fluid">
     <h2>Creación de Proveedores:</h2>
   </div>
-  <div class="container">
+  <div class="container-fluid">
       <div class="col-md-6">
           <br />
           <form action="" class="">
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input class="form-control" id="nombre" type="text" placeholder="Nombre:">
-            </div>
-
-
-              <br><br>
-              <button class="btn btn-success">Crear Proveedor</button><br><br>
-            </div>
+              <div class="form-group">
+                  <label for="nombre">Nombre:</label>
+                  <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newSupplierC.Nombre">
+              </div>
+              <br>
           </form>
         </div>
-      </div>
+  </div>
+    <div class="container-fluid">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button class="btn btn-success" data-ng-click="sendNewSupplier()" data-ng-disabled="!newSupplierC.Nombre">Crear Proveedor</button><br><br>
+            </div>
+        </div>
+    </div>
 
-
-
-<script src="http:code.jquery.com/jquery-latest.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="http:code.jquery.com/jquery-latest.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </body>
 </html>

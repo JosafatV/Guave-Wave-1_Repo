@@ -103,7 +103,7 @@
         controller: 'readProductController'
     })
     .when('/NigmaFacturation/AdminView/Products/createProducts', {
-        templateUrl: 'HtmlPages/AdminView/Products/createProducts.html',
+        templateUrl: 'HtmlPages/AdminView/Products/createProduct.html',
         controller: 'createProductController'
     })
     .when('/NigmaFacturation/AdminView/Products/deleteProducts', {
