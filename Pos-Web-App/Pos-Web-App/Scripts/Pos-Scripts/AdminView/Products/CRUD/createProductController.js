@@ -3,9 +3,8 @@ angular.module('NigmaBillingApp').controller('createProductController', ['$scope
         //NewProduct to sell
         $scope.newProduct= { EAN: '', Nombre: '', Precio: '',Estado:'A'};
         //Function that save to the database
-            $scope.sendNewProduct = function () {
-                alert(angular.toJson($scope.newProduct))
-            //waveWebApiResource.save({ type: 'Productos' }, $scope.newProduct);
+        $scope.sendNewProduct = function () {
+                waveWebApiResource.save({ type: 'Productos' }, $scope.newProduct);
             };
             $scope.goProductosCRUD = function () {
                 $location.path('/NigmaFacturation/AdminView/Products/productsCRUDMenu');

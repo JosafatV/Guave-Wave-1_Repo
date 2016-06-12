@@ -25,29 +25,12 @@
               <th>Estado</th>
 
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
+          <tr data-ng-repeat="branch in listOfBranch  | filter: search">
+              <td>{{branch.Nombre}}</td>
+              <td>{{branch.Direccion}}</td>
+              <td>{{branch.Telefono}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="sendDelete(branch)">Borrar</button><br><br>
               </td>
 
           </tr>

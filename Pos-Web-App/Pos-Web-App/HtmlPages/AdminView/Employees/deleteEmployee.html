@@ -22,30 +22,16 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Cédula</th>
-              <th>Estado</th>
+              <th>Puesto</th>
+              <th>Presione para borrar</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
+          <tr data-ng-repeat="emp in listOfEmployee  | filter: search">
+              <td>{{emp.Nombre}}</td>
+              <td>{{emp.Apellidos}}</td>
+              <td>{{emp.Cedula}}</td>
+              <td>{{emp.NombreRol}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="sendDelete(emp)">Borrar</button><br><br>
               </td>
           </tr>
     </table>

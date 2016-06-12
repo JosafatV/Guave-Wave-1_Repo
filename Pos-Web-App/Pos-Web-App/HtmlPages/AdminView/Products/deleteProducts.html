@@ -21,43 +21,19 @@
           <tr>
               <th>Nombre</th>
               <th>Precio</th>
-              <th>Stock Mínimo</th>
-              <th>Stock Promedio</th>
-              <th>Estado</th>
-
+              <th>EAN</th>
+              <th>Presione para Borrar</th>
 
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
+          <tr data-ng-repeat="prod in listOfProduct  | filter: search">
+              <td>{{prod.Nombre}}</td>
+              <td>{{prod.Precio}}</td>
+              <td>{{prod.EAN}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="sendDelete(prod)">Borrar</button><br><br>
               </td>
 
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-
-          </tr>
-    </table>
+</table>
     <br>
     <button type="button" class="btn btn-primary" data-ng-click="goProductosCRUD()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar

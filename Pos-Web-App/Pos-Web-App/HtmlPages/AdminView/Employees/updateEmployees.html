@@ -54,12 +54,14 @@
                     <div class="form-group">
                         <label for="option">Puesto: </label>
                         <select ng-disabled="checked" ng-options="rol.Nombre for rol in rolList" class="form-control" data-ng-model="rolSelected" data-ng-change="changeRol(rol)"></select>
-
                     </div>
                     <br><br>
                 </form>
             </div>
         </div>
+    <button type="button" class="btn btn-primary" data-ng-click="sendUpdate()">
+      <span class="glyphicon glyphicon-repeat" aria-hidden="true" ></span>    Modificar
+    </button>
     <button type="button" class="btn btn-primary">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
     </button>
