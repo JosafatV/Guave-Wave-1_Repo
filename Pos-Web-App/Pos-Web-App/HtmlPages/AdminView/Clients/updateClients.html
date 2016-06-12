@@ -20,29 +20,49 @@
       <table class="table table-striped table-bordered table-hover table-condensed">
           <tr>
               <th>Nombre</th>
-              <th>Apellido</th>
+              <th>Apellidos</th>
               <th>Cédula</th>
+              <th>Fecha de Nacimiento</th>
+
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-          </tr>
-    </table>
+          <tr data-ng-repeat="cli in listOfClient  | filter: search" data-ng-click="unHideMod(cli)">
+              <td>{{cli.Nombre}}</td>
+              <td>{{cli.Apellidos}}</td>
+              <td>{{cli.Cedula}}</td>
+              <td>{{cli.FechaNacimiento}}</td>
+</table>
+        <div class="container">
+            <div class="col-md-6" data-ng-hide="boolHideModify">
+                <br />
+                <form action="" class="">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedClient.Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Apellidos:</label>
+                        <input class="form-control" id="Apellidos" type="text" placeholder="Apellidos:" data-ng-model="updatedClient.Apellidos">
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Cedula:</label>
+                        <input class="form-control" id="Cedula" type="text" placeholder="Cedula:" data-ng-model="updatedClient.Cedula">
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Fecha Nacimiento:</label>
+                        <input class="form-control" id="Fecha Nacimiento:" type="date" placeholder="Fecha Nacimiento:" data-ng-model="updatedClient.FechaNacimiento">
+                    </div>
+
+                    <br><br>
+                </form>
+            </div>
+        </div>
     <br>
     <button type="button" class="btn btn-primary" data-ng-click="goClientsCRUD()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
     </button>
+        <button type="button" class="btn btn-primary" data-ng-click="sendUpdate()">
+            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Modificiar
+        </button>
   </div>
 
 

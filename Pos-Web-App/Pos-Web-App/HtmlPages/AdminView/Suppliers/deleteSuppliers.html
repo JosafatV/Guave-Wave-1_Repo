@@ -20,30 +20,14 @@
       <table class="table table-striped table-bordered table-hover table-condensed">
           <tr>
               <th>Nombre</th>
-              <th>Estado</th>
+              <th>Presione para Borrar</th>
 
           </tr>
-          <tr>
-              <td>1</td>
+          <tr data-ng-repeat="sup in listOfSupplier  | filter: search">
+              <td>{{sup.Nombre}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="sendDelete(sup)">Borrar</button><br><br>
               </td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-
-
           </tr>
     </table>
     <br>

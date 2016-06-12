@@ -22,22 +22,27 @@
               <th>Nombre</th>
 
           </tr>
-          <tr>
-              <td>1</td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-
-
+          <tr data-ng-repeat="sup in listOfSupplier  | filter: search" data-ng-click="unHideMod(sup)">
+              <td>{{sup.Nombre}}</td>
           </tr>
     </table>
+        <div class="container">
+            <div class="col-md-6" data-ng-hide="boolHideModify">
+                <br />
+                <form action="" class="">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedSupplier.Nombre">
+                    </div>
+                    <br><br>
+                </form>
+            </div>
+        </div>
     <br>
     <button type="button" class="btn btn-primary" data-ng-click="goSuppliersCRUD()">
+      <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
+    </button>        
+    <button type="button" class="btn btn-primary" data-ng-click="sendUpdate()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
     </button>
   </div>

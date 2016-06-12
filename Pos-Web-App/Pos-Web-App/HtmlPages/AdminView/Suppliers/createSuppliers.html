@@ -16,7 +16,7 @@
           <form action="" class="">
               <div class="form-group">
                   <label for="nombre">Nombre:</label>
-                  <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newSupplierC.Nombre">
+                  <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newSupplier.Nombre">
               </div>
               <br>
           </form>
@@ -25,7 +25,7 @@
     <div class="container-fluid">
         <div class="col-md-6">
             <div class="form-group">
-                <button class="btn btn-success" data-ng-click="sendNewSupplier()" data-ng-disabled="!newSupplierC.Nombre">Crear Proveedor</button>
+                <button class="btn btn-success" data-ng-click="sendNewSupplier()" data-ng-disabled="!newSupplier.Nombre">Crear Proveedor</button>
                 <button type="button" class="btn btn-primary"  data-ng-click="goSuppliersCRUD()">
                     <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
                 </button>

@@ -13,7 +13,10 @@ angular.module('NigmaBillingApp').controller('deleteBranchController', ['$scope'
             alert(angular.toJson(branch));
         };
         $scope.sendDelete = function (branch) {
-            alert(angular.toJson(branch.IdSucursal));
-            waveWebApiResource.delete({ type: 'Sucursales', extension1: branch.IdSucursal });
+            waveWebApiResource.delete({ type: 'Sucursales', extension1: branch.IdSucursal }).$promise.then(function () {
+                waveWebApiResource.query({ type: 'Sucursales' }).$promise.then(function (data) {
+                    $scope.listOfBranch = data;
+                });
+            });
         };
     }]);

@@ -22,32 +22,18 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Cédula</th>
+              <th>Fecha de Nacimiento</th>
+              <th>Presione para Borrar</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
+          <tr data-ng-repeat="cli in listOfClient  | filter: search">
+              <td>{{cli.Nombre}}</td>
+              <td>{{cli.Apellido}}</td>
+              <td>{{cli.Cedula}}</td>
+              <td>{{cli.FechaNacimiento}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="sendDelete(cli)">Borrar</button><br><br>
               </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-    </table>
+</table>
     <br>
     <button type="button" class="btn btn-primary" data-ng-click="goClientsCRUD()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar

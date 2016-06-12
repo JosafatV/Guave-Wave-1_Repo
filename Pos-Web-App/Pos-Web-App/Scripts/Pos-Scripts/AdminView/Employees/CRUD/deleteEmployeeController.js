@@ -7,6 +7,10 @@ angular.module('NigmaBillingApp').controller('deleteEmployeeController', ['$scop
             $scope.listOfEmployee = data;
         });
         $scope.sendDelete = function (emp) {
-            waveWebApiResource.delete({ type: 'Empleado', extension1: emp.IdEmpleado });
+            waveWebApiResource.delete({ type: 'Empleado', extension1: emp.IdEmpleado }).$promise.then(function () {
+                waveWebApiResource.query({ type: 'Empleados' }).$promise.then(function (data) {
+                    $scope.listOfEmployee = data;
+                });
+            });
         };
     }]);
