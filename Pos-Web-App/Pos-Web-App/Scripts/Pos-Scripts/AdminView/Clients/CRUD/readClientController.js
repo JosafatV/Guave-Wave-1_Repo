@@ -1,5 +1,5 @@
-angular.module('NigmaBillingApp').controller('readClientController', ['$scope', '$routeParams', '$location',
-    function ($scope, $routeParams, $location) {
+angular.module('NigmaBillingApp').controller('readClientController', ['$scope', '$routeParams', '$location', 'waveWebApiResource',
+    function ($scope, $routeParams, $location, waveWebApiResource) {
         //List of the Clients
         $scope.listOfClients = [];
         //This line called the API for the information

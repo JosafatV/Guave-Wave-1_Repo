@@ -108,11 +108,11 @@
     })
     .when('/NigmaFacturation/AdminView/Products/deleteProducts', {
         templateUrl: 'HtmlPages/AdminView/Products/deleteProducts.html',
-        controller: 'deleteProductsController'
+        controller: 'deleteProductController'
     })
     .when('/NigmaFacturation/AdminView/Products/updateProducts', {
         templateUrl: 'HtmlPages/AdminView/Products/updateProducts.html',
-        controller: 'updateProductsController'
+        controller: 'updateProductController'
     })
 /*------------------Clients---------------------*/
     .when('/NigmaFacturation/AdminView/Clients/clientsCRUDMenu', {
@@ -141,7 +141,7 @@
         controller: 'suppliersCRUDMenuController'
     })
     .when('/NigmaFacturation/AdminView/Suppliers/readSuppliers', {
-        templateUrl: 'HtmlPages/AdminView/Products/readProducts.html',
+        templateUrl: 'HtmlPages/AdminView/Suppliers/readSuppliers.html',
         controller: 'readSupplierController'
     })
     .when('/NigmaFacturation/AdminView/Suppliers/createSuppliers', {

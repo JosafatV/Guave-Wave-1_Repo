@@ -21,32 +21,14 @@
           <tr>
               <th>Nombre</th>
               <th>Precio</th>
-              <th>Stock Mínimo</th>
-              <th>Stock Promedio</th>
+              <th>EAN</th>
 
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-
-          </tr>
-    </table>
+          <tr data-ng-repeat="prod in listOfProducts  | filter: search">
+              <td>{{prod.Nombre}}</td>
+              <td>{{prod.Precio}}</td>
+              <td>{{prod.EAN}}</td>
+</table>
     <br>
     <button type="button" class="btn btn-primary">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
