@@ -20,6 +20,7 @@ namespace WaveWebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("api/Empleados")]
         public IQueryable<View_EmpleadoPorRol> GetEmpladosPorRol()
         {
             return db.View_EmpleadoPorRol;
@@ -47,7 +48,7 @@ namespace WaveWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/Empleado/{idEmpleado}/{password}")]
+        [Route("api/EmpleadoLogIn/{idEmpleado}/{password}")]
         [ResponseType(typeof(List<View_EmpleadoPorRol>))]
         public IHttpActionResult GetEmpleadoLogin(int idEmpleado, int password)
         {

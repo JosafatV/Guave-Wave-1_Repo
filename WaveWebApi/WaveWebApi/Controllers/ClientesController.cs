@@ -17,14 +17,16 @@ namespace WaveWebApi.Controllers
         private PosPFEntities db = new PosPFEntities();
 
         // GET: api/Clientes
+        [HttpGet]
         public IQueryable<CLIENTE> GetCLIENTE()
         {
             return db.CLIENTE;
         }
 
         // GET: api/Clientes/5
+        [HttpGet]
         [ResponseType(typeof(CLIENTE))]
-        public IHttpActionResult GetCLIENTE(int id)
+        public IHttpActionResult GetClienteById(int id)
         {
             CLIENTE cLIENTE = db.CLIENTE.Find(id);
             if (cLIENTE == null)
