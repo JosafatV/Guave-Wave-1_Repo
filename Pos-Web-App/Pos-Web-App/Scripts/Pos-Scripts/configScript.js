@@ -38,7 +38,7 @@
     })
     .when('/NigmaFacturation/CashierView/sales/productsToRemove', {
         templateUrl: 'HtmlPages/CashierView/SalesView/productsToRemove.html',
-        controller: 'productsToRemoveController'
+        controller: 'supervisorLogController'
     })
     .when('/NigmaFacturation/CashierView/sales/supervisorLog', {
         templateUrl: 'HtmlPages/CashierView/SalesView/supervisorLog.html',

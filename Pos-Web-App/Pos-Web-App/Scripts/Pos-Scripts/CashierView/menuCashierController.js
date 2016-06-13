@@ -8,7 +8,13 @@
             $location.path('/NigmaFacturation/CashierView/cashDeskClosing');
         };
         $scope.goSales = function () {
+            //Quitar Este:
             $location.path('/NigmaFacturation/CashierView/sales');
+            //Poner Este:
+            /*waveWebApiResource.query({ type: 'ProductoPorSucursal' }).$promise.then(function (data) {
+                   listaTotal = data;
+                   $location.path('/NigmaFacturation/CashierView/sales');
+            });*/
         };
         $scope.goLogin = function () {
             $location.path('default')

@@ -18,36 +18,17 @@
               <th>Nombre</th>
               <th>Cantidad</th>
               <th>Precio</th>
-              <th>Estado</th>
+              <th>Eliminar Producto</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
+          <tr data-ng-repeat="product in listaProductos  | filter: search">
+              <td>{{product.EAN}}</td>
+              <td>{{product.Nombre}}</td>
+              <td>{{product.Stock}}</td>
+              <td>{{product.Precio}}</td>
               <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
+                  <button class="btn btn-danger" data-ng-click="deleteProduc($index)">Borrar</button><br><br>
               </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>
-                <button class="btn btn-danger">Borrar</button><br><br>
-              </td>
-          </tr>
-    </table>
+</table>
     <br>
     <button type="button" class="btn btn-primary" data-ng-click="goBack()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar

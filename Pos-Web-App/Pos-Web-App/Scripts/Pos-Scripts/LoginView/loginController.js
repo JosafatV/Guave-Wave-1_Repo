@@ -1,4 +1,18 @@
-﻿angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$routeParams', '$location',
+﻿var clienteActual =  1;
+var sucursalActual = 1;
+var tiempo_inicial = '';
+var cajaActual = '';
+var listaActualPedido = [];
+var listaTotal = [
+            { EAN: '1', Nombre: 'sideocaina', Stock: '10', Precio: '1000' },
+            { EAN: '2', Nombre: 'crack', Stock: '15', Precio: '55000' },
+            { EAN: '3', Nombre: 'mariguanol', Stock: '1', Precio: '40' },
+            { EAN: '4', Nombre: 'dorival', Stock: '5', Precio: '500' },
+];
+var listaCodesTotal = [];
+var listaForSales =[];
+
+angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
 
         /*--------------Functions to redirect the user as he/she do something----------------*/
