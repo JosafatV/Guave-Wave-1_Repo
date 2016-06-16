@@ -8,7 +8,7 @@
     })
     .when('/NigmaFacturation/CashierView/createClient', {
         templateUrl: 'HtmlPages/CashierView/createClient.html',
-        controller: 'createClientController'
+        controller: 'createClientControllerSales'
     })
     .when('/NigmaFacturation/CashierView/cashDeskOpening', {
         templateUrl: 'HtmlPages/CashierView/cashDeskOpening.html',
