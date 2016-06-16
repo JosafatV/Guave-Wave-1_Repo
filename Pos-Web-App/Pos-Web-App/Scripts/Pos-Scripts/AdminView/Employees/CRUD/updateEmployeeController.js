@@ -34,4 +34,7 @@ angular.module('NigmaBillingApp').controller('updateEmployeeController', ['$scop
                 });
             });
         };
+        $scope.goCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu')
+        }
     }]);

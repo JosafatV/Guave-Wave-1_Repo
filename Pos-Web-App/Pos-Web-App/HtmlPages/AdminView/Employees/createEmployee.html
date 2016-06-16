@@ -45,7 +45,7 @@
         <div class="col-md-6">
             <button class="btn btn-success" data-ng-click="sendNewEmployee()"  data-ng-disabled="!newEmployee.Nombre || !newEmployee.Cedula || !newEmployee.Contrasena 
                     || !rolSelected || !newEmployee.Apellidos" >Crear Empleado</button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-ng-click="goCRUD()">
                 <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
             </button>
         </div>

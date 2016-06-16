@@ -13,4 +13,7 @@ angular.module('NigmaBillingApp').controller('deleteEmployeeController', ['$scop
                 });
             });
         };
+        $scope.goCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu')
+        }
     }]);

@@ -6,4 +6,7 @@ angular.module('NigmaBillingApp').controller('readEmployeeController', ['$scope'
         waveWebApiResource.query({ type: 'Empleados' }).$promise.then(function (data) {
             $scope.listOfEmployee = data;
         });
+        $scope.goCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu')
+        }
     }]);

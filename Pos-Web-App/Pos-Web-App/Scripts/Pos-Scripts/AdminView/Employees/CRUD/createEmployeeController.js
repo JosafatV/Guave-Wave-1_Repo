@@ -12,4 +12,9 @@ angular.module('NigmaBillingApp').controller('createEmployeeController', ['$scop
         $scope.sendNewEmployee = function () {
             waveWebApiResource.save({ type: 'Empleado' }, $scope.newEmployee);
         };
+        $scope.goCRUD = function () {
+            $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu')
+        }
+
+     
     }]);
