@@ -1,6 +1,7 @@
 angular.module('NigmaBillingApp').controller('updateEmployeeController', ['$scope', '$routeParams', '$location', 'waveWebApiResource',
     function ($scope, $routeParams, $location, waveWebApiResource) {
         $scope.rolList = '';
+        //Ask de roles to be shown
         waveWebApiResource.query({ type: 'Roles' }).$promise.then(function (data) {
             $scope.rolList = data;
         });
@@ -18,6 +19,7 @@ angular.module('NigmaBillingApp').controller('updateEmployeeController', ['$scop
             $scope.updatedEmployee.IdRol = $scope.rolSelected.IdRol;
             alert(angular.toJson($scope.updatedEmployee));
         };
+        //Function that shows the hide elements to be modify
         $scope.unHideMod = function (emp) {
             $scope.boolHideModify = false;
             $scope.updatedEmployee.IdEmpleado = emp.IdEmpleado;
@@ -27,6 +29,7 @@ angular.module('NigmaBillingApp').controller('updateEmployeeController', ['$scop
             $scope.updatedEmployee.Contrasena = emp.Contrasena;
             $scope.updatedEmployee.IdRol = emp.IdRol;
         };
+        //Function that save the new data into the database
         $scope.sendUpdate = function () {
             waveWebApiResource.update({ type: 'Empleado', extension1: $scope.updatedEmployee.IdEmpleado }, $scope.updatedEmployee).$promise.then(function () {
                 waveWebApiResource.query({ type: 'Empleados' }).$promise.then(function (data) {
@@ -34,6 +37,7 @@ angular.module('NigmaBillingApp').controller('updateEmployeeController', ['$scop
                 });
             });
         };
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/employeesCRUDMenu')
         }

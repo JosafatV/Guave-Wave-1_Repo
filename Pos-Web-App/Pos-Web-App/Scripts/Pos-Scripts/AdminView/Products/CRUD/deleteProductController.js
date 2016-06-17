@@ -12,9 +12,11 @@ angular.module('NigmaBillingApp').controller('deleteProductController', ['$scope
         $scope.alerte = function (branch) {
             alert(angular.toJson(branch));
         };
+        //This function sen the new branch to the database in order to be save
         $scope.sendDelete = function (prod) {
             alert(angular.toJson(prod.IdProducto));
             waveWebApiResource.delete({ type: 'Productos', extension1: prod.IdProducto }).$promise.then(function () {
+                //here I ask the list again to update it in the view at the same time
                 waveWebApiResource.query({ type: 'Productos' }).$promise.then(function (data) {
                     $scope.listOfProduct = data;
                 });

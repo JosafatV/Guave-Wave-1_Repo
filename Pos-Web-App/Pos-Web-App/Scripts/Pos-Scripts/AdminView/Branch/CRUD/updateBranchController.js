@@ -17,7 +17,7 @@ angular.module('NigmaBillingApp').controller('updateBranchController', ['$scope'
             $scope.updatedBranch.Telefono = branch.Telefono;
             $scope.updatedBranch.IdSucursal = branch.IdSucursal;
         };
-        //Function that sends te PUT
+        //Function that save the new data into the database
         $scope.sendUpdate = function () {
             waveWebApiResource.update({ type: 'Sucursales', extension1: $scope.updatedBranch.IdSucursal }, $scope.updatedBranch).$promise.then(function () {
                 waveWebApiResource.query({ type: 'Sucursales' }).$promise.then(function (data) {
@@ -25,6 +25,7 @@ angular.module('NigmaBillingApp').controller('updateBranchController', ['$scope'
                 });
             });
         };
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goSucursalCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/Branch/branchCRUDMenu');
         };

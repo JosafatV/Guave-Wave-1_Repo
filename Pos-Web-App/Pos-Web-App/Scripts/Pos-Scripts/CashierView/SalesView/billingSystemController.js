@@ -15,7 +15,7 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         //function that save only all the codes in one list
         $scope.getAllCodes = function () {
             angular.forEach($scope.allProductList, function (value, key) {
-                $scope.allProductCodes.push(value.EAN);
+                $scope.allProductCodes.push(parseInt (value.EAN));
             });
         };
         $scope.getAllCodes();
@@ -42,7 +42,7 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
                     //guardo los productos que el cliente compro
                     angular.forEach($scope.forSaleProductList, function (value, key) {
                         waveWebApiResource.save({ type: 'ProductoPorVenta' },
-                            { IdProducto: value.EAN, IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock }).$promise.then(function (data) {
+                            { IdProducto: parseInt (value.EAN), IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock }).$promise.then(function (data) {
                             });
                     })
                         //No se si funciona esto: hay que probarlo:
@@ -65,8 +65,10 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         };
 /*--------------Function to save a new product-----------------------------------------*/
         $scope.saveNewProduct = function (newProductcode, newProductQuantity) {
-            $scope.agregateProductCode = newProductcode;
+            //Add the new producto to the list
+            $scope.agregateProductCode = parseInt( newProductcode);
             $scope.agregateProductQuantity = newProductQuantity;
+            //Para que verifique si no esta ya escogido 
             $scope.boolCheckAddedProduct = true;
             $scope.boolCheckAddedProductCode = true;
             $scope.codBool.EAN = '';
@@ -74,20 +76,25 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         $scope.addTheProduct = function (productToSale) {
             $scope.wrongCode = false;
             $scope.boolCheckAddedProduct = false;
+            //Guardo los productos a vender en la lista respectiva
             $scope.forSaleProductList.push({
                 EAN: productToSale.EAN, Nombre: productToSale.Nombre,
                 Precio: productToSale.Precio, Stock: $scope.agregateProductQuantity
             });
-            $scope.forSaleProductCodes.push(productToSale.EAN);
+            
+            $scope.forSaleProductCodes.push(parseInt(productToSale.EAN));
             $scope.prodPos = $scope.allProductList.indexOf(productToSale);
             $scope.allProductList[$scope.prodPos].Stock -= $scope.agregateProductQuantity;
         };
+    //Compara los resultados del producto a agregar con la catidad para saber si es ncesario o que pasa con estos "animales"
         $scope.compareProductsQuantitiesLess = function (originalP,newP) {
             return parseInt(originalP) < parseInt(newP);
         };
+    //Compara los resultados del producto a agregar con la catidad para saber si es ncesario o que pasa con estos "animales"
         $scope.compareProductsQuantitiesMore = function (originalP, newP) {
             return parseInt(originalP) >= parseInt(newP);
         };
+
 /*--------------Function to alert something went wrong---------------------------------*/
         $scope.alerteNoExisteCodigo = function (productWrongCode) {
             alert('Código erroneo: ' + productWrongCode);

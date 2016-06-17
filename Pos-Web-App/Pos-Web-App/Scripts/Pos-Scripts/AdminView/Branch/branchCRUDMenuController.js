@@ -1,5 +1,6 @@
 angular.module('NigmaBillingApp').controller('branchCRUDMenuController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCreateBranch = function () {
             $location.path('/NigmaFacturation/AdminView/Branch/createBranch');
         };

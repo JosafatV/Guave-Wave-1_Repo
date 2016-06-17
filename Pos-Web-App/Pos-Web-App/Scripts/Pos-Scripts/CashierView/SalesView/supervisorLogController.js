@@ -9,7 +9,7 @@ angular.module('NigmaBillingApp').controller('supervisorLogController', ['$scope
             $location.path('/NigmaFacturation/CashierView/sales/productsToRemove');
         };
         $scope.deleteProduc = function (index) {
-            $scope.indexDevolver = listaCodesTotal.indexOf(listaActualPedido[index].EAN);
+            $scope.indexDevolver = listaCodesTotal.indexOf(parseInt (listaActualPedido[index].EAN));;
             $scope.stockADevolver = listaActualPedido[index].Stock;
             listaTotal[$scope.indexDevolver].Stock = parseInt(listaTotal[$scope.indexDevolver].Stock) + parseInt($scope.stockADevolver);
             listaForSales.splice(index, 1);

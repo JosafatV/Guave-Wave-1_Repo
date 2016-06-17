@@ -6,6 +6,7 @@ angular.module('NigmaBillingApp').controller('readClientController', ['$scope', 
         waveWebApiResource.query({ type: 'Clientes' }).$promise.then(function (data) {
             $scope.listOfClients = data;
         });
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goClientsCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/Clients/clientsCRUDMenu');
         };

@@ -6,6 +6,7 @@ angular.module('NigmaBillingApp').controller('readBranchController', ['$scope', 
         waveWebApiResource.query({ type: 'Sucursales' }).$promise.then(function (data) {
             $scope.listOfBranch = data;
         });
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goSucursalCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/Branch/branchCRUDMenu');
         };

@@ -1,5 +1,6 @@
 angular.module('NigmaBillingApp').controller('productsCRUDMenuController', ['$scope', '$routeParams', '$location',
     function ($scope, $routeParams, $location) {
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCreateProducts = function () {
             $location.path('/NigmaFacturation/AdminView/Products/createProducts');
         };

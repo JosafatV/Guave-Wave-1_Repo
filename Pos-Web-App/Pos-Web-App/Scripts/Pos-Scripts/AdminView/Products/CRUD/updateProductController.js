@@ -10,6 +10,7 @@ angular.module('NigmaBillingApp').controller('updateProductController', ['$scope
         $scope.goProductosCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/Products/productsCRUDMenu');
         };
+        //Function that shows the hide elements to be modify
         $scope.unHideMod = function (prod) {
             $scope.boolHideModify = false;
             $scope.updatedProduct.IdProducto = prod.IdProducto;
@@ -17,8 +18,10 @@ angular.module('NigmaBillingApp').controller('updateProductController', ['$scope
             $scope.updatedProduct.Nombre = prod.Nombre;
             $scope.updatedProduct.Precio = prod.Precio;
         };
+        //Function that save the new data into the database
         $scope.sendUpdate = function () {
             waveWebApiResource.update({ type: 'Productos', extension1: $scope.updatedProduct.IdProducto }, $scope.updatedProduct).$promise.then(function () {
+                //I asked for the list again to be saved
                 waveWebApiResource.query({ type: 'Productos' }).$promise.then(function (data) {
                     $scope.listOfProducts = data;
                 });

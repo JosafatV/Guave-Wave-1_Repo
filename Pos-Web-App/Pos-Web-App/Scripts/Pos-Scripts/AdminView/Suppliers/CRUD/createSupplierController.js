@@ -4,6 +4,7 @@ angular.module('NigmaBillingApp').controller('createSupplierController', ['$scop
         $scope.sendNewSupplier = function () {
             waveWebApiResource.save({ type: 'Proveedores' }, $scope.newSupplier);
         };
+        /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goSuppliersCRUD = function () {
             $location.path('/NigmaFacturation/AdminView/Suppliers/supplierCRUDMenu');
         };

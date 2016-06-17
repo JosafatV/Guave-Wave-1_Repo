@@ -15,6 +15,7 @@ angular.module('NigmaBillingApp').controller('updateClientController', ['$scope'
         $scope.changeRol = function (rol) {
             alert(angular.toJson($scope.updatedEmployee));
         };
+        //Function that shows the hide elements to be modify
         $scope.unHideMod = function (emp) {
             $scope.boolHideModify = false;
             $scope.updatedClient.IdCliente = emp.IdCliente;
@@ -23,6 +24,7 @@ angular.module('NigmaBillingApp').controller('updateClientController', ['$scope'
             $scope.updatedClient.Cedula = emp.Cedula;
             $scope.updatedClient.FechaNacimiento = emp.FechaNacimiento;
         };
+        //Function that save the new data into the database
         $scope.sendUpdate = function () {
             waveWebApiResource.update({ type: 'Clientes', extension1: $scope.updatedClient.IdCliente }, $scope.updatedClient).$promise.then(function () {
                 waveWebApiResource.query({ type: 'Clientes' }).$promise.then(function (data) {

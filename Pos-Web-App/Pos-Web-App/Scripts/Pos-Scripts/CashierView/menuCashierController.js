@@ -9,12 +9,13 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         };
         $scope.goSales = function () {
             //Quitar Este:
-            //$location.path('/NigmaFacturation/CashierView/sales');
-            //Poner Este:
+            $location.path('/NigmaFacturation/CashierView/sales');
+            //Poner Este: 
+            /*
             waveWebApiResource.query({ type: 'ProductoPorSucursal', extension1: sucursalActual}).$promise.then(function (data) {
                    listaTotal = data;
                    $location.path('/NigmaFacturation/CashierView/sales');
-            });
+            });*/
         };
         $scope.goLogin = function () {
             $location.path('default')
