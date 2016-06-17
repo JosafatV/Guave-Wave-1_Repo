@@ -1,7 +1,8 @@
 ﻿var clienteActual =  1;
-var sucursalActual = 1;
+var sucursalActual = 3;
 var tiempo_inicial = '';
-var cajaActual = '';
+var cajaActual = 1;
+var cajaAbierta = false;
 var listaActualPedido = [];
 var listaTotal = [
             { EAN: '556095512398  ', Nombre: 'sideocaina', Stock: '10', Precio: '1000' },
@@ -10,10 +11,21 @@ var listaTotal = [
             { EAN: '4', Nombre: 'dorival', Stock: '5', Precio: '500' },
 ];
 var listaCodesTotal = [];
-var listaForSales =[];
+var listaForSales = [];
+var empleadoActual = {
+    IdEmpleado: 11,
+    Contrasena: "4343           ",
+    Cedula: "21231     ",
+    Nombre: "Josef          ",
+    Apellidos: "Vargas                        ",
+    Estado: "A",
+    IdRol: 5,
+    NombreRol: "Misceláneo     ",
+    EstadoRol: "A"
+}
 
-angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$routeParams', '$location',
-    function ($scope, $routeParams, $location) {
+angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$routeParams', '$location','ModalService',
+    function ($scope, $routeParams, $location, ModalService) {
 
         /*--------------Functions to redirect the user as he/she do something----------------*/
         $scope.goCashier = function () {
@@ -21,6 +33,19 @@ angular.module('NigmaBillingApp').controller('loginController', ['$scope', '$rou
         };
         $scope.goAdminMenu = function () {
             $location.path('/NigmaFacturation/AdminView/adminMenu');
+        };
+        $scope.goModal = function () {
+            ModalService.showModal({
+                templateUrl: 'HtmlPages/LoginView/modal.html',
+                controller: "loginController"
+            }).then(function (modal) {
+
+                //it's a bootstrap element, use 'modal' to show it
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    console.log(result);
+                });
+            });
         };
 
 

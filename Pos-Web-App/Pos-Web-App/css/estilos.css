@@ -12,3 +12,7 @@ background: linear-gradient(to right, #007f7f ,white);
   font-family:inherit;
 }
 
+.modal {
+    display:block;
+}
+

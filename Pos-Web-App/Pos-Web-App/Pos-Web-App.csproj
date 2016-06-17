@@ -307,7 +307,9 @@
     <Content Include="HtmlPages\CashierView\salesView\paymentReceipt.html" />
     <Content Include="HtmlPages\CashierView\salesView\productsToRemove.html" />
     <Content Include="HtmlPages\CashierView\salesView\supervisorLog.html" />
+    <Content Include="HtmlPages\LoginView\createUser.html" />
     <Content Include="HtmlPages\LoginView\login.html" />
+    <Content Include="HtmlPages\LoginView\modal.html" />
     <Content Include="imagenes\adm.jpg" />
     <Content Include="imagenes\caj.jpg" />
     <Content Include="imagenes\clien.jpg" />
@@ -323,6 +325,7 @@
     <Content Include="index.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-modal-service.js" />
     <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-resource.js" />
     <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-resource.min.js" />
     <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-route.js" />

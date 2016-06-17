@@ -3,6 +3,7 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         //cantidad minima para la cual se puede hacer un producto, aqui tambien se guarda la cantidad que pide el cajero       
         $scope.quantity = 1;
         $scope.wrongCode = true;
+        $scope.puedeVender = cajaAbierta;
         //-------------------------------------------------Nuevo
         
             $scope.allProductList = listaTotal;
@@ -34,24 +35,26 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
             //Esto me da los segundos que duro y los guarda en var duracion
             var duracion = (new Date() - tiempo_inicial) / 1000;
             var ventaActual = '';
+            $scope.newVenta = { IdCaja: cajaActual, Duracion: duracion, IdCliente: clienteActual };
+            alert(angular.toJson($scope.newVenta));
             //-------------------------------------------------Nuevo
             //Obtengo el numero de venta con esto-------------------------------------------------Nuevo
             waveWebApiResource.save({ type: 'Ventas' }, { IdCaja: cajaActual, Duracion: duracion, IdCliente: clienteActual })
                 .$promise.then(function (data) {
                     ventaActual = data.IdVenta;
                     //guardo los productos que el cliente compro
-                    angular.forEach($scope.forSaleProductList, function (value, key) {
+
+                    angular.forEach($scope.forSaleProductList, function (value, key) {                        
+                        alert(angular.toJson( { IdProducto: value.IdProducto, IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock }));
                         waveWebApiResource.save({ type: 'ProductoPorVenta' },
-                            { IdProducto: parseInt (value.EAN), IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock }).$promise.then(function (data) {
-                            });
-                    })
-                        //No se si funciona esto: hay que probarlo:
-                    .$promise.then(function (data) {
+                            { IdProducto: value.IdProducto , IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock })
+                    }) 
                         $location.path('/NigmaFacturation/CashierView/sales/paymentReceipt');
                         //esta linea es muy importante debe buscar donde colocarse;------------------------------------------------------------------------
                         //si no sirve se redirecciona afuera y se coloca vacia ahí
                         listaActualPedido = [];
-                    });
+                    
+                    
                 });
             //-------------------------------------------------/Nuevo
         };
@@ -78,7 +81,7 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
             $scope.boolCheckAddedProduct = false;
             //Guardo los productos a vender en la lista respectiva
             $scope.forSaleProductList.push({
-                EAN: productToSale.EAN, Nombre: productToSale.Nombre,
+                IdProducto: productToSale.IdProducto ,EAN: productToSale.EAN, Nombre: productToSale.Nombre,
                 Precio: productToSale.Precio, Stock: $scope.agregateProductQuantity
             });
             

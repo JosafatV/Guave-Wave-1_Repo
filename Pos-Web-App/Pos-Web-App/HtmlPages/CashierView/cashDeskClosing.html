@@ -11,12 +11,12 @@
     <h2>Cerrar Caja</h2><br>
   </div>
   <div class="container">
-    <h4>Mostrar Nombre</h4>
-    <h4>Mostrar cédula</h4>
+      <h4>Cajero: {{nombreCajero}} {{apellidosCajero}}</h4>
+      <h4>Cedula: {{cedulaCajero}}</h4>
     <br>
     <h4>Dinero Final </h4>
-    <input type="text"><br><br>
-    <button class="btn btn-success">Cerrar Caja</button>
+    <input type="text" data-ng-model="dineroFinal"><br><br>
+    <button class="btn btn-success"  data-ng-click="cerrarCaja()">Cerrar Caja</button>
       <button type="button" class="btn btn-primary" data-ng-click="goCashier()">
           <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
       </button>

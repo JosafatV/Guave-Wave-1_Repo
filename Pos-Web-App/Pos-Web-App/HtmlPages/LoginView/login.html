@@ -54,7 +54,7 @@
                 <input type="text" data-ng-model="cedBool">
                 <h4>Contraseña</h4>
                 <input type="password" data-ng-model="passwBool"><br><br>
-                <button class="btn btn-success" data-ng-disabled="!cedBool || !passwBool">Ingresar</button>
+                <button class="btn btn-success" data-ng-click="goModal()" data-ng-disabled="!cedBool || !passwBool">Ingresar</button>
                 <button class="btn btn-primary" data-ng-click="goCashier()">Cajero</button>
                 <button class="btn btn-primary" data-ng-click="goAdminMenu()">Administrador</button>
 
