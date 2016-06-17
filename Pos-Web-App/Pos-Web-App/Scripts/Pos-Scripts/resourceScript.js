@@ -1,5 +1,5 @@
 ﻿//Var used to save the URL 
-var urlGeneric = 'http://192.168.0.105';
+var urlGeneric = 'http://192.168.2.11';
 
 //This script is the resource that is used to connect to the web Api od DrPhischel
 angular.module('NigmaBillingApp').factory('waveWebApiResource', function ($resource) {

@@ -364,6 +364,7 @@
     <Content Include="css\bootstrap.css.map" />
     <Content Include="css\bootstrap.min.css.map" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
+    <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
     <None Include="Properties\PublishProfiles\Web Deploy.pubxml" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\css\bootstrap-theme.min.css.map" />
