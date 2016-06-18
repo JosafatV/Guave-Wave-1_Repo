@@ -54,10 +54,30 @@
                 <input type="text" data-ng-model="cedBool">
                 <h4>Contraseña</h4>
                 <input type="password" data-ng-model="passwBool"><br><br>
-                <button class="btn btn-success" data-ng-click="goModal()" data-ng-disabled="!cedBool || !passwBool">Ingresar</button>
-                <button class="btn btn-primary" data-ng-click="goCashier()">Cajero</button>
-                <button class="btn btn-primary" data-ng-click="goAdminMenu()">Administrador</button>
 
+                <div ng-if="pediLosRoles">
+                    <div ng-repeat="rol in listaRoles">
+                        <div ng-if="esCajero(rol.IdRol)" ng-init="activeCajero(rol)"></div>
+                        <div ng-if="esAdmin(rol.IdRol)" ng-init="activeAdmin(rol)"></div>
+                    </div>
+                </div>
+
+                <div ng-if="pediLosRoles">
+                    <div ng-repeat="rol in listaRoles">
+                        <div ng-if="!esCajero(rol.IdRol) && !esAdmin(rol.IdRol)" data-ng-init="banderAlerteOn()"></div>
+                    </div>
+                </div>
+                <div data-ng-if="pruebeRolesMalUsuario()" data-ng-init="banderAlerteOn()"></div>
+
+                <!--<button class="btn btn-success" data-ng-click="ingresar()" data-ng-disabled="!cedBool || !passwBool">Ingresar</button>
+                <button class="btn btn-primary" data-ng-click="goCashier()">Cajero</button>
+                <button class="btn btn-primary" data-ng-click="goAdminMenu()">Administrador</button>-->
+
+                <!----------------Para el login segun el tipo de usuario que el empleado sea--------------------->
+                <button class="btn btn-success" data-ng-click="ingresar()" data-ng-disabled="!cedBool || !passwBool">Ingresar</button>
+                <button class="btn btn-primary" data-ng-click="goCashier()"     data-ng-hide="!cajeroDisponible">Cajero</button>
+                <button class="btn btn-primary" data-ng-click="goAdminMenu()"   data-ng-hide="!adminDisponible">Administrador</button>
+                <div ng-if="banderaAlerte" data-ng-init="alerteNoRegistrado()"></div>
 
             </div>
 

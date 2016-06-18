@@ -23,29 +23,17 @@
               <th>Cantidad</th>
               <th>Precio</th>
           </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
+          <tr data-ng-repeat="product in forSaleProductListAux  | filter: codBool:strict">
+              <td>{{product.EAN}}</td>
+              <td>{{product.Nombre}}</td>
+              <td>{{product.Stock}}</td>
+              <td>{{product.Precio}}</td>
           </tr>
     </table>
   </div>
   <br>
   <div class="container">
-    <h2>Total a pagar:</h2><br><br> <!--Mostrar la suma de los precios-->
+    <h2>Total a pagar: {{valorTotal}}</h2><br><br> <!--Mostrar la suma de los precios-->
     <h3>¡Muchas gracias por su compra! Lo esperamos nuevamente.</h3>
   </div><br><br>
   <button type="button" class="btn btn-primary">

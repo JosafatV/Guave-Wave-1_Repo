@@ -13,6 +13,7 @@ angular.module('NigmaBillingApp').controller('cashDeskClosingController', ['$sco
                 Estado: "I"
             }).$promise.then(function () {
                 cajaAbierta = false;
+                alert('Se cerro la caja');
             });
 
         };

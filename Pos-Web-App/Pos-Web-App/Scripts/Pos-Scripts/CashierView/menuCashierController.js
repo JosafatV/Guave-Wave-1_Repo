@@ -12,8 +12,8 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
             //$location.path('/NigmaFacturation/CashierView/sales');
             //Poner Este: 
             
-            waveWebApiResource.query({ type: 'ProductoPorSucursal', extension1: sucursalActual}).$promise.then(function (data) {
-                   listaTotal = data;
+            waveWebApiResource.query({ type: 'ProductoPorSucursal', extension1: sucursalActual }).$promise.then(function (data) {
+                listaTotal = data;
                    $location.path('/NigmaFacturation/CashierView/sales');
             });
         };

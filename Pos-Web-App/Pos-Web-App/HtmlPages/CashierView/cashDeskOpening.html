@@ -13,11 +13,14 @@
   <div class="container">
     <h4>Cajero: {{nombreCajero}} {{apellidosCajero}}</h4>
     <h4>Cedula: {{cedulaCajero}}</h4>
+    <hr>
     <br>
     <h4>Dinero Inicial </h4>
     <input type="text" data-ng-model="dineroInicial"><br><br>
-    <button class="btn btn-success" data-ng-click="aperturaCaja()">Realizar Apertura</button>
-      <button type="button" class="btn btn-primary" data-ng-click="goCashier()">
+      <h4>Ingrese el número de caja </h4>
+      <input type="text" data-ng-model="cajaIngresada"/><br><br>
+    <button class="btn btn-success" data-ng-click="aperturaCaja()" data-ng-disabled="!dineroInicial || !cajaIngresada">Realizar Apertura</button>
+      <button type="button" class="btn btn-primary" data-ng-click="goCashier()" >
           <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
       </button>
 

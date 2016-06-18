@@ -4,6 +4,9 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
         $scope.quantity = 1;
         $scope.wrongCode = true;
         $scope.puedeVender = cajaAbierta;
+
+        $scope.nombreClienteAcutual = clienteActual.Nombre + clienteActual.Apellidos;
+        $scope.cedulaClienteActual = clienteActual.Cedula;
         //-------------------------------------------------Nuevo
         
             $scope.allProductList = listaTotal;
@@ -36,25 +39,24 @@ function ($scope, $routeParams, $location,waveWebApiResource) {
             var duracion = (new Date() - tiempo_inicial) / 1000;
             var ventaActual = '';
             $scope.newVenta = { IdCaja: cajaActual, Duracion: duracion, IdCliente: clienteActual };
-            alert(angular.toJson($scope.newVenta));
             //-------------------------------------------------Nuevo
             //Obtengo el numero de venta con esto-------------------------------------------------Nuevo
-            waveWebApiResource.save({ type: 'Ventas' }, { IdCaja: cajaActual, Duracion: duracion, IdCliente: clienteActual })
+            waveWebApiResource.save({ type: 'Ventas' }, { IdCaja: cajaActual, Duracion: duracion, IdCliente: clienteActual.IdCliente })
                 .$promise.then(function (data) {
                     ventaActual = data.IdVenta;
                     //guardo los productos que el cliente compro
 
                     angular.forEach($scope.forSaleProductList, function (value, key) {                        
-                        alert(angular.toJson( { IdProducto: value.IdProducto, IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock }));
                         waveWebApiResource.save({ type: 'ProductoPorVenta' },
                             { IdProducto: value.IdProducto , IdVenta: ventaActual, IdCaja: cajaActual, Cantidad: value.Stock })
-                    }) 
+                    })
+                    alert('Se realizo correctamente su compra');
+                    listaActualPedidoAux = listaActualPedido;
+                        listaActualPedido = [];
                         $location.path('/NigmaFacturation/CashierView/sales/paymentReceipt');
                         //esta linea es muy importante debe buscar donde colocarse;------------------------------------------------------------------------
                         //si no sirve se redirecciona afuera y se coloca vacia ahí
-                        listaActualPedido = [];
-                    
-                    
+
                 });
             //-------------------------------------------------/Nuevo
         };
