@@ -37,15 +37,15 @@
                 <form action="" class="">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedClient.Nombre">
+                        <input class="form-control" id="nombre" type="text" maxlength="15" placeholder="Nombre:" data-ng-model="updatedClient.Nombre">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Apellidos:</label>
-                        <input class="form-control" id="Apellidos" type="text" placeholder="Apellidos:" data-ng-model="updatedClient.Apellidos">
+                        <input class="form-control" id="Apellidos" type="text" maxlength="30" placeholder="Apellidos:" data-ng-model="updatedClient.Apellidos">
                     </div>
                     <div class="form-group">
                         <label for="cedula">Cedula:</label>
-                        <input class="form-control" id="Cedula" type="text" placeholder="Cedula:" data-ng-model="updatedClient.Cedula">
+                        <input class="form-control" id="Cedula" type="text" maxlength="10" placeholder="Cedula:" data-ng-model="updatedClient.Cedula">
                     </div>
                     <div class="form-group">
                         <label for="cedula">Fecha Nacimiento:</label>
@@ -61,7 +61,7 @@
     <button type="button" class="btn btn-primary" data-ng-click="goClientsCRUD()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
     </button>
-       
+
   </div>
 
 

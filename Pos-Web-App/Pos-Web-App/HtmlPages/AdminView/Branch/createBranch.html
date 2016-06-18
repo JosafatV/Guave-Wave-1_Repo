@@ -16,15 +16,15 @@
             <form action="" class="">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="newBranch.Nombre">
+                    <input class="form-control" id="nombre" type="text" maxlength="15" placeholder="Nombre:" data-ng-model="newBranch.Nombre">
                 </div>
                 <div class="form-group">
                     <label for="nombre">Dirección:</label>
-                    <input class="form-control" id="direccion" type="text" placeholder="Dirección:" data-ng-model="newBranch.Direccion">
+                    <input class="form-control" id="direccion" type="text" maxlength="30" placeholder="Dirección:" data-ng-model="newBranch.Direccion">
                 </div>
                 <div class="form-group">
                     <label for="cedula">Teléfono:</label>
-                    <input class="form-control" id="telefono" type="number" placeholder="Teléfono:" data-ng-model="newBranch.Telefono">
+                    <input class="form-control" id="telefono" type="number" max="99999999" placeholder="Teléfono:" data-ng-model="newBranch.Telefono">
                 </div>
 
                 <br>
@@ -32,14 +32,14 @@
         </div>
     </div>
     <div class="container">
-        
+
             <button class="btn btn-success" data-ng-click="sendNewBranch()" data-ng-disabled="!newBranch.Nombre || !newBranch.Direccion ||
                                   !newBranch.Telefono">Crear Sucursal</button>
         <button type="button" class="btn btn-primary" data-ng-click="goSucursalCRUD()">
             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
         </button>
         </div>
-        
+
 
 
 

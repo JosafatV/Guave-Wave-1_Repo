@@ -32,7 +32,7 @@
                 <form action="" class="">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedSupplier.Nombre">
+                        <input class="form-control" id="nombre" type="text" maxlength="15" placeholder="Nombre:" data-ng-model="updatedSupplier.Nombre">
                     </div>
                     <br><br>
                 </form>
@@ -42,8 +42,8 @@
     <button type="button" class="btn btn-success" data-ng-click="sendUpdate()">Modificar</button>
     <button type="button" class="btn btn-primary" data-ng-click="goSuppliersCRUD()">
       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>    Regresar
-    </button>        
-    
+    </button>
+
   </div>
 
 

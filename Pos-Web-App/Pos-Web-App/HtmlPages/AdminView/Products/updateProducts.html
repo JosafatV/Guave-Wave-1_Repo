@@ -35,15 +35,15 @@
                 <form action="" class="">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input class="form-control" id="nombre" type="text" placeholder="Nombre:" data-ng-model="updatedProduct.Nombre">
+                        <input class="form-control" id="nombre" type="text" maxlength="15" placeholder="Nombre:" data-ng-model="updatedProduct.Nombre">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Precio:</label>
-                        <input class="form-control" id="Precio" type="text" placeholder="Precio:" data-ng-model="updatedProduct.Precio">
+                        <input class="form-control" id="Precio" type="number" placeholder="Precio:" data-ng-model="updatedProduct.Precio">
                     </div>
                     <div class="form-group">
                         <label for="cedula">EAN:</label>
-                        <input class="form-control" id="EAN" type="text" placeholder="EAN:" data-ng-model="updatedProduct.EAN">
+                        <input class="form-control" id="EAN" type="number" max="9999999999999" placeholder="EAN:" data-ng-model="updatedProduct.EAN">
                     </div>
                     <br><br>
                 </form>
