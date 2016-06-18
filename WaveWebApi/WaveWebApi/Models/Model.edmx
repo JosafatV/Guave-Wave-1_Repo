@@ -198,6 +198,8 @@ warning 6002: The table/view 'PosPF.dbo.View_EmpleadoPorSucursal' does not have 
         <EntityType Name="View_EmpleadoPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpleado" />
+            
+            
             <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpleado" Type="int" Nullable="false" />
@@ -589,6 +591,10 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_CierreDeCaja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCaja" Type="int" Mode="In" />
+          <Parameter Name="DineroCierre" Type="money" Mode="In" />
+        </Function>
         <Function Name="sp_insert_Caja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Dinero" Type="money" Mode="In" />
           <Parameter Name="IdSucursal" Type="int" Mode="In" />
@@ -1298,51 +1304,51 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <End Role="SUCURSAL" EntitySet="SUCURSAL" />
             <End Role="PRODUCTO_POR_SUCURSAL" EntitySet="PRODUCTO_POR_SUCURSAL" />
           </AssociationSet>
-          <FunctionImport Name="sp_insert_Caja">
+          <FunctionImport Name="sp_insert_Caja" ReturnType="Collection(Int32)">
             <Parameter Name="Dinero" Mode="In" Type="Decimal" />
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Empleado">
+          <FunctionImport Name="sp_insert_Empleado" ReturnType="Collection(Int32)">
             <Parameter Name="Contrasena" Mode="In" Type="String" />
             <Parameter Name="Cedula" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Apellidos" Mode="In" Type="String" />
             <Parameter Name="IdRol" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Producto">
+          <FunctionImport Name="sp_insert_Producto" ReturnType="Collection(Int32)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="EAN" Mode="In" Type="String" />
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
             <Parameter Name="idProveedor" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_ProductosPorVenta">
+          <FunctionImport Name="sp_insert_ProductosPorVenta" ReturnType="Collection(Int32)">
             <Parameter Name="IdProducto" Mode="In" Type="Int32" />
             <Parameter Name="IdVenta" Mode="In" Type="Int32" />
             <Parameter Name="Cantidad" Mode="In" Type="Int16" />
             <Parameter Name="IdCaja" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Proveedor">
+          <FunctionImport Name="sp_insert_Proveedor" ReturnType="Collection(Int32)">
           <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Rol">
+          <FunctionImport Name="sp_insert_Rol" ReturnType="Collection(Int32)">
           <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Sucursal">
+          <FunctionImport Name="sp_insert_Sucursal" ReturnType="Collection(Int32)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_insert_Venta">
+          <FunctionImport Name="sp_insert_Venta" ReturnType="Collection(Int32)">
             <Parameter Name="IdCaja" Mode="In" Type="Int32" />
             <Parameter Name="IdCliente" Mode="In" Type="Int32" />
             <Parameter Name="Duracion" Mode="In" Type="Int16" />
           </FunctionImport>
-          <FunctionImport Name="sp_reStock">
+          <FunctionImport Name="sp_reStock" ReturnType="Collection(Int32)">
             <Parameter Name="IdProduct" Mode="In" Type="Int32" />
             <Parameter Name="Quantity" Mode="In" Type="Int16" />
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_Stock">
+          <FunctionImport Name="sp_Stock" ReturnType="Collection(Int32)">
             <Parameter Name="IdProducto" Mode="In" Type="Int32" />
             <Parameter Name="Stock" Mode="In" Type="Int16" />
             <Parameter Name="StockMinimo" Mode="In" Type="Int16" />
@@ -1362,7 +1368,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <End Role="VENTA_POR_CAJA" EntitySet="VENTA_POR_CAJA" />
           </AssociationSet>
           <EntitySet Name="View_Ventas" EntityType="PosPFModel.View_Ventas" />
-          <EntitySet Name="View_ProductoPorVenta" EntityType="PosPFModel.View_ProductoPorVenta" />
           <EntitySet Name="View_spInsertVenta" EntityType="PosPFModel.View_spInsertVenta" />
           <EntitySet Name="View_spProductosPorVenta" EntityType="PosPFModel.View_spProductosPorVenta" />
           <EntitySet Name="View_EmpleadoPorRol" EntityType="PosPFModel.View_EmpleadoPorRol" />
@@ -1376,6 +1381,11 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
             <End Role="EMPLEADO_POR_SUCURSAL" EntitySet="EMPLEADO_POR_SUCURSAL" />
           </AssociationSet>
           <EntitySet Name="View_EmpleadoPorSucursal" EntityType="PosPFModel.View_EmpleadoPorSucursal" />
+          <EntitySet Name="View_ProductoPorVenta" EntityType="PosPFModel.View_ProductoPorVenta" />
+          <FunctionImport Name="sp_CierreDeCaja" ReturnType="Collection(PosPFModel.sp_CierreDeCaja_Result)">
+            <Parameter Name="IdCaja" Mode="In" Type="Int32" />
+            <Parameter Name="DineroCierre" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="VENTA">
           <Key>
@@ -1454,24 +1464,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <Property Name="EstadoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="View_ProductoPorVenta">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="IdVenta" />
-          </Key>
-          <Property Name="IdProducto" Type="Int32" Nullable="false" />
-          <Property Name="EAN" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Cantidad" Type="Int16" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Timestamp" Type="DateTime" Precision="3" />
-          <Property Name="IdVenta" Type="Int32" Nullable="false" />
-          <Property Name="IdCaja" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="View_spInsertVenta">
           <Key>
@@ -1565,6 +1557,28 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
           <Property Name="Telefono" Type="Int32" />
           <Property Name="EstadoSucursal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="View_ProductoPorVenta">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="EAN" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Cantidad" Type="Int16" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="sp_CierreDeCaja_Result">
+          <Property Type="Int32" Name="IdCaja" Nullable="false" />
+          <Property Type="Decimal" Name="Column1" Nullable="true" Precision="19" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1828,24 +1842,6 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="View_ProductoPorVenta">
-            <EntityTypeMapping TypeName="PosPFModel.View_ProductoPorVenta">
-              <MappingFragment StoreEntitySet="View_ProductoPorVenta">
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
-                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="EAN" ColumnName="EAN" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="View_spInsertVenta">
             <EntityTypeMapping TypeName="PosPFModel.View_spInsertVenta">
               <MappingFragment StoreEntitySet="View_spInsertVenta">
@@ -1910,6 +1906,32 @@ warning 6002: The table/view 'PosPF.dbo.View_Ventas' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="View_ProductoPorVenta">
+            <EntityTypeMapping TypeName="PosPFModel.View_ProductoPorVenta">
+              <MappingFragment StoreEntitySet="View_ProductoPorVenta">
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CierreDeCaja" FunctionName="PosPFModel.Store.sp_CierreDeCaja">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PosPFModel.sp_CierreDeCaja_Result">
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

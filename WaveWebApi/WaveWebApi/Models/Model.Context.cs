@@ -48,14 +48,14 @@ namespace WaveWebApi.Models
         public virtual DbSet<View_VentaPorCliente> View_VentaPorCliente { get; set; }
         public virtual DbSet<VENTA> VENTA { get; set; }
         public virtual DbSet<View_Ventas> View_Ventas { get; set; }
-        public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
         public virtual DbSet<View_spInsertVenta> View_spInsertVenta { get; set; }
         public virtual DbSet<View_spProductosPorVenta> View_spProductosPorVenta { get; set; }
         public virtual DbSet<View_EmpleadoPorRol> View_EmpleadoPorRol { get; set; }
         public virtual DbSet<EMPLEADO> EMPLEADO { get; set; }
         public virtual DbSet<View_EmpleadoPorSucursal> View_EmpleadoPorSucursal { get; set; }
+        public virtual DbSet<View_ProductoPorVenta> View_ProductoPorVenta { get; set; }
     
-        public virtual int sp_insert_Caja(Nullable<decimal> dinero, Nullable<int> idSucursal)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Caja(Nullable<decimal> dinero, Nullable<int> idSucursal)
         {
             var dineroParameter = dinero.HasValue ?
                 new ObjectParameter("Dinero", dinero) :
@@ -65,10 +65,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdSucursal", idSucursal) :
                 new ObjectParameter("IdSucursal", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Caja", dineroParameter, idSucursalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Caja", dineroParameter, idSucursalParameter);
         }
     
-        public virtual int sp_insert_Empleado(string contrasena, string cedula, string nombre, string apellidos, Nullable<byte> idRol)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Empleado(string contrasena, string cedula, string nombre, string apellidos, Nullable<byte> idRol)
         {
             var contrasenaParameter = contrasena != null ?
                 new ObjectParameter("Contrasena", contrasena) :
@@ -90,10 +90,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdRol", idRol) :
                 new ObjectParameter("IdRol", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Empleado", contrasenaParameter, cedulaParameter, nombreParameter, apellidosParameter, idRolParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Empleado", contrasenaParameter, cedulaParameter, nombreParameter, apellidosParameter, idRolParameter);
         }
     
-        public virtual int sp_insert_Producto(string nombre, string eAN, Nullable<decimal> precio, Nullable<int> idProveedor)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Producto(string nombre, string eAN, Nullable<decimal> precio, Nullable<int> idProveedor)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -111,10 +111,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("idProveedor", idProveedor) :
                 new ObjectParameter("idProveedor", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Producto", nombreParameter, eANParameter, precioParameter, idProveedorParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Producto", nombreParameter, eANParameter, precioParameter, idProveedorParameter);
         }
     
-        public virtual int sp_insert_ProductosPorVenta(Nullable<int> idProducto, Nullable<int> idVenta, Nullable<short> cantidad, Nullable<int> idCaja)
+        public virtual ObjectResult<Nullable<int>> sp_insert_ProductosPorVenta(Nullable<int> idProducto, Nullable<int> idVenta, Nullable<short> cantidad, Nullable<int> idCaja)
         {
             var idProductoParameter = idProducto.HasValue ?
                 new ObjectParameter("IdProducto", idProducto) :
@@ -132,28 +132,28 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdCaja", idCaja) :
                 new ObjectParameter("IdCaja", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_ProductosPorVenta", idProductoParameter, idVentaParameter, cantidadParameter, idCajaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_ProductosPorVenta", idProductoParameter, idVentaParameter, cantidadParameter, idCajaParameter);
         }
     
-        public virtual int sp_insert_Proveedor(string nombre)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Proveedor(string nombre)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
                 new ObjectParameter("Nombre", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Proveedor", nombreParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Proveedor", nombreParameter);
         }
     
-        public virtual int sp_insert_Rol(string nombre)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Rol(string nombre)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
                 new ObjectParameter("Nombre", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Rol", nombreParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Rol", nombreParameter);
         }
     
-        public virtual int sp_insert_Sucursal(string nombre, string direccion, Nullable<int> telefono)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Sucursal(string nombre, string direccion, Nullable<int> telefono)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -167,10 +167,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Sucursal", nombreParameter, direccionParameter, telefonoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Sucursal", nombreParameter, direccionParameter, telefonoParameter);
         }
     
-        public virtual int sp_insert_Venta(Nullable<int> idCaja, Nullable<int> idCliente, Nullable<short> duracion)
+        public virtual ObjectResult<Nullable<int>> sp_insert_Venta(Nullable<int> idCaja, Nullable<int> idCliente, Nullable<short> duracion)
         {
             var idCajaParameter = idCaja.HasValue ?
                 new ObjectParameter("IdCaja", idCaja) :
@@ -184,10 +184,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("Duracion", duracion) :
                 new ObjectParameter("Duracion", typeof(short));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_Venta", idCajaParameter, idClienteParameter, duracionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_insert_Venta", idCajaParameter, idClienteParameter, duracionParameter);
         }
     
-        public virtual int sp_reStock(Nullable<int> idProduct, Nullable<short> quantity, Nullable<int> idSucursal)
+        public virtual ObjectResult<Nullable<int>> sp_reStock(Nullable<int> idProduct, Nullable<short> quantity, Nullable<int> idSucursal)
         {
             var idProductParameter = idProduct.HasValue ?
                 new ObjectParameter("IdProduct", idProduct) :
@@ -201,10 +201,10 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdSucursal", idSucursal) :
                 new ObjectParameter("IdSucursal", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_reStock", idProductParameter, quantityParameter, idSucursalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_reStock", idProductParameter, quantityParameter, idSucursalParameter);
         }
     
-        public virtual int sp_Stock(Nullable<int> idProducto, Nullable<short> stock, Nullable<short> stockMinimo, Nullable<int> idSucursal)
+        public virtual ObjectResult<Nullable<int>> sp_Stock(Nullable<int> idProducto, Nullable<short> stock, Nullable<short> stockMinimo, Nullable<int> idSucursal)
         {
             var idProductoParameter = idProducto.HasValue ?
                 new ObjectParameter("IdProducto", idProducto) :
@@ -222,7 +222,20 @@ namespace WaveWebApi.Models
                 new ObjectParameter("IdSucursal", idSucursal) :
                 new ObjectParameter("IdSucursal", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stock", idProductoParameter, stockParameter, stockMinimoParameter, idSucursalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Stock", idProductoParameter, stockParameter, stockMinimoParameter, idSucursalParameter);
+        }
+    
+        public virtual ObjectResult<sp_CierreDeCaja_Result> sp_CierreDeCaja(Nullable<int> idCaja, Nullable<decimal> dineroCierre)
+        {
+            var idCajaParameter = idCaja.HasValue ?
+                new ObjectParameter("IdCaja", idCaja) :
+                new ObjectParameter("IdCaja", typeof(int));
+    
+            var dineroCierreParameter = dineroCierre.HasValue ?
+                new ObjectParameter("DineroCierre", dineroCierre) :
+                new ObjectParameter("DineroCierre", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_CierreDeCaja_Result>("sp_CierreDeCaja", idCajaParameter, dineroCierreParameter);
         }
     }
 }

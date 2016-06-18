@@ -48,18 +48,10 @@ namespace WaveWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/EmpleadoLogIn/{idEmpleado}/{password}")]
-        [ResponseType(typeof(List<View_EmpleadoPorRol>))]
-        public IHttpActionResult GetEmpleadoLogin(int idEmpleado, int password)
+        [Route("api/EmpleadoLogIn/{Cedula}/{password}")]
+        public IQueryable<View_EmpleadoPorRol> GetEmpleadoLogin(string Cedula, string password)
         {
-            List<View_EmpleadoPorRol> List_Empleado = db.View_EmpleadoPorRol.
-                SqlQuery("Select * from View_EmpleadoPorRol where idEmpleado = '" + idEmpleado + "' and contrasena = '" + password + "' ").ToList();
-            if (List_Empleado == null || List_Empleado.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(List_Empleado);
+            return db.View_EmpleadoPorRol.Where(T => T.Estado == "A" && T.Cedula == Cedula && T.Contrasena == password ); 
         }
 
         [HttpPut]
@@ -118,7 +110,8 @@ namespace WaveWebApi.Controllers
             string apellidos = empleado.Apellidos;
             byte Rol= empleado.IdRol;
             //calls an insert stored procedure and returns the new id
-            empleado.IdEmpleado=  db.sp_insert_Empleado(contrasenia,cedula , nombre ,apellidos , Rol); 
+            var idNew = db.sp_insert_Empleado(contrasenia, cedula, nombre, apellidos, Rol);
+            empleado.IdEmpleado = idNew.SingleOrDefault().Value;
             try
             {
                 db.SaveChanges();

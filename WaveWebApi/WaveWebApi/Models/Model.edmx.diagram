@@ -40,7 +40,6 @@
         <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdVen__3E52440B" />
         <AssociationConnector Association="PosPFModel.FK__VENTA_POR__IdVen__4316F928" />
         <EntityTypeShape EntityType="PosPFModel.View_Ventas" Width="2.75" PointX="14.25" PointY="15.75" />
-        <EntityTypeShape EntityType="PosPFModel.View_ProductoPorVenta" Width="3.25" PointX="12.375" PointY="10.75" />
         <EntityTypeShape EntityType="PosPFModel.View_spInsertVenta" Width="3.25" PointX="20.875" PointY="6.625" />
         <EntityTypeShape EntityType="PosPFModel.View_spProductosPorVenta" Width="3.25" PointX="16.75" PointY="6.75" />
         <EntityTypeShape EntityType="PosPFModel.View_EmpleadoPorRol" Width="3.25" PointX="19.125" PointY="9.125" />
@@ -48,6 +47,7 @@
         <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdEmp__2C3393D0" />
         <AssociationConnector Association="PosPFModel.FK__EMPLEADO___IdEmp__300424B4" />
         <EntityTypeShape EntityType="PosPFModel.View_EmpleadoPorSucursal" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PosPFModel.View_ProductoPorVenta" Width="3.375" PointX="10.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

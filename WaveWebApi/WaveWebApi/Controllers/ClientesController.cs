@@ -25,11 +25,11 @@ namespace WaveWebApi.Controllers
 
         // GET: api/Clientes/5
         [HttpGet]
-        [Route("api/Clientes/{id}")]
+        [Route("api/Clientes/{Cedula}")]
         [ResponseType(typeof(CLIENTE))]
-        public IHttpActionResult GetClienteById(int id)
+        public IHttpActionResult GetClienteById(string Cedula)
         {
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
+            CLIENTE cLIENTE = db.CLIENTE.Where(T => T.Cedula == Cedula).ToList().First();
             if (cLIENTE == null || cLIENTE.Estado != "A" )
             {
                 return NotFound();

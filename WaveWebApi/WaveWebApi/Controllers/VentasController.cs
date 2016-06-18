@@ -99,15 +99,15 @@ namespace WaveWebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            int idVenta = db.sp_insert_Venta(view.IdCaja, view.IdCliente, view.Duracion); //insert store procedure
-            view.IdVenta = idVenta;
+            var idVenta = db.sp_insert_Venta(view.IdCaja, view.IdCliente, view.Duracion); //insert store procedure
+            view.IdVenta = idVenta.SingleOrDefault().Value;
              try
             {
                 db.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (VENTAExists(idVenta))
+                if (VENTAExists(view.IdVenta))
                 {
                     return Conflict();
                 }

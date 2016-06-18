@@ -38,6 +38,15 @@ namespace WaveWebApi.Controllers
             return Ok(cAJA_POR_SUCURSAL);
         }
 
+
+        [HttpGet]
+        [Route("api/CajaPorSucursal/{idCaja}")]
+        public IQueryable<View_CajaPorSucursal> GetSucursales(int idCaja)
+        {
+            return db.View_CajaPorSucursal.Where(T => T.Estado == "A"  &&  T.IdCaja == idCaja) ;
+        }
+
+
         [HttpPost]
         [Route("api/CajaPorSucursal")]
         [ResponseType(typeof(CAJA_POR_SUCURSAL))]

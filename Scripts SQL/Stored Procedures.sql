@@ -84,7 +84,7 @@ CREATE PROCEDURE sp_insert_Venta
 		DECLARE @IdVenta INT
 
 		INSERT INTO VENTA (Timestamp, Duracion) VALUES (GETDATE(), @Duracion)
-		SELECT @IdVenta = @@IDENTITY
+		SELECT @IdVenta =  scope_identity() 
 		
 		INSERT INTO VENTA_POR_CAJA (IdVenta, IdCaja) VALUES (@IdVenta,@IdCaja)
 		INSERT INTO VENTA_POR_CLIENTE (IdVenta, IdCliente) VALUES (@IdVenta,@IdCliente)

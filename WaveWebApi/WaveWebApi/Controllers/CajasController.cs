@@ -73,6 +73,38 @@ namespace WaveWebApi.Controllers
             return Ok(cAJA);
         }
 
+        [HttpPut]
+        [Route("api/Cajas/Cierre/{idCaja}/{DineroCierre}")]
+        [ResponseType(typeof(CAJA))]
+        public IHttpActionResult CierreCAJA(int idCaja, decimal DineroCierre)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            db.sp_CierreDeCaja(idCaja,DineroCierre);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CAJAExists(idCaja))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(db.CAJA.Find(idCaja));
+        }
+
         [HttpPost]
         [Route("api/Cajas")]
         [ResponseType(typeof(CAJA))]
@@ -139,6 +171,7 @@ namespace WaveWebApi.Controllers
         [HttpOptions]
         [Route("api/Cajas/{id}")]
         [Route("api/Cajas")]
+        [Route("api/Cajas/Cierre/{idCaja}/{DineroCierre}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
